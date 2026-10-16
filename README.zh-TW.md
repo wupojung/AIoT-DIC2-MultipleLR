@@ -7,7 +7,7 @@
 
 [English](README.md) · **繁體中文**
 
-**國立中興大學 AIoT 2026 · Doing in Class 2**
+**國立中興大學 AIoT 2026 · Do in Class 2**
 
 本專案以 Python、scikit-learn 及 **CRISP-DM 六階段**，實作多元線性迴歸（Multiple Linear Regression）、特徵選擇（Feature Selection）與可重現的模型評估。所有研究指標與圖表均來自實際程式執行，不使用硬編碼分數冒充分析。
 
@@ -17,9 +17,9 @@
 
 > **Dashboard MVP 已串接真實實測結果**：50 Startups／Boston Housing 下拉切換，Overview／Feature Selection／Evaluation 三頁，顯示 RMSE／R²、曲線、特徵順序及評估表。讀取靜態 JSON，沒有即時訓練或自訂 CSV；Training CV、Nested CV、Holdout 明確分開。
 
-![真實瀏覽器 Desktop 1920×1080 截圖](docs/assets/dashboard-50_startups-overview-1920x1080.png)
+![真實瀏覽器 Desktop 1920×1080 截圖](docs/assets/mlr-lab-50_startups-overview-1920x1080.png)
 
-[Boston Housing 截圖](docs/assets/dashboard-boston_housing-overview-1920x1080.png) · [六張正式截圖與驗證證據](docs/assets/README.md)
+[Boston Housing 截圖](docs/assets/mlr-lab-boston_housing-overview-1920x1080.png) · [品牌更新截圖與驗證證據](docs/assets/BRANDING.md)
 
 ## 專案功能與進度
 
