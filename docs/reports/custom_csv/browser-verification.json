@@ -1,7 +1,7 @@
 {
   "status": "PASS",
-  "url": "http://localhost:8000/",
-  "tested_at": "2026-10-16T15:58:06.135Z",
+  "url": "https://wupojung.github.io/AIoT-DIC2-MultipleLR/",
+  "tested_at": "2026-10-16T16:03:53.448Z",
   "browser": "155.0.8059.84",
   "viewport": {
     "width": 1920,
@@ -35,8 +35,8 @@
           "n": 10
         }
       },
-      "execution_ms": 4,
-      "max_prediction_abs_error": 2.44071998167783e-7
+      "execution_ms": 2.5,
+      "max_prediction_abs_error": 2.44071998167783e-07
     },
     {
       "name": "custom_numeric",
@@ -56,14 +56,20 @@
           "n": 20
         }
       },
-      "execution_ms": 2.6999998092651367,
+      "execution_ms": 2.5,
       "max_prediction_abs_error": 3.410605131648481e-13
     }
   ],
   "js_errors": [],
   "unexpected_console_errors": [],
   "expected_cors_errors": [
-    "Access to fetch at 'https://example.com/' from origin 'http://localhost:8000' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+    "Access to fetch at 'https://example.com/' from origin 'https://wupojung.github.io' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
     "Failed to load resource: net::ERR_FAILED"
+  ],
+  "deployed_commit": "f19dc0111c950cec140d2998adfe44d79a9e16d6",
+  "deployment_run": "https://github.com/wupojung/AIoT-DIC2-MultipleLR/actions/runs/38928694867",
+  "screenshots": [
+    "docs/assets/custom-csv-import-1920x1080.png",
+    "docs/assets/custom-csv-regression-1920x1080.png"
   ]
 }

@@ -38,6 +38,36 @@ Heap 是 browser 可見的粗略診斷，JS/WASM 可能有重疊，不相加成�
 
 Custom 五方法 ranking／k 曲線、training CV／nested CV **未實作**，UI 明確 Not Available；Feature Selection 頁僅呈現實際設計欄位，不是排名。未宣稱整個 Issue #7 全部驗收完成。
 
-初步本地 [browser verification](browser-verification.json)；正式 Pages 部署 Commit／Screenshot 與最終 gates 見 [驗證紀錄](VERIFICATION.md)。
+公開 Pages [browser verification](browser-verification.json)；正式 Pages 部署 Commit／Screenshot 與最終 gates 見 [驗證紀錄](VERIFICATION.md)。
 
 [操作、限制及架構](../../CUSTOM_CSV.md)。
+
+## 正式部署及 Screenshot
+
+[GitHub Pages Demo](https://wupojung.github.io/AIoT-DIC2-MultipleLR/) · [成功部署紀錄](https://github.com/wupojung/AIoT-DIC2-MultipleLR/actions/runs/38928694867)
+
+**實際部署／截圖 Web Commit：`f19dc0111c950cec140d2998adfe44d79a9e16d6`**。
+後續 commit 只附證據及文件，不改此 Web。從公開網址用 Playwright + 真實 Chrome 155、1920×1080 viewport／scale 1 重新讀取 CSV、worker 擬合後 full-page capture。
+無 AI 圖片、合成、mockup 或靜態 JSON 冒充分析。第二張是合成 numeric 測試 CSV 的真實系統計算，不是宣稱真實房價觀測。
+
+![CSV 匯入與欄位選擇](../../assets/custom-csv-import-1920x1080.png)
+
+![新資料 Regression、預測與殘差結果](../../assets/custom-csv-regression-1920x1080.png)
+
+Custom Feature Selection 沒有完成，所以不提供假 k 曲線 Screenshot。
+
+## PoC 重現入口（只供開發比較，不在正式 Web 載入 Pyodide）
+
+先依 `web/vendor/README.md` 在 `/tmp/mlr-vendor` 安裝 pinned build dependencies，再執行：
+
+```sh
+.venv/bin/python tests/generate_custom_reference.py --poc-dir /tmp/dic2-poc/www
+# Create /tmp/mlr-vendor/poc-entry.js with:
+# export {Matrix, SingularValueDecomposition} from 'ml-matrix';
+/tmp/mlr-vendor/node_modules/.bin/esbuild /tmp/mlr-vendor/poc-entry.js --bundle --format=iife --global-name=ML --minify --outfile=/tmp/dic2-poc/www/matrix.js
+python3 -m http.server 8010 --directory /tmp/dic2-poc/www
+# Separate terminal:
+NODE_PATH=/tmp/dic2-browser/node_modules node tests/runtime_poc.cjs
+```
+
+前處理後 PoC 矩陣只存於 temp directory，不提交原始 CSV 或發布至 Pages。不同機器／網路重新量測數字可不同，不以性能數字當研究績效。

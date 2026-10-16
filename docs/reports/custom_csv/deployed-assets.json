@@ -1,0 +1,59 @@
+{
+  "deployed_commit": "f19dc0111c950cec140d2998adfe44d79a9e16d6",
+  "assets": [
+    {
+      "path": "index.html",
+      "status": 200,
+      "sha256": "2b7a02ba7098592ee96f083a3a86be9dbb184b94a822e36b17fe1e50f3434f9c",
+      "matches_local": true
+    },
+    {
+      "path": "app.js",
+      "status": 200,
+      "sha256": "f3db32974817b0164cd32d453b552259d9c62a437a18c7080327e71eb3912fa7",
+      "matches_local": true
+    },
+    {
+      "path": "styles.css",
+      "status": 200,
+      "sha256": "80b9c22b7ee515a1e778824c096145863c64d472c191219020c8a9aa197e9fd4",
+      "matches_local": true
+    },
+    {
+      "path": "custom-engine.mjs",
+      "status": 200,
+      "sha256": "f67e700a3fe1071097a84bb9de98c2b40d6e51b8e81d3c79d499a1f37d222ed8",
+      "matches_local": true
+    },
+    {
+      "path": "custom-ui.mjs",
+      "status": 200,
+      "sha256": "b6f6b35a2d6b665dbe1532624480a1e2bddf9b9e567759360f7b5334d1cbb6b2",
+      "matches_local": true
+    },
+    {
+      "path": "custom-worker.mjs",
+      "status": 200,
+      "sha256": "0beb367f0b206f1c3815286c36608b5222945f90d63aca6f3911d16987d32b15",
+      "matches_local": true
+    },
+    {
+      "path": "vendor/numerics.mjs",
+      "status": 200,
+      "sha256": "c665b9205887f2a81e913ae8ad3871a24abac33fb4e09430fb25828ba56bf6e9",
+      "matches_local": true
+    },
+    {
+      "path": "data/50_startups.json",
+      "status": 200,
+      "sha256": "248e1df9112495b5fdc673046b2754521f2ad9b326677bb198f4a61a2bce23c6",
+      "matches_local": true
+    },
+    {
+      "path": "data/boston_housing.json",
+      "status": 200,
+      "sha256": "9f2712f02086a2929c90b58ff536f128a5f52874a03a31f733550530463a9d75",
+      "matches_local": true
+    }
+  ]
+}
