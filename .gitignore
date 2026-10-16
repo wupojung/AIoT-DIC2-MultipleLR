@@ -1,0 +1,17 @@
+.idea/
+.vscode/
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.env
+.env.*
+!.env.example
+.DS_Store
+outputs/*
+!outputs/.gitkeep
+data/*
+!data/README.md
+*.joblib
+*.pkl
+*.pickle

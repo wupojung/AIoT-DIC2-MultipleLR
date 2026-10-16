@@ -1,0 +1,2 @@
+# Foundation uses only the Python standard library.
+# Add justified, versioned analysis dependencies in a follow-up issue.

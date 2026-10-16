@@ -31,7 +31,7 @@
 - **Docs:** CRISP-DM 學習文件、架構、ADR 決策紀錄及中英雙語術語表。
 - **Workflow:** 從 50 Startups 提取可重用流程，再套用 Boston Housing。
 
-目前尚未建立分析程式或正式 Web 成品。**自訂 CSV 應採純前端 JS 還是後端 Python 尚未決議**，由後續 ADR 評估，勿將規劃描述為已完成。
+目前提供環境檢查與靜態 Web 初始化介面，尚未建立迴歸分析程式或正式 Web 成品。**自訂 CSV 應採純前端 JS 還是後端 Python 尚未決議**，由後續 ADR 評估，勿將規劃描述為已完成。
 
 ## Development and issue tracking
 
@@ -44,7 +44,35 @@
 
 ## Initial setup
 
-此 Repo 的 Python 環境、Web 原型及完整安裝指令由 **Issue #1** 建立。待驗證後更新本章節；在此之前不宣稱有可執行的 Regression Pipeline。
+需要 Python 3.11+（初始化驗證版本為 3.14.2）與瀏覽器。Python 目前僅使用標準函式庫，沒有可執行的 Regression Pipeline。
+
+在 Codex 選擇本地專案資料夾，或先 clone 再開啟：
+```sh
+git clone https://github.com/wupojung/AIoT-DIC2-MultipleLR.git
+cd AIoT-DIC2-MultipleLR
+git remote -v
+```
+確認 origin 的 fetch/push 都是上述 URL。開工前讀取 [AGENTS.md](AGENTS.md)、本 README、目標 Issue 與架構文件；在獨立 feature branch 工作。
+
+macOS 快速開始：
+```sh
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+python python/src/environment_check.py
+python -m unittest discover -s tests -v
+python -m http.server 8000 --directory web
+```
+瀏覽 http://localhost:8000；也可直接開啟 web/index.html。Windows PowerShell 的完整指令見 [Python 指南](python/README.md)。
+
+- [Web 操作與目前限制](web/README.md)
+- [資料來源與倫理要求](data/README.md)
+- [CRISP-DM 六階段驗收](docs/CRISP_DM.md)
+- [目前／規劃架構](docs/ARCHITECTURE.md)
+- [中英術語表](docs/GLOSSARY.md)
+- [ADR 流程](docs/adr/README.md) 與 [ADR-0001 基礎架構提案](docs/adr/ADR-0001-project-foundation.md)
+
+Web 僅頁籤切換可操作；資料集選單為停用的預留介面。尚無 API、資料整合、模型訓練、CSV 匯入或部署。遵循 BUILD → RUN → TEST → VERIFY → PASS，實際指令與結果記錄於 PR，人工審查前不關閉 Issue。
 
 ## Research integrity
 
