@@ -1,6 +1,6 @@
 # AIoT DIC-2 — Multiple Linear Regression
 
-> NCHU AIoT 2026 · Doing in Class 2 · **Project initialization in progress**
+> NCHU AIoT 2026 · Doing in Class 2 · **50 Startups baseline · Review pending**
 
 本專案用 **Python / scikit-learn** 練習多元線性迴歸（Multiple Linear Regression），以 **CRISP-DM** 六階段引導分析，並逐步製作簡潔的 **Regression Analysis Dashboard**。重點是理解分析流程、正確評估模型，以及將流程重用到第二個問題，而非只追求最高分數。
 
@@ -31,7 +31,7 @@
 - **Docs:** CRISP-DM 學習文件、架構、ADR 決策紀錄及中英雙語術語表。
 - **Workflow:** 從 50 Startups 提取可重用流程，再套用 Boston Housing。
 
-目前提供環境檢查與靜態 Web 初始化介面，尚未建立迴歸分析程式或正式 Web 成品。**自訂 CSV 應採純前端 JS 還是後端 Python 尚未決議**，由後續 ADR 評估，勿將規劃描述為已完成。
+目前提供 50 Startups Python baseline、環境檢查與靜態 Web 介面；baseline 尚待 PR 人工審查，Web 尚未連接分析資料。**自訂 CSV 應採純前端 JS 還是後端 Python 尚未決議**，由後續 ADR 評估，勿將規劃描述為已完成。
 
 ## Development and issue tracking
 
@@ -44,7 +44,7 @@
 
 ## Initial setup
 
-需要 Python 3.11+（初始化驗證版本為 3.14.2）與瀏覽器。Python 目前僅使用標準函式庫，沒有可執行的 Regression Pipeline。
+需要 Python 3.12+（實測 3.14.2）與瀏覽器。分析相依及固定版本見 requirements.txt / constraints.txt；標準函式庫環境檢查與 ML baseline 為不同命令。
 
 在 Codex 選擇本地專案資料夾，或先 clone 再開啟：
 ```sh
@@ -60,11 +60,13 @@ python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install -r requirements.txt
 python python/src/environment_check.py
+python python/src/startups_baseline.py --run-id baseline-v1
 python -m unittest discover -s tests -v
 python -m http.server 8000 --directory web
 ```
 瀏覽 http://localhost:8000；也可直接開啟 web/index.html。Windows PowerShell 的完整指令見 [Python 指南](python/README.md)。
 
+- [50 Startups 實測報告與圖表](docs/reports/50_startups/report.md)
 - [Web 操作與目前限制](web/README.md)
 - [資料來源與倫理要求](data/README.md)
 - [作業需求、證據與 Issue #3 開工清單](docs/ASSIGNMENT_REQUIREMENTS.md)
@@ -76,9 +78,9 @@ python -m http.server 8000 --directory web
 - [中英術語表](docs/GLOSSARY.md)
 - [ADR 流程](docs/adr/README.md) 與 [ADR-0001 基礎架構提案](docs/adr/ADR-0001-project-foundation.md)
 
-Issue #2 文件為待審規格；資料來源、評估提案及教師未決要求仍需核准，不代表分析階段 PASS。
+Issue #2／PR #11 已由 owner 接受；依後續指示執行 Issue #3。教師未決問題 Q1–Q5、來源原始權利及幣別／期間仍未確認，不視為已獲教授核准。基準執行與限制見 [Python 指南](python/README.md)。
 
-Web 僅頁籤切換可操作；資料集選單為停用的預留介面。尚無 API、資料整合、模型訓練、CSV 匯入或部署。遵循 BUILD → RUN → TEST → VERIFY → PASS，實際指令與結果記錄於 PR，人工審查前不關閉 Issue。
+Web 僅頁籤切換可操作；資料集選單為停用的預留介面。Web 尚無 API、資料整合、模型執行、CSV 匯入或部署。遵循 BUILD → RUN → TEST → VERIFY → PASS，實際指令與結果記錄於 PR，人工審查前不關閉 Issue。
 
 ## Research integrity
 

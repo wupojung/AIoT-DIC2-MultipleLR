@@ -1,6 +1,7 @@
 # 評估協定 / Evaluation protocol
 
-狀態：**Proposed**，待 owner 審查；不含結果。適用兩題的共通預設，
+狀態：**Issue #2 規劃已隨 PR #11 接受**；Issue #3 baseline 依此實作，程式與實測另待審。
+本文件不含結果。E3 為未來選擇器設計，尚未實作。適用兩題的共通預設，
 Issue #3 僅先做 50 Startups baseline。任何變更先記錄理由與新協定版本，
 不能看 holdout 分數後調整方法再宣稱同一次獨立評估。
 
