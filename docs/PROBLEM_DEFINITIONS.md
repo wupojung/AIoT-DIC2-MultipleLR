@@ -2,7 +2,8 @@
 
 狀態：50 Startups baseline 已實作並作本地技術驗證（PR 待審），
 原先的預期 schema 保留於下表；實測與限制見 [review report](reports/50_startups/report.md)。
-Boston 仍為 Planned，未取得或分析資料。
+Boston 已依 PR #17 owner 暫行決策完成 MVP 技術實測；[報告](reports/boston_housing/REPORT.md) 與
+[來源政策](BOSTON_WORKFLOW_PROPOSAL.md) 記錄實際處理；不代表教師核准或原始權利已釐清。
 需求來源與待教授確認事項見 [需求矩陣](ASSIGNMENT_REQUIREMENTS.md)。
 
 ## Problem 1 — 50 Startups / Profit prediction

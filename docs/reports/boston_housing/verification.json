@@ -1,0 +1,88 @@
+{
+  "status": "PASS",
+  "source_rows": 506,
+  "predictors": 12,
+  "train_rows": 404,
+  "holdout_rows": 102,
+  "selector_contexts": 24,
+  "subset_rows": 1440,
+  "training_predictions_recomputed": 148268,
+  "holdout_predictions_recomputed": 306,
+  "checks": [
+    "pinned source/schema",
+    "exact split and fold isolation",
+    "fold-local imputer/scaler statistics",
+    "all five selector traces and k subsets",
+    "LassoCV alpha path minimum",
+    "prediction-derived four metrics",
+    "plot data equality",
+    "independent final LR refit"
+  ],
+  "deferred": "Exhaustive selector replay/platform/coverage/UI expansion: Issue #8; human review pending",
+  "reproducibility": {
+    "byte_identical_files": [
+      "results.json",
+      "comparison.csv",
+      "plot_data.csv",
+      "final_selection.csv",
+      "frozen_selection.json",
+      "splits.json",
+      "holdout_predictions.csv",
+      "features_vs_rmse.png",
+      "features_vs_r2.png",
+      "selected_features.csv",
+      "protocol.json",
+      "data_quality.json"
+    ],
+    "decompressed_predictions_identical": true
+  },
+  "startups_preservation": [
+    {
+      "actual": "/tmp/dic2-05-mvp-check/outputs/50_startups/issue5-regression",
+      "reference": "/tmp/dic2-04-clean/outputs/50_startups/issue4-regression",
+      "byte_identical": [
+        "metrics.json",
+        "data_quality.json",
+        "frozen_plan.json",
+        "fitted_model.json",
+        "REPORT.md",
+        "splits.json",
+        "config.json",
+        "train_descriptive_statistics.csv",
+        "train_correlation.csv",
+        "holdout_actual_predicted.png",
+        "holdout_residuals.png",
+        "holdout_predictions.csv",
+        "train_correlation.png",
+        "training_cv.json",
+        "train_distributions.png",
+        "train_state_counts.png",
+        "status.json",
+        "environment.json",
+        "train_cv_predictions.csv",
+        "holdout_residual_distribution.png"
+      ],
+      "different": []
+    },
+    {
+      "actual": "/tmp/dic2-05-mvp-check/outputs/50_startups/feature_selection/issue5-regression",
+      "reference": "docs/reports/feature_selection",
+      "byte_identical": [
+        "final_selection.csv",
+        "features_vs_r2.png",
+        "selected_features.csv",
+        "splits.json",
+        "plot_data.csv",
+        "predictions.csv",
+        "results.json",
+        "features_vs_rmse.png",
+        "frozen_selection.json",
+        "comparison.csv",
+        "protocol.json",
+        "status.json",
+        "environment.json"
+      ],
+      "different": []
+    }
+  ]
+}
