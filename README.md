@@ -7,7 +7,7 @@
 
 **English** · [繁體中文](README.zh-TW.md)
 
-**NCHU AIoT 2026 · Doing in Class 2** — A reproducible multiple linear regression and feature selection laboratory built with Python, scikit-learn, and the six-phase CRISP-DM methodology.
+**NCHU AIoT 2026 · Do in Class 2** — A reproducible multiple linear regression and feature selection laboratory built with Python, scikit-learn, and the six-phase CRISP-DM methodology.
 
 ### Live demo
 

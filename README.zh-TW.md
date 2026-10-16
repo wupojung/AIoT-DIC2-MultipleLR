@@ -7,7 +7,7 @@
 
 [English](README.md) · **繁體中文**
 
-**國立中興大學 AIoT 2026 · Doing in Class 2**
+**國立中興大學 AIoT 2026 · Do in Class 2**
 
 本專案以 Python、scikit-learn 及 **CRISP-DM 六階段**，實作多元線性迴歸（Multiple Linear Regression）、特徵選擇（Feature Selection）與可重現的模型評估。所有研究指標與圖表均來自實際程式執行，不使用硬編碼分數冒充分析。
 
