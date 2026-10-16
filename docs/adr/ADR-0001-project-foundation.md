@@ -1,7 +1,8 @@
 # ADR-0001 — Project foundation
 
-- Status: Proposed
+- Status: Accepted
 - Date: 2026-10-16
+- Accepted by: Repository owner (explicit approval on 2026-10-16)
 - Decision owner: Teacher / repository owner (wupojung)
 - Related issue: https://github.com/wupojung/AIoT-DIC2-MultipleLR/issues/1
 
