@@ -96,6 +96,12 @@ def verify(directory, source, replay=False):
     for entry in result['audit']:
         context = entry['context']
         parent = context.split('/lasso/')[0].split('/sfs/')[0]
+        expected_fit = traces[parent]['fit_row_ids']
+        for suffix, method in [('/lasso/', 'LassoCV'), ('/sfs/', 'SFS')]:
+            if suffix in context:
+                index = int(context.rsplit(suffix, 1)[1])
+                expected_fit = traces[parent]['details'][method]['folds'][index]['fit_row_ids']
+        check(entry['fit_row_ids'] == expected_fit, 'Preprocessor fit IDs differ from exact inner training fold')
         check(set(entry['fit_row_ids']) <= set(traces[parent]['fit_row_ids']), 'Preprocessor outside training context')
         X = frame.loc[entry['fit_row_ids'], baseline.FEATURES]
         prep, scaler, _ = preprocessing(X)

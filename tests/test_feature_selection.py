@@ -147,6 +147,20 @@ class SelectionIntegrationTests(unittest.TestCase):
         finally:
             path.write_bytes(original)
 
+    def test_verifier_rejects_preprocessor_fitted_on_parent_fold(self):
+        path = self.directory / 'results.json'
+        original = path.read_bytes()
+        altered = json.loads(original)
+        entry = next(item for item in altered['audit'] if '/sfs/' in item['context'])
+        parent = entry['context'].split('/sfs/')[0]
+        entry['fit_row_ids'] = next(trace['fit_row_ids'] for trace in altered['traces'] if trace['context'] == parent)
+        try:
+            path.write_text(json.dumps(altered))
+            with self.assertRaisesRegex(ValueError, 'exact inner training fold'):
+                verifier.verify(self.directory, self.source)
+        finally:
+            path.write_bytes(original)
+
     def test_no_holdout_mutation_can_change_selection_or_curves(self):
         splits = json.loads((self.directory / 'splits.json').read_text())
         frame = self.frame.copy()
