@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <title>DIC-2 · Regression Analysis Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">NCHU AIoT · DIC-2</p>
+      <h1>Regression Analysis Dashboard</h1>
+      <p>多元線性迴歸 · CRISP-DM 學習工作區</p>
+      <p class="notice">初始化原型 / Placeholder：尚未載入資料、訓練模型或產生評估結果。</p>
+    </header>
+    <section class="dataset" aria-labelledby="dataset-heading">
+      <h2 id="dataset-heading">Dataset 資料集</h2>
+      <label for="dataset">資料集選擇（尚未實作）</label>
+      <select id="dataset" disabled aria-describedby="dataset-help">
+        <option>50 Startups</option>
+        <option>Boston Housing</option>
+        <option>Custom Dataset</option>
+      </select>
+      <p id="dataset-help">此選單為預留介面；不會載入資料。自訂 CSV 功能與執行架構尚待決議。</p>
+    </section>
+    <div role="tablist" aria-label="分析頁籤">
+      <button id="tab-overview" role="tab" aria-controls="overview" aria-selected="true">Overview</button>
+      <button id="tab-features" role="tab" aria-controls="features" aria-selected="false" tabindex="-1">Feature Selection</button>
+      <button id="tab-evaluation" role="tab" aria-controls="evaluation" aria-selected="false" tabindex="-1">Evaluation</button>
+    </div>
+    <section id="overview" role="tabpanel" aria-labelledby="tab-overview" tabindex="0">
+      <p class="eyebrow">01 / Overview</p><h2>從問題與資料開始</h2>
+      <p>預留內容：資料來源、Target、欄位、EDA 與資料品質檢查。</p>
+      <p class="empty">Placeholder · 尚無資料摘要或圖表</p>
+    </section>
+    <section id="features" role="tabpanel" aria-labelledby="tab-features" tabindex="0" hidden>
+      <p class="eyebrow">02 / Feature Selection</p><h2>建立可重現的特徵比較</h2>
+      <p>預留內容：訓練資料內的 RFE、SFS 與 LassoCV 比較；目前尚未實作。</p>
+      <p class="empty">Placeholder · 尚無特徵選擇結果</p>
+    </section>
+    <section id="evaluation" role="tabpanel" aria-labelledby="tab-evaluation" tabindex="0" hidden>
+      <p class="eyebrow">03 / Evaluation</p><h2>用證據評估模型</h2>
+      <p>預留內容：MAE、MSE、RMSE、R² 與殘差。所有數值需來自實際執行。</p>
+      <p class="empty">Placeholder · 尚無模型評估結果</p>
+    </section>
+    <footer>Foundation only · 無 API、CSV 匯入、模型執行或部署</footer>
+  </main>
+</body>
+</html>
