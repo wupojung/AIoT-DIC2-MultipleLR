@@ -1,33 +1,44 @@
-# Static dashboard shell
+# Regression Analysis Dashboard MVP
 
-Open index.html directly, or from the repository root run:
+Serve from the repository root:
+
 ```sh
 python3 -m http.server 8000 --directory web
 ```
-Visit http://localhost:8000. Windows may use `py -3` instead of `python3`.
-No install/build step or framework is required. Local CSS and JavaScript only.
-Tabs switch placeholder panels; the disabled dataset selector lists the approved
-50 Startups / Boston Housing / Custom Dataset concept. No metrics or figures exist.
 
-Verify desktop and narrow viewport layouts, tab clicks, arrow/Home/End keyboard
-navigation, and the browser console. Python output integration and browser versus
-backend CSV execution require later work and a separate ADR. There is no API,
-model execution, data integration, CSV import or deployment.
+Open http://localhost:8000/ or the [GitHub Pages demo](https://wupojung.github.io/AIoT-DIC2-MultipleLR/).
+HTTP is required for fetch; direct `file://` opening is unsupported. No npm build/runtime dependency, CDN, backend or model execution.
 
-## Optional repeatable browser check
+Overview, Feature Selection and Evaluation support 50 Startups / Boston Housing switching.
+Custom Dataset is explicitly disabled. Dataset JSON loads once; switching redraws all panels synchronously, preventing stale cross-dataset numbers.
+All-feature holdout, training CV, nested selection and final training-selected features have separate labels.
+50 Startups selected-model holdout is unavailable and shown as not evaluated; the accepted baseline holdout is still displayed.
+Charts show fixed method/k mean training-CV scores, not test scans or confidence intervals.
 
-The foundation has no Node runtime dependency. For development verification only,
-with Node/npm and Chrome installed, start the HTTP server above, then on macOS:
+## Static data contract
+
 ```sh
-npm install --prefix /tmp/dic2-browser playwright
-NODE_PATH=/tmp/dic2-browser/node_modules node tests/browser_smoke.cjs
+python3 python/src/export_dashboard.py
+python3 python/src/export_dashboard.py --check
 ```
-Run from repository root. The script defaults to the macOS Chrome executable;
-set `CHROME_PATH` to another installed Chrome/Chromium executable if needed.
-It checks HTTP and direct-file opening at 1920×1080, 1440×900, 768×1024,
-390×844 and 375×812; all tabs and button states, keyboard navigation, text
-overflow, horizontal scrolling and browser console/page/network errors.
-It writes 15 actual full-page PNG captures and verification.json under
-docs/screenshots/. See the [verification evidence](../docs/screenshots/README.md).
-Playwright is installed outside the project solely for verification, not shipped
-with the dashboard. Windows/browser automation is not yet verified.
+
+The standard-library exporter reads accepted `docs/reports/` JSON only; it never imports ML packages or retrains.
+`web/data/{50_startups,boston_housing}.json` contains summaries, curve points, full-training ranks, final selection, metrics and source SHA256 lineage.
+The `--check` command regenerates in memory and fails for stale/altered payloads. Raw CSV, prediction caches and full audit files are not published.
+Adding new experiments needs an explicit exporter update; there is no arbitrary JSON/CSV upload or inference.
+
+## Lean desktop verification
+
+With the server running, use the existing external development Playwright installation:
+
+```sh
+NODE_PATH=/tmp/dic2-browser/node_modules node tests/dashboard_smoke.cjs
+DASHBOARD_URL=https://wupojung.github.io/AIoT-DIC2-MultipleLR/ NODE_PATH=/tmp/dic2-browser/node_modules node tests/dashboard_smoke.cjs
+```
+
+Defaults to local macOS Google Chrome; `CHROME_PATH` may override it.
+1920×1080 only: 50 Startups → Boston → Startups, all three tabs, exact JSON/metric/table values, every curve coordinate, feature orders, keyboard, horizontal overflow and console/network errors.
+Screenshots and evidence go to `docs/assets/`. No complete Python regression, nested CV, coverage or five-size matrix is required for this MVP.
+The old `browser_smoke.cjs` describes the previous disabled-selector foundation and is superseded for this Dashboard; it was not run or represented as passing here.
+
+Pages uses the existing `pages.yml` deployment workflow. For pre-merge review the owner-authorized feature branch is specifically allowed in the `github-pages` environment and dispatched manually. Main-only automatic deployment rules and CI remain unchanged.

@@ -2,3 +2,5 @@
 
 /* Presentation layout: keep the complete desktop overview in one 1080p frame. */
 @media(min-width:1500px){.topbar{height:55px}.page-heading{padding:23px 0 20px}h1{font-size:33px}.eyebrow{margin-bottom:9px}.dataset-bar{padding:13px 21px;margin-bottom:18px}.section-heading{margin-bottom:12px}.stats{margin-bottom:17px}.stat{padding:16px 23px}.stat.accent{padding-top:14px}.stat-value{font-size:32px;margin:7px 0 5px}.card{padding:17px 23px}.chart{max-height:225px}.chart-grid{margin-bottom:17px}.bottom-grid{margin-bottom:15px}.workflow{margin:15px 0 9px}.step b{width:24px;height:24px;margin-bottom:6px}.side-note{margin-top:65px}.notice{padding:10px 15px;margin-bottom:13px}.info-line{padding:7px 0}.card-sub{margin-bottom:9px}.bottom-grid .muted{margin-bottom:0}.source-links{margin-top:10px}footer{margin-top:14px;padding:14px 0}.subheading{margin-top:9px}}
+
+@media(min-width:1500px){.topbar{height:50px}.page-heading{padding:18px 0 17px}.chart{max-height:215px}footer{padding:12px 0}.notice{margin-bottom:11px}}

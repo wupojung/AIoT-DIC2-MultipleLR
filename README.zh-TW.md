@@ -15,7 +15,11 @@
 
 **[開啟 GitHub Pages Demo](https://wupojung.github.io/AIoT-DIC2-MultipleLR/)** · [檢查部署紀錄](https://github.com/wupojung/AIoT-DIC2-MultipleLR/actions/workflows/pages.yml)
 
-> 網站目前是 **靜態 Dashboard UI 骨架**，尚未串接真實模型分析，也不支援自訂 CSV、資料集切換或網頁即時訓練。請以 Actions 實際部署狀態確認是否已上線。Demo Screenshot 暫不放置，待完成後再補。
+> **Dashboard MVP 已串接真實實測結果**：50 Startups／Boston Housing 下拉切換，Overview／Feature Selection／Evaluation 三頁，顯示 RMSE／R²、曲線、特徵順序及評估表。讀取靜態 JSON，沒有即時訓練或自訂 CSV；Training CV、Nested CV、Holdout 明確分開。
+
+![真實瀏覽器 Desktop 1920×1080 截圖](docs/assets/dashboard-50_startups-overview-1920x1080.png)
+
+[Boston Housing 截圖](docs/assets/dashboard-boston_housing-overview-1920x1080.png) · [六張正式截圖與驗證證據](docs/assets/README.md)
 
 ## 專案功能與進度
 
@@ -23,8 +27,8 @@
 | --- | --- | --- |
 | 50 Startups Baseline | 已完成（Issue #3／PR #14） | [實測報告與六張圖](docs/reports/50_startups/report.md) |
 | 五種 Feature Selection | 已完成（Issue #4／PR #15） | [比較分析及 RMSE／R² 曲線](docs/reports/feature_selection/REPORT.md) |
-| Boston Housing Workflow Reuse | Issue #5，待交付／驗收 | [Issue #5](https://github.com/wupojung/AIoT-DIC2-MultipleLR/issues/5) |
-| Web Dashboard | 僅靜態畫面骨架 | [Web 說明](web/README.md) |
+| Boston Housing Workflow Reuse | PR #17 已合併，技術實測完成 | [Issue #5](https://github.com/wupojung/AIoT-DIC2-MultipleLR/issues/5) |
+| Web Dashboard | 真實結果雙資料集三頁 MVP | [Web 說明](web/README.md) |
 | 自訂 CSV Dataset | 尚未實作 | [Issue #7](https://github.com/wupojung/AIoT-DIC2-MultipleLR/issues/7) · [ADR-0002 草案](https://github.com/wupojung/AIoT-DIC2-MultipleLR/pull/12) |
 
 50 Startups 採固定資料來源與 SHA-256、80/20 訓練測試切分、fold-local 前處理、五折訓練 CV、OLS LinearRegression 與 Dummy Baseline。Feature Selection 使用 **Pearson、F-Test、RFE、Forward SFS、LassoCV**，並以統一 OLS 下游模型公平比較；另以 Nested CV 檢查選模偏差。
@@ -60,7 +64,7 @@ Pages Workflow 目前只有 `main` 上的 `web/**` 或 Workflow 檔案變更才�
 | 3. Data Preparation | 切分、缺值處理、編碼、避免資料洩漏 |
 | 4. Modeling | LinearRegression、Dummy、Cross-Validation |
 | 5. Evaluation | MAE、MSE、RMSE、R²、殘差、特徵選擇 |
-| 6. Deployment | 報告、可重現產物、網站展示（模型 Web 串接尚未完成） |
+| 6. Deployment | 報告、可重現產物、網站展示（靜態實測結果展示） |
 
 ## 本地快速啟動
 
@@ -112,4 +116,18 @@ python python/src/verify_boston_run.py outputs/boston_housing/boston-v1
 
 Pinned historical CSV，506 rows；B 排除後 12 predictors，MEDV（歷史千美元）。
 重用共通 Regression／五種 Feature Selection；原始資料不隨 repo 散布。
-Owner 暫准教學 MVP，不代表原始授權或教師審查已完成；Web 尚未整合分析資料。
+Owner 暫准教學 MVP，不代表原始授權或教師審查已完成；Issue #6 已在 Web 展示這些實測產物。
+
+## Dashboard MVP 重現（不重跑模型）
+
+```sh
+python3 python/src/export_dashboard.py --check
+python3 -m http.server 8000 --directory web
+NODE_PATH=/tmp/dic2-browser/node_modules node tests/dashboard_smoke.cjs
+```
+
+瀏覽 http://localhost:8000/，不需要安裝 ML 相依或重跑 Nested CV。
+匯出檢查會比對靜態 JSON 與實測來源，含 SHA256 追溯。1920×1080 實際瀏覽器檢查資料集往返切換、
+三頁、精確指標、每個圖表座標、排名及 console/network errors。
+[實際結果與部署證據](docs/assets/README.md)。本次刻意不重跑完整 Python／五尺寸矩陣／Coverage；
+Custom CSV、ADR-0002、CI 建置與非必要重構暫停。
