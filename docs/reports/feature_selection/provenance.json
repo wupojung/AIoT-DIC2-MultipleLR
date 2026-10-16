@@ -1,0 +1,27 @@
+{
+  "dataset_id": "50_startups",
+  "repository": "https://github.com/Avik-Jain/100-Days-Of-ML-Code",
+  "revision": "5d67810c1498082e7bb262cf6397d7861dfd9891",
+  "path": "datasets/50_Startups.csv",
+  "url": "https://raw.githubusercontent.com/Avik-Jain/100-Days-Of-ML-Code/5d67810c1498082e7bb262cf6397d7861dfd9891/datasets/50_Startups.csv",
+  "sha256": "c6075ca5a7551243b31193bad9228f0a1b9468cdde2475c6586c56dcfac5630d",
+  "license_notice": "https://github.com/Avik-Jain/100-Days-Of-ML-Code/blob/5d67810c1498082e7bb262cf6397d7861dfd9891/LICENSE",
+  "repository_license": "MIT; Copyright (c) 2018 Avik Jain",
+  "original_dataset_rights": "Not independently established; no raw CSV redistribution in this repository",
+  "original_collection": "Unknown; source is a teaching mirror, not verified primary collection",
+  "units": "Source numerical units; currency and reporting period unverified",
+  "expected_rows": 50,
+  "expected_raw_features": [
+    "R&D Spend",
+    "Administration",
+    "Marketing Spend",
+    "State"
+  ],
+  "target": "Profit",
+  "use_scope": "Issue #3 local educational baseline; no claim of instructor approval or production suitability",
+  "acquisition": {
+    "url": "https://raw.githubusercontent.com/Avik-Jain/100-Days-Of-ML-Code/5d67810c1498082e7bb262cf6397d7861dfd9891/datasets/50_Startups.csv",
+    "sha256": "c6075ca5a7551243b31193bad9228f0a1b9468cdde2475c6586c56dcfac5630d",
+    "retrieved_at_utc": "2026-10-16T13:27:42.334444+00:00"
+  }
+}

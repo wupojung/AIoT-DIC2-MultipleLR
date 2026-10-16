@@ -1,6 +1,6 @@
 # AIoT DIC-2 — Multiple Linear Regression
 
-> NCHU AIoT 2026 · Doing in Class 2 · **50 Startups baseline · Review pending**
+> NCHU AIoT 2026 · Doing in Class 2 · **50 Startups · Feature Selection review pending**
 
 本專案用 **Python / scikit-learn** 練習多元線性迴歸（Multiple Linear Regression），以 **CRISP-DM** 六階段引導分析，並逐步製作簡潔的 **Regression Analysis Dashboard**。重點是理解分析流程、正確評估模型，以及將流程重用到第二個問題，而非只追求最高分數。
 
@@ -31,7 +31,7 @@
 - **Docs:** CRISP-DM 學習文件、架構、ADR 決策紀錄及中英雙語術語表。
 - **Workflow:** 從 50 Startups 提取可重用流程，再套用 Boston Housing。
 
-目前提供 50 Startups Python baseline、環境檢查與靜態 Web 介面；baseline 尚待 PR 人工審查，Web 尚未連接分析資料。**自訂 CSV 應採純前端 JS 還是後端 Python 尚未決議**，由後續 ADR 評估，勿將規劃描述為已完成。
+PR #14 的 50 Startups Baseline 已合併；現在另提供五方法 Feature Selection 的 training-only 實驗與巢狀驗證（待本次 PR 審查）。Web 尚未連接分析資料。**自訂 CSV 應採純前端 JS 還是後端 Python 尚未決議**，由後續 ADR 評估，勿將規劃描述為已完成。
 
 ## Development and issue tracking
 
@@ -66,7 +66,9 @@ python -m http.server 8000 --directory web
 ```
 瀏覽 http://localhost:8000；也可直接開啟 web/index.html。Windows PowerShell 的完整指令見 [Python 指南](python/README.md)。
 
-- [50 Startups 實測報告與圖表](docs/reports/50_startups/report.md)
+- [50 Startups Baseline 實測報告與圖表（保留）](docs/reports/50_startups/report.md)
+- [Feature Selection 五方法比較、曲線與繁中報告](docs/reports/feature_selection/REPORT.md)
+- [Feature Selection 實驗協定與重現](docs/FEATURE_SELECTION_PROTOCOL.md)
 - [Web 操作與目前限制](web/README.md)
 - [資料來源與倫理要求](data/README.md)
 - [作業需求、證據與 Issue #3 開工清單](docs/ASSIGNMENT_REQUIREMENTS.md)

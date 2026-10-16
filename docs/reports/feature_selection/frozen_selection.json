@@ -1,0 +1,24 @@
+{
+  "protocol_sha256": "8ce1e71434ffb8ff762e673f05be071382fd139194340c5a61f4950379a5e754",
+  "choice": {
+    "method": "F-Test",
+    "k": 3,
+    "n_folds": 3,
+    "mae_mean": 7257.563047880554,
+    "mae_std": 2190.6979090107534,
+    "mse_mean": 97259676.02405684,
+    "mse_std": 51025473.57067249,
+    "rmse_mean": 9453.57070474953,
+    "rmse_std": 2808.8568768020687,
+    "r2_mean": 0.9456311227541878,
+    "r2_std": 0.02491125149432596,
+    "features": [
+      "numeric__R&D Spend",
+      "numeric__Marketing Spend",
+      "state__State_New York"
+    ],
+    "selection_cv": "3-fold full training"
+  },
+  "holdout_evaluations": 0,
+  "status": "FROZEN_FOR_HUMAN_REVIEW; no new independent test claim"
+}
