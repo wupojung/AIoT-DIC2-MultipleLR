@@ -1,0 +1,341 @@
+{
+  "schema_version": 1,
+  "engine": "MLR-JS-OLS-v1 / ml-matrix 6.12.1 SVD",
+  "target": "Sale value",
+  "features": [
+    "floor area (m²)",
+    "years, age",
+    "distance_km"
+  ],
+  "rows": 96,
+  "configuration": {
+    "seed": 42,
+    "test_size": 0.2,
+    "split_algorithm": "NumPy RandomState MT19937 permutation; ceil(0.2*n) test rows",
+    "numeric": "training median imputation",
+    "categorical": "training most frequent; lexical ties, sorted drop-first one-hot; unknown -> all zero",
+    "estimator": "centered/scaled SVD OLS, fit intercept; coefficients converted to source units",
+    "feature_selection": "Not Available: Regression MVP only; holdout is not used to choose k",
+    "units": "user source units; not verified"
+  },
+  "splits": {
+    "train": [
+      40,
+      67,
+      15,
+      68,
+      88,
+      9,
+      39,
+      11,
+      45,
+      55,
+      28,
+      72,
+      70,
+      5,
+      44,
+      49,
+      35,
+      16,
+      47,
+      34,
+      7,
+      91,
+      27,
+      19,
+      78,
+      25,
+      89,
+      13,
+      24,
+      3,
+      17,
+      38,
+      8,
+      75,
+      6,
+      62,
+      36,
+      84,
+      56,
+      95,
+      54,
+      43,
+      50,
+      65,
+      46,
+      66,
+      61,
+      93,
+      76,
+      41,
+      58,
+      48,
+      83,
+      57,
+      32,
+      90,
+      59,
+      63,
+      81,
+      37,
+      29,
+      1,
+      52,
+      21,
+      2,
+      23,
+      87,
+      74,
+      86,
+      82,
+      20,
+      60,
+      71,
+      14,
+      92,
+      51
+    ],
+    "test": [
+      80,
+      77,
+      73,
+      94,
+      33,
+      79,
+      69,
+      42,
+      0,
+      10,
+      64,
+      30,
+      18,
+      4,
+      31,
+      26,
+      12,
+      22,
+      53,
+      85
+    ]
+  },
+  "preprocessing": {
+    "specs": [
+      {
+        "name": "floor area (m²)",
+        "index": 0,
+        "type": "numeric",
+        "median": 120.75851236611001
+      },
+      {
+        "name": "years, age",
+        "index": 1,
+        "type": "numeric",
+        "median": 30.27975548511812
+      },
+      {
+        "name": "distance_km",
+        "index": 2,
+        "type": "numeric",
+        "median": 12.75682268697357
+      }
+    ],
+    "names": [
+      "floor area (m²)",
+      "years, age",
+      "distance_km"
+    ]
+  },
+  "fit": {
+    "means": [
+      123.02901863018157,
+      28.362124816571633,
+      12.764393976824065
+    ],
+    "scales": [
+      53.360525943654125,
+      15.665031424781732,
+      6.705334764213631
+    ],
+    "coefficients": [
+      2.808210279859283,
+      -1.1082549606290646,
+      -3.483766337452818
+    ],
+    "intercept": 28.847141006972322,
+    "rank": 3,
+    "condition": 1.3178906317043837,
+    "training_target_mean": 298.43786426885606
+  },
+  "unknown_category_count": 0,
+  "holdout": {
+    "linear_regression": {
+      "mae": 4.770169268993307,
+      "mse": 35.80557629527097,
+      "rmse": 5.983776090001276,
+      "r2": 0.9985570649577903,
+      "n": 20
+    },
+    "dummy_mean": {
+      "mae": 142.88341551028765,
+      "mse": 27697.921411832394,
+      "rmse": 166.42692514083288,
+      "r2": -0.11620327157765131,
+      "n": 20
+    }
+  },
+  "predictions": [
+    {
+      "row_id": 80,
+      "actual": 136.25590650563905,
+      "prediction": 131.1051088745821,
+      "residual": 5.150797631056946,
+      "dummy_prediction": 298.43786426885606
+    },
+    {
+      "row_id": 77,
+      "actual": 395.29374279145566,
+      "prediction": 386.49576892236973,
+      "residual": 8.797973869085922,
+      "dummy_prediction": 298.43786426885606
+    },
+    {
+      "row_id": 73,
+      "actual": 560.1470693530646,
+      "prediction": 557.8997447158113,
+      "residual": 2.247324637253314,
+      "dummy_prediction": 298.43786426885606
+    },
+    {
+      "row_id": 94,
+      "actual": 401.73484344620925,
+      "prediction": 398.76958686765727,
+      "residual": 2.965256578551987,
+      "dummy_prediction": 298.43786426885606
+    },
+    {
+      "row_id": 33,
+      "actual": 192.10127727110097,
+      "prediction": 188.23875902079547,
+      "residual": 3.8625182503054987,
+      "dummy_prediction": 298.43786426885606
+    },
+    {
+      "row_id": 79,
+      "actual": 426.7004737994329,
+      "prediction": 424.6101814616799,
+      "residual": 2.0902923377530556,
+      "dummy_prediction": 298.43786426885606
+    },
+    {
+      "row_id": 69,
+      "actual": 246.7150191442893,
+      "prediction": 240.79244394072015,
+      "residual": 5.922575203569153,
+      "dummy_prediction": 298.43786426885606
+    },
+    {
+      "row_id": 42,
+      "actual": 524.247188095915,
+      "prediction": 525.093847011072,
+      "residual": -0.8466589151569224,
+      "dummy_prediction": 298.43786426885606
+    },
+    {
+      "row_id": 0,
+      "actual": 457.077377324347,
+      "prediction": 459.8502262929153,
+      "residual": -2.772848968568269,
+      "dummy_prediction": 298.43786426885606
+    },
+    {
+      "row_id": 10,
+      "actual": 77.99834116452568,
+      "prediction": 83.53194204943983,
+      "residual": -5.533600884914151,
+      "dummy_prediction": 298.43786426885606
+    },
+    {
+      "row_id": 64,
+      "actual": 316.7961120768572,
+      "prediction": 313.18645494521445,
+      "residual": 3.6096571316427344,
+      "dummy_prediction": 298.43786426885606
+    },
+    {
+      "row_id": 30,
+      "actual": 255.9877875460077,
+      "prediction": 252.70328481894143,
+      "residual": 3.2845027270662683,
+      "dummy_prediction": 298.43786426885606
+    },
+    {
+      "row_id": 18,
+      "actual": 114.59263904575782,
+      "prediction": 105.66404483238742,
+      "residual": 8.928594213370403,
+      "dummy_prediction": 298.43786426885606
+    },
+    {
+      "row_id": 4,
+      "actual": 498.88256883411225,
+      "prediction": 499.2552783466962,
+      "residual": -0.37270951258392415,
+      "dummy_prediction": 298.43786426885606
+    },
+    {
+      "row_id": 31,
+      "actual": 231.74925377250275,
+      "prediction": 224.6733964940289,
+      "residual": 7.075857278473848,
+      "dummy_prediction": 298.43786426885606
+    },
+    {
+      "row_id": 26,
+      "actual": 599.6137679633184,
+      "prediction": 584.3447183942351,
+      "residual": 15.269049569083336,
+      "dummy_prediction": 298.43786426885606
+    },
+    {
+      "row_id": 12,
+      "actual": 510.5075690625706,
+      "prediction": 508.38340654964065,
+      "residual": 2.1241625129299564,
+      "dummy_prediction": 298.43786426885606
+    },
+    {
+      "row_id": 22,
+      "actual": 240.25225741756017,
+      "prediction": 241.51013543648114,
+      "residual": -1.2578780189209624,
+      "dummy_prediction": 298.43786426885606
+    },
+    {
+      "row_id": 53,
+      "actual": 551.9462654808777,
+      "prediction": 541.8632283840526,
+      "residual": 10.083037096825137,
+      "dummy_prediction": 298.43786426885606
+    },
+    {
+      "row_id": 85,
+      "actual": 304.1252709204001,
+      "prediction": 307.33336096315446,
+      "residual": -3.2080900427543497,
+      "dummy_prediction": 298.43786426885606
+    }
+  ],
+  "warnings": [
+    "Historical/sample random split only; no group/time/spatial generalization claim.",
+    "Repeated reruns after viewing holdout make it exploratory, not a new independent test."
+  ],
+  "source": {
+    "kind": "local file",
+    "name": "custom_numeric.csv",
+    "sha256": "3d3d30666abff459eb3b352a183484ee608504b08671c69fb7a03162628a623c"
+  },
+  "executed_at": "2026-10-16T15:58:05.385Z",
+  "execution_ms": 2.6999998092651367
+}

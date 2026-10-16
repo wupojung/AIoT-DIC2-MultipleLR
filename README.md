@@ -13,7 +13,7 @@
 
 **[Open the GitHub Pages dashboard](https://wupojung.github.io/AIoT-DIC2-MultipleLR/)** · [Check deployment status](https://github.com/wupojung/AIoT-DIC2-MultipleLR/actions/workflows/pages.yml)
 
-> **Live Dashboard MVP:** Switch between 50 Startups and Boston Housing across Overview, Feature Selection and Evaluation. All metrics, curves and feature ranks come from reviewed static experiment JSON. No live training or Custom CSV analysis. Training CV, nested CV and holdout are explicitly separated.
+> **Live Dashboard MVP:** Switch between 50 Startups and Boston Housing across Overview, Feature Selection and Evaluation. All metrics, curves and feature ranks come from reviewed static experiment JSON. Custom Dataset now fits new CSV models locally; custom five-method Feature Selection is Not Available. Training CV, nested CV and holdout are explicitly separated.
 
 ![50 Startups Dashboard — real browser capture, desktop 1920×1080](docs/assets/mlr-lab-50_startups-overview-1920x1080.png)
 
@@ -31,7 +31,7 @@ This project studies **ordinary least squares (OLS) multiple linear regression**
 - **Boston Housing:** Merged PR #17; pinned 506-row historical data, B excluded, baseline/dummy and five-method feature-selection evidence.
 - **Dashboard MVP:** Real static results for both datasets, three tabs, locally rendered RMSE/R² curves and actual feature names/ranks. No external chart dependency.
 
-**Deferred:** Custom CSV analysis ([Issue #7](https://github.com/wupojung/AIoT-DIC2-MultipleLR/issues/7)), ADR-0002 and complete QA/coverage (Issue #8). The historic Boston dataset retains explicit ethical and licensing limitations.
+**Deferred:** Custom CSV feature selection ([Issue #7](https://github.com/wupojung/AIoT-DIC2-MultipleLR/issues/7)), ADR-0002 and complete QA/coverage (Issue #8). The historic Boston dataset retains explicit ethical and licensing limitations.
 
 ## Verified experimental results
 
@@ -86,7 +86,7 @@ python -m http.server 8000 --directory web
 
 Open <http://localhost:8000/> to preview the static UI. The baseline downloads the **pinned and SHA-256 verified** teaching CSV on its first run; generated outputs are excluded from Git. For feature selection execution and validation, follow the [reproduction instructions](docs/reports/feature_selection/REPORT.md). See [Python instructions](python/README.md) for other operating systems.
 
-## Public CSV examples — for future custom dataset support
+## Public CSV examples — Custom Regression MVP
 
 The following public files are **candidate regression inputs** for testing the future import feature; **the current website cannot analyze them yet**. Users will need to select a numeric target and suitable feature columns, handle missing/categorical values, and fit the new dataset from scratch.
 
@@ -96,7 +96,7 @@ The following public files are **candidate regression inputs** for testing the f
 | Auto MPG | [CSV](https://raw.githubusercontent.com/mwaskom/seaborn-data/master/mpg.csv) | `mpg` | `cylinders`, `displacement`, `horsepower`, `weight`, `acceleration` | Missing horsepower values |
 | Restaurant Tips | [CSV](https://raw.githubusercontent.com/plotly/datasets/master/tips.csv) | `tip` | `total_bill`, `size` | Other categorical fields need encoding; no causal claim |
 
-CSV URL downloads may be blocked by **CORS**, authentication, or source restrictions. File upload is a proposed fallback, not a current capability. Arbitrary CSVs are not guaranteed to be valid regression datasets; feature/target types, sample count, dependence, leakage, and source rights require checking.
+CSV URL downloads may be blocked by **CORS**, authentication, or source restrictions. Local file upload is available as a fallback. Arbitrary CSVs are not guaranteed to be valid regression datasets; feature/target types, sample count, dependence, leakage, and source rights require checking.
 
 ## Documentation and references
 
@@ -134,3 +134,9 @@ Open http://localhost:8000/. No ML dependency installation or nested CV is neede
 The export check traces both static payloads to reviewed source JSON and SHA256 lineage.
 1920×1080 browser verification checks dataset round trips, three tabs, exact metrics, every curve coordinate, ranks and console/network errors.
 [Actual results and deployment evidence](docs/assets/README.md). Full Python regressions, five-size browser matrix and coverage were intentionally not rerun for this urgent MVP.
+
+## Custom CSV Regression MVP — Issue #7
+
+Local CSV / public CORS-enabled URL → choose Y and 2+ X → fresh browser OLS + Dummy, predictions, residuals and metrics.
+[操作與限制 / Usage and limits](docs/CUSTOM_CSV.md) · [PoC、sklearn 對照與正式截圖](docs/reports/custom_csv/REPORT.md).
+Custom feature ranking/k-curves remain **Not Available**; no static result is substituted. No Vercel/backend; ADR-0002 remains Proposed.

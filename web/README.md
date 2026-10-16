@@ -7,10 +7,10 @@ python3 -m http.server 8000 --directory web
 ```
 
 Open http://localhost:8000/ or the [GitHub Pages demo](https://wupojung.github.io/AIoT-DIC2-MultipleLR/).
-HTTP is required for fetch; direct `file://` opening is unsupported. No npm build/runtime dependency, CDN, backend or model execution.
+HTTP is required for fetch; direct `file://` opening is unsupported. No npm installation is required to serve the vendored assets. Built-in results stay static; Custom CSV fits new OLS models locally in a worker. No CDN runtime or backend.
 
 Overview, Feature Selection and Evaluation support 50 Startups / Boston Housing switching.
-Custom Dataset is explicitly disabled. Dataset JSON loads once; switching redraws all panels synchronously, preventing stale cross-dataset numbers.
+Custom Dataset now supports fresh browser regression; see [Custom CSV guide](../docs/CUSTOM_CSV.md). Dataset JSON loads once; switching redraws all panels synchronously, preventing stale cross-dataset numbers.
 All-feature holdout, training CV, nested selection and final training-selected features have separate labels.
 50 Startups selected-model holdout is unavailable and shown as not evaluated; the accepted baseline holdout is still displayed.
 Charts show fixed method/k mean training-CV scores, not test scans or confidence intervals.
@@ -25,7 +25,7 @@ python3 python/src/export_dashboard.py --check
 The standard-library exporter reads accepted `docs/reports/` JSON only; it never imports ML packages or retrains.
 `web/data/{50_startups,boston_housing}.json` contains summaries, curve points, full-training ranks, final selection, metrics and source SHA256 lineage.
 The `--check` command regenerates in memory and fails for stale/altered payloads. Raw CSV, prediction caches and full audit files are not published.
-Adding new experiments needs an explicit exporter update; there is no arbitrary JSON/CSV upload or inference.
+Adding new experiments needs an explicit exporter update; the built-in export adapter does not process custom CSV; that is handled by a separate browser module.
 
 ## Lean desktop verification
 
@@ -42,3 +42,11 @@ Screenshots and evidence go to `docs/assets/`. No complete Python regression, ne
 The old `browser_smoke.cjs` describes the previous disabled-selector foundation and is superseded for this Dashboard; it was not run or represented as passing here.
 
 Pages uses the existing `pages.yml` deployment workflow. For pre-merge review the owner-authorized feature branch is specifically allowed in the `github-pages` environment and dispatched manually. Main-only automatic deployment rules and CI remain unchanged.
+
+## Custom CSV Regression MVP
+
+[Input limits, preprocessing, CORS and reproducibility](../docs/CUSTOM_CSV.md).
+`custom-engine.mjs` is DOM/network-free, `custom-worker.mjs` owns fresh computation,
+`custom-ui.mjs` owns import/configuration and result rendering. No server model is called.
+Custom five-method Feature Selection is explicitly Not Available; original built-in results remain intact.
+Tests: `node --test tests/custom_engine.test.mjs` and `NODE_PATH=/tmp/dic2-browser/node_modules node tests/custom_browser.cjs`.

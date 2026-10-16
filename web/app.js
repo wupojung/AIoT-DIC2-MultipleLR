@@ -70,6 +70,11 @@ function metricTable(rows) {
   return `<div class="table-wrap"><table><thead><tr><th>Model / assessment</th><th>MAE</th><th>MSE</th><th>RMSE</th><th>R²</th></tr></thead><tbody>${rows.map(([label,row]) => `<tr><td>${label}</td>${['mae','mse','rmse','r2'].map(metric => `<td>${number(row[metric], metric === 'mse' ? 2 : 4)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
 }
 function render(data) {
+  document.querySelector('.dataset-bar .snapshot-tag').textContent = 'PRECOMPUTED · NO LIVE TRAINING';
+  document.querySelector('.top-tag').innerHTML = '<span class="live-dot"></span> Verified experiment data';
+  document.querySelector('.side-note small').innerHTML = 'Python / scikit-learn<br>Static experiment snapshots';
+  document.querySelector('.subheading').textContent = 'From features to evidence. Explore two real regression experiments.';
+  document.querySelector('footer > span:last-child').textContent = 'Real data · Training-only selection · Explicit limitations';
   document.body.dataset.dataset = data.dataset_id;
   document.querySelector('#dataset-description').textContent = `${data.subtitle} · Target: ${data.target}`;
   const base = data.holdout['All Features'];
@@ -105,7 +110,11 @@ async function start() {
       if (data.dataset_id !== id || data.schema_version !== 1 || !data.curves.length) throw new Error(`Invalid experiment data: ${id}`);
       return [id,data];
     })));
-    selector.addEventListener('change', () => render(datasets.get(selector.value)));
+    selector.addEventListener('change', () => {
+      if (selector.value === 'custom') {document.dispatchEvent(new Event('custom-dataset-selected')); return;}
+      document.dispatchEvent(new Event('builtin-dataset-selected'));
+      render(datasets.get(selector.value));
+    });
     render(datasets.get(selector.value));
     document.querySelector('#content').hidden = false;
     document.querySelector('#status').textContent = '';

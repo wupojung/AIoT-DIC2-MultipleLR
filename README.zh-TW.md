@@ -15,7 +15,7 @@
 
 **[開啟 GitHub Pages Demo](https://wupojung.github.io/AIoT-DIC2-MultipleLR/)** · [檢查部署紀錄](https://github.com/wupojung/AIoT-DIC2-MultipleLR/actions/workflows/pages.yml)
 
-> **Dashboard MVP 已串接真實實測結果**：50 Startups／Boston Housing 下拉切換，Overview／Feature Selection／Evaluation 三頁，顯示 RMSE／R²、曲線、特徵順序及評估表。讀取靜態 JSON，沒有即時訓練或自訂 CSV；Training CV、Nested CV、Holdout 明確分開。
+> **Dashboard MVP 已串接真實實測結果**：50 Startups／Boston Housing 下拉切換，Overview／Feature Selection／Evaluation 三頁，顯示 RMSE／R²、曲線、特徵順序及評估表。讀取靜態 JSON，Custom Dataset 可在瀏覽器重新訓練 CSV；自訂五方法 Feature Selection 為 Not Available，內建資料仍為靜態結果；Training CV、Nested CV、Holdout 明確分開。
 
 ![真實瀏覽器 Desktop 1920×1080 截圖](docs/assets/mlr-lab-50_startups-overview-1920x1080.png)
 
@@ -29,7 +29,7 @@
 | 五種 Feature Selection | 已完成（Issue #4／PR #15） | [比較分析及 RMSE／R² 曲線](docs/reports/feature_selection/REPORT.md) |
 | Boston Housing Workflow Reuse | PR #17 已合併，技術實測完成 | [Issue #5](https://github.com/wupojung/AIoT-DIC2-MultipleLR/issues/5) |
 | Web Dashboard | 真實結果雙資料集三頁 MVP | [Web 說明](web/README.md) |
-| 自訂 CSV Dataset | 尚未實作 | [Issue #7](https://github.com/wupojung/AIoT-DIC2-MultipleLR/issues/7) · [ADR-0002 草案](https://github.com/wupojung/AIoT-DIC2-MultipleLR/pull/12) |
+| 自訂 CSV Dataset | Browser Regression MVP；Feature Selection 未實作 | [Issue #7](https://github.com/wupojung/AIoT-DIC2-MultipleLR/issues/7) · [ADR-0002 草案](https://github.com/wupojung/AIoT-DIC2-MultipleLR/pull/12) |
 
 50 Startups 採固定資料來源與 SHA-256、80/20 訓練測試切分、fold-local 前處理、五折訓練 CV、OLS LinearRegression 與 Dummy Baseline。Feature Selection 使用 **Pearson、F-Test、RFE、Forward SFS、LassoCV**，並以統一 OLS 下游模型公平比較；另以 Nested CV 檢查選模偏差。
 
@@ -84,7 +84,7 @@ python -m http.server 8000 --directory web
 
 開啟 <http://localhost:8000/> 檢視靜態 UI。首次分析會下載並驗證固定來源的 50 Startups CSV；產物位於被 Git 忽略的 `outputs/`。特徵選擇重現指令見 [分析報告](docs/reports/feature_selection/REPORT.md)，其他作業系統見 [Python 說明](python/README.md)。
 
-## 自訂 CSV 測試範例（規劃功能）
+## 自訂 CSV 測試範例（Regression MVP）
 
 以下均為公開可取得的**候選資料集**，不代表目前網頁可以立即輸入並分析。未來每次匯入都必須重新指定數值型 Target（y）與可用 Features（X），並重新執行前處理、訓練和評估。
 
@@ -130,4 +130,10 @@ NODE_PATH=/tmp/dic2-browser/node_modules node tests/dashboard_smoke.cjs
 匯出檢查會比對靜態 JSON 與實測來源，含 SHA256 追溯。1920×1080 實際瀏覽器檢查資料集往返切換、
 三頁、精確指標、每個圖表座標、排名及 console/network errors。
 [實際結果與部署證據](docs/assets/README.md)。本次刻意不重跑完整 Python／五尺寸矩陣／Coverage；
-Custom CSV、ADR-0002、CI 建置與非必要重構暫停。
+完整 Custom Feature Selection、ADR-0002 接受、CI 建置與非必要重構仍暫停；CSV Regression MVP 見下方。
+
+## Custom CSV Regression MVP — Issue #7
+
+Local CSV / public CORS-enabled URL → choose Y and 2+ X → fresh browser OLS + Dummy, predictions, residuals and metrics.
+[操作與限制 / Usage and limits](docs/CUSTOM_CSV.md) · [PoC、sklearn 對照與正式截圖](docs/reports/custom_csv/REPORT.md).
+Custom feature ranking/k-curves remain **Not Available**; no static result is substituted. No Vercel/backend; ADR-0002 remains Proposed.

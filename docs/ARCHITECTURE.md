@@ -23,6 +23,7 @@ Issue #3 code/results and accepted ADRs remain intact. Boston MVP now uses the s
 See [Boston evidence](reports/boston_housing/REPORT.md); human review remains pending.
 Runtime artifacts are ignored; curated review figures may be recorded in docs/reports/.
 Issue #6 adds the standard-library export_dashboard.py adapter and schema_version=1 static JSON in web/data.
-The browser fetches both snapshots once and redraws all panels on dataset change. No ML execution occurs in Web. Dynamic custom CSV processing in browser versus Python backend
-remains undecided and needs its own ADR. No API or model service exists; the existing GitHub Pages workflow hosts only web/.
+The browser fetches both snapshots once and redraws all panels on dataset change. Built-in views never execute ML. Issue #7 adds a DOM-free CSV/SVD engine in a module Worker,
+with a separate custom importer/view; only a single JavaScript implementation ships. See [Custom contract](CUSTOM_CSV.md).
+ADR-0002 remains Proposed; this MVP is directly authorized by the task and its PoC evidence, not ADR acceptance. No API or model service exists; the existing GitHub Pages workflow hosts only web/.
 See [ADR-0001](adr/ADR-0001-project-foundation.md) and [CRISP-DM](CRISP_DM.md).
