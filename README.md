@@ -15,9 +15,9 @@
 
 > **Live Dashboard MVP:** Switch between 50 Startups and Boston Housing across Overview, Feature Selection and Evaluation. All metrics, curves and feature ranks come from reviewed static experiment JSON. No live training or Custom CSV analysis. Training CV, nested CV and holdout are explicitly separated.
 
-![50 Startups Dashboard — real browser capture, desktop 1920×1080](docs/assets/dashboard-50_startups-overview-1920x1080.png)
+![50 Startups Dashboard — real browser capture, desktop 1920×1080](docs/assets/mlr-lab-50_startups-overview-1920x1080.png)
 
-[View Boston Housing](docs/assets/dashboard-boston_housing-overview-1920x1080.png) · [All six desktop captures and verification](docs/assets/README.md)
+[View Boston Housing](docs/assets/mlr-lab-boston_housing-overview-1920x1080.png) · [Branding screenshot evidence](docs/assets/BRANDING.md)
 
 ## Overview
 

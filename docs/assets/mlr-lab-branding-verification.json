@@ -1,0 +1,100 @@
+{
+  "status": "PASS",
+  "url": "https://wupojung.github.io/AIoT-DIC2-MultipleLR/",
+  "deployed_commit": "48c41b83143bff8a53ecdb3780f2db6924f994d3",
+  "deployment": "https://github.com/wupojung/AIoT-DIC2-MultipleLR/actions/runs/38925143973",
+  "captured_at": "2026-10-16T15:37:26.821Z",
+  "tool": "Playwright + real Google Chrome",
+  "browser": "155.0.8059.84",
+  "viewport": {
+    "width": 1920,
+    "height": 1080
+  },
+  "device_scale_factor": 1,
+  "assets": [
+    {
+      "path": "index.html",
+      "status": 200,
+      "sha256": "674b5213ce25daddd3dbf10ea2c007a1f6af951519255a7e3a87733c376a1fb2",
+      "matches_local": true
+    },
+    {
+      "path": "styles.css",
+      "status": 200,
+      "sha256": "6e512b9d3c058cd7efb8df97110dfd2ae69a11eecf079cfe493a71350d10e031",
+      "matches_local": true
+    },
+    {
+      "path": "app.js",
+      "status": 200,
+      "sha256": "afa25ccb971a6b2c957bf4a9e3f6c16cae6b7bd553b00bc853e95e539ffd7aa2",
+      "matches_local": true
+    },
+    {
+      "path": "data/50_startups.json",
+      "status": 200,
+      "sha256": "248e1df9112495b5fdc673046b2754521f2ad9b326677bb198f4a61a2bce23c6",
+      "matches_local": true
+    },
+    {
+      "path": "data/boston_housing.json",
+      "status": 200,
+      "sha256": "9f2712f02086a2929c90b58ff536f128a5f52874a03a31f733550530463a9d75",
+      "matches_local": true
+    }
+  ],
+  "cases": [
+    {
+      "dataset": "50_startups",
+      "tab": "overview",
+      "status": "PASS"
+    },
+    {
+      "dataset": "50_startups",
+      "tab": "features",
+      "status": "PASS"
+    },
+    {
+      "dataset": "50_startups",
+      "tab": "evaluation",
+      "status": "PASS"
+    },
+    {
+      "dataset": "boston_housing",
+      "tab": "overview",
+      "status": "PASS"
+    },
+    {
+      "dataset": "boston_housing",
+      "tab": "features",
+      "status": "PASS"
+    },
+    {
+      "dataset": "boston_housing",
+      "tab": "evaluation",
+      "status": "PASS"
+    },
+    {
+      "dataset": "50_startups",
+      "tab": "overview",
+      "status": "PASS"
+    },
+    {
+      "dataset": "50_startups",
+      "tab": "features",
+      "status": "PASS"
+    },
+    {
+      "dataset": "50_startups",
+      "tab": "evaluation",
+      "status": "PASS"
+    }
+  ],
+  "console_js_errors": [],
+  "console_warnings": [],
+  "failed_requests": [],
+  "screenshots": [
+    "mlr-lab-50_startups-overview-1920x1080.png",
+    "mlr-lab-boston_housing-overview-1920x1080.png"
+  ]
+}
