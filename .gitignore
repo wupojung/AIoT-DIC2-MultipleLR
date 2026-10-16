@@ -16,3 +16,5 @@ data/*
 *.pkl
 *.pickle
 !data/50_startups_manifest.json
+
+!data/boston_housing_manifest.json

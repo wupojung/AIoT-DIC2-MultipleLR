@@ -1,0 +1,33 @@
+{
+  "dataset_id": "boston_housing",
+  "revision": "ffc0f66676b4835eb1bdd3f3ecab025e9c1be9fe",
+  "url": "https://raw.githubusercontent.com/scikit-learn/scikit-learn/ffc0f66676b4835eb1bdd3f3ecab025e9c1be9fe/sklearn/datasets/data/boston_house_prices.csv",
+  "sha256": "d98212636026544fc9b9c0f372e5f819872e6fa6fa757ab025efdda22180f2d6",
+  "git_blob": "61193a5d646cc190ec2b10b87a975c234bfe03eb",
+  "bytes": 34742,
+  "rows": 506,
+  "raw_columns": [
+    "CRIM",
+    "ZN",
+    "INDUS",
+    "CHAS",
+    "NOX",
+    "RM",
+    "AGE",
+    "DIS",
+    "RAD",
+    "TAX",
+    "PTRATIO",
+    "B",
+    "LSTAT",
+    "MEDV"
+  ],
+  "excluded": [
+    "B"
+  ],
+  "target": "MEDV",
+  "units": "historical USD thousands",
+  "parsing": "skip first metadata row; CSV header on second row",
+  "decision": "https://github.com/wupojung/AIoT-DIC2-MultipleLR/pull/17#issuecomment-6218126601",
+  "license_note": "Repository BSD-3-Clause is not proof of original dataset-specific license. Original rights/provenance unresolved; local educational assessment only, no raw redistribution. Owner provisional decision, not instructor approval."
+}

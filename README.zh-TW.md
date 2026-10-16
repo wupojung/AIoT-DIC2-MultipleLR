@@ -100,3 +100,16 @@ CSV URL 可能受到 CORS、驗證或授權限制；本機 CSV 上傳只是尚�
 - [GitHub Issues](https://github.com/wupojung/AIoT-DIC2-MultipleLR/issues) · [陳煥教授參考專案](https://github.com/huanchen1107/AIoT-DIC2-MultipleLR) · [舊版實驗](https://github.com/wupojung/DIC-2_test) · [StatsUnlock 設計參考](https://statsunlock.com/multiple-linear-regression-calculator/)
 
 本專案由 Codex 依獨立分支開發，遵守 **BUILD → RUN → TEST → VERIFY → PASS**，所有 PR 經人工 Review、明確授權才 Merge。歷史資料權利、貨幣單位及教師未決要求不得假設已確認。
+
+## Boston Housing MVP — Issue #5
+
+[繁中分析報告與 RMSE/R² 圖](docs/reports/boston_housing/REPORT.md) · [實測驗證](docs/reports/boston_housing/VERIFICATION.md) · [來源與倫理政策](docs/BOSTON_WORKFLOW_PROPOSAL.md)
+
+```sh
+python python/src/boston_workflow.py --run-id boston-v1
+python python/src/verify_boston_run.py outputs/boston_housing/boston-v1
+```
+
+Pinned historical CSV，506 rows；B 排除後 12 predictors，MEDV（歷史千美元）。
+重用共通 Regression／五種 Feature Selection；原始資料不隨 repo 散布。
+Owner 暫准教學 MVP，不代表原始授權或教師審查已完成；Web 尚未整合分析資料。
