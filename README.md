@@ -83,3 +83,23 @@ Web 僅頁籤切換可操作；資料集選單為停用的預留介面。尚無 
 ## Research integrity
 
 特徵選擇、前處理與參數調整應在訓練資料內進行；測試集保留供最後評估。不同方法比較時必須使用一致的資料切分與評估方式。圖表與數據必須來自實際執行，不可寫死績效或最佳特徵數。
+
+## 自訂 CSV 測試資料 / Custom regression CSV examples
+
+以下是真實公開 CSV 的**候選測試資料**，已檢查 GitHub 原始檔來源及欄位名稱。適用於未來 Custom Dataset 功能驗證，**不表示目前網站已具備 CSV 匯入或分析功能**。來源屬第三方，網址可用性、CORS、授權與欄位內容可能變動；請在正式測試時重新驗證。
+
+| Dataset | CSV URL | Target (y) | 建議 Features (X) | 注意事項 |
+| --- | --- | --- | --- | --- |
+| 50 Startups | [50_Startups.csv](https://raw.githubusercontent.com/Avik-Jain/100-Days-Of-ML-Code/master/datasets/50_Startups.csv) | `Profit` | `R&D Spend`, `Administration`, `Marketing Spend`, `State` | `State` 是類別欄位，需 one-hot；小樣本，評估有不確定性。 |
+| Auto MPG | [mpg.csv](https://raw.githubusercontent.com/mwaskom/seaborn-data/master/mpg.csv) | `mpg` | `cylinders`, `displacement`, `horsepower`, `weight`, `acceleration` | `horsepower` 有缺失值；`name` 不建議直接當連續數值特徵。 |
+| Restaurant Tips | [tips.csv](https://raw.githubusercontent.com/plotly/datasets/master/tips.csv) | `tip` | `total_bill`, `size` | 想加入 `sex`, `smoker`, `day`, `time` 等類別欄位時，必須先做適當編碼；避免將觀察關係誤解為因果。 |
+
+**預計使用方式（尚未實作）：** 將 CSV URL 貼入 Custom Dataset → 預覽資料 → 手動指定 Target 與兩個以上 Features → 檢查缺值與類別資料 → 選擇適合的前處理 → 重新訓練 Regression → 顯示來自本次資料的 MAE / MSE / RMSE / R² 與圖表。切勿重用別的資料集的模型、特徵排序或分數。
+
+如果網址被瀏覽器的 **CORS** 政策阻擋，改用「下載 CSV 後上傳檔案」（待實作）。不是每個 CSV 都適合多元線性迴歸；Target 須為可用的連續數值，且需要足夠獨立樣本，不得存在無法處理的資料洩漏、特徵共線性或有效樣本不足問題。這些示例**並非**課堂「14–39 特徵」的符合性證明。
+
+## GitHub Pages preview deployment
+
+正式預覽網址預計為 `https://wupojung.github.io/AIoT-DIC2-MultipleLR/`，但**必須等 GitHub Pages 正式啟用且部署成功後才能視為可用**。
+
+GitHub Repo → **Settings → Pages → Build and deployment → Source: GitHub Actions**。本 Repo 的 `.github/workflows/pages.yml` 將只發佈 `web/` 這個靜態資料夾，不會公開 `data/`、Python 產物或其他研究檔案。首次部署需確認 Settings 已啟用並檢查 Actions 實際結果；目前網頁僅為 Foundation UI，不支援 CSV 分析。
