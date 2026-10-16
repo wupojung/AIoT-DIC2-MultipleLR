@@ -149,7 +149,7 @@ def write_report(directory, result):
         '## 1. 商業理解', '',
         '以歷史地區聚合資料預測 MEDV（歷史千美元），驗證流程重用。不得用於現代住房決策，亦不宣稱因果關係。', '',
         '## 2. 資料理解', '',
-        '來源、版本、SHA256 與權利限制見 [provenance.json](provenance.json)；欄位說明見 [來源與政策](../../BOSTON_WORKFLOW_PROPOSAL.md)。',
+        '來源、版本、SHA256 與權利限制見 [provenance.json](provenance.json)；欄位說明見 [來源與政策](https://github.com/wupojung/AIoT-DIC2-MultipleLR/blob/dic2-05-boston-workflow/docs/BOSTON_WORKFLOW_PROPOSAL.md)。',
         '506 筆、13 原始 predictors + MEDV；排除 B 後 12 個。完整結構稽核見 [data_quality.json](data_quality.json)。',
         'B 是歷史種族比例的非線性變換；排除不代表移除代理偏誤。LSTAT 等仍具社經偏誤。',
         '原始資料專屬授權與來源權利尚未完全釐清；owner 暫准本地教學評估，不代表教師核准或新授權；不散布原始 CSV。', '',
@@ -180,7 +180,7 @@ def write_report(directory, result):
         '重用 config/schema、Pipeline、seeded split/folds、四指標、五選擇器、nested engine、JSON 與繪圖。資料來源／完整性、B 排除、單位及報告保留 Boston 專屬設定。',
         '沒有重用已訓練模型、索引、排名或數值；50 Startups 原結果不覆寫。未建大型框架、Web 整合或部署。',
         '重現：python python/src/boston_workflow.py --run-id boston-mvp-v1；接著 python python/src/verify_boston_run.py outputs/boston_housing/boston-mvp-v1。',
-        '完整平台矩陣、完整 selector replay、覆蓋率／UI QA 延至 Issue #8；本次必要驗證見 VERIFICATION.md。']
+        '完整平台矩陣、完整 selector replay、覆蓋率／UI QA 延至 Issue #8；本次必要驗證見 verification.json；實際命令見 PR 附帶的 VERIFICATION.md。']
     (directory / 'REPORT.md').write_text('\n'.join(lines) + '\n', encoding='utf-8')
 
 
