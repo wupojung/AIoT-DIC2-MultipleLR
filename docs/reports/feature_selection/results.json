@@ -10524,8 +10524,8 @@
             "numeric__Administration",
             "numeric__Marketing Spend"
           ],
-          "order_meaning": "reverse elimination, not forward entry",
-          "survivor": "numeric__R&D Spend"
+          "survivor": "numeric__R&D Spend",
+          "order_meaning": "reverse elimination, not forward entry"
         },
         "SFS": {
           "steps": [
@@ -11453,8 +11453,8 @@
             "numeric__Administration",
             "numeric__Marketing Spend"
           ],
-          "order_meaning": "reverse elimination, not forward entry",
-          "survivor": "numeric__R&D Spend"
+          "survivor": "numeric__R&D Spend",
+          "order_meaning": "reverse elimination, not forward entry"
         },
         "SFS": {
           "steps": [
@@ -12383,8 +12383,8 @@
             "numeric__Marketing Spend",
             "state__State_Florida"
           ],
-          "order_meaning": "reverse elimination, not forward entry",
-          "survivor": "numeric__R&D Spend"
+          "survivor": "numeric__R&D Spend",
+          "order_meaning": "reverse elimination, not forward entry"
         },
         "SFS": {
           "steps": [
@@ -13328,8 +13328,8 @@
             "numeric__Administration",
             "numeric__Marketing Spend"
           ],
-          "order_meaning": "reverse elimination, not forward entry",
-          "survivor": "numeric__R&D Spend"
+          "survivor": "numeric__R&D Spend",
+          "order_meaning": "reverse elimination, not forward entry"
         },
         "SFS": {
           "steps": [
@@ -14350,8 +14350,8 @@
             "state__State_New York",
             "state__State_Florida"
           ],
-          "order_meaning": "reverse elimination, not forward entry",
-          "survivor": "numeric__R&D Spend"
+          "survivor": "numeric__R&D Spend",
+          "order_meaning": "reverse elimination, not forward entry"
         },
         "SFS": {
           "steps": [
@@ -15280,8 +15280,8 @@
             "numeric__Marketing Spend",
             "numeric__Administration"
           ],
-          "order_meaning": "reverse elimination, not forward entry",
-          "survivor": "numeric__R&D Spend"
+          "survivor": "numeric__R&D Spend",
+          "order_meaning": "reverse elimination, not forward entry"
         },
         "SFS": {
           "steps": [
@@ -16210,8 +16210,8 @@
             "numeric__Administration",
             "numeric__Marketing Spend"
           ],
-          "order_meaning": "reverse elimination, not forward entry",
-          "survivor": "numeric__R&D Spend"
+          "survivor": "numeric__R&D Spend",
+          "order_meaning": "reverse elimination, not forward entry"
         },
         "SFS": {
           "steps": [
@@ -17158,8 +17158,8 @@
             "numeric__Administration",
             "numeric__Marketing Spend"
           ],
-          "order_meaning": "reverse elimination, not forward entry",
-          "survivor": "numeric__R&D Spend"
+          "survivor": "numeric__R&D Spend",
+          "order_meaning": "reverse elimination, not forward entry"
         },
         "SFS": {
           "steps": [
@@ -18184,8 +18184,8 @@
             "numeric__Administration",
             "numeric__Marketing Spend"
           ],
-          "order_meaning": "reverse elimination, not forward entry",
-          "survivor": "numeric__R&D Spend"
+          "survivor": "numeric__R&D Spend",
+          "order_meaning": "reverse elimination, not forward entry"
         },
         "SFS": {
           "steps": [
@@ -19114,8 +19114,8 @@
             "numeric__Administration",
             "numeric__Marketing Spend"
           ],
-          "order_meaning": "reverse elimination, not forward entry",
-          "survivor": "numeric__R&D Spend"
+          "survivor": "numeric__R&D Spend",
+          "order_meaning": "reverse elimination, not forward entry"
         },
         "SFS": {
           "steps": [
@@ -20045,8 +20045,8 @@
             "numeric__Administration",
             "numeric__Marketing Spend"
           ],
-          "order_meaning": "reverse elimination, not forward entry",
-          "survivor": "numeric__R&D Spend"
+          "survivor": "numeric__R&D Spend",
+          "order_meaning": "reverse elimination, not forward entry"
         },
         "SFS": {
           "steps": [
@@ -20994,8 +20994,8 @@
             "numeric__Administration",
             "numeric__Marketing Spend"
           ],
-          "order_meaning": "reverse elimination, not forward entry",
-          "survivor": "numeric__R&D Spend"
+          "survivor": "numeric__R&D Spend",
+          "order_meaning": "reverse elimination, not forward entry"
         },
         "SFS": {
           "steps": [
@@ -22018,8 +22018,8 @@
             "state__State_New York",
             "numeric__Marketing Spend"
           ],
-          "order_meaning": "reverse elimination, not forward entry",
-          "survivor": "numeric__R&D Spend"
+          "survivor": "numeric__R&D Spend",
+          "order_meaning": "reverse elimination, not forward entry"
         },
         "SFS": {
           "steps": [
@@ -22948,8 +22948,8 @@
             "numeric__Administration",
             "numeric__Marketing Spend"
           ],
-          "order_meaning": "reverse elimination, not forward entry",
-          "survivor": "numeric__R&D Spend"
+          "survivor": "numeric__R&D Spend",
+          "order_meaning": "reverse elimination, not forward entry"
         },
         "SFS": {
           "steps": [
@@ -23877,8 +23877,8 @@
             "numeric__Administration",
             "numeric__Marketing Spend"
           ],
-          "order_meaning": "reverse elimination, not forward entry",
-          "survivor": "numeric__R&D Spend"
+          "survivor": "numeric__R&D Spend",
+          "order_meaning": "reverse elimination, not forward entry"
         },
         "SFS": {
           "steps": [
@@ -24826,8 +24826,8 @@
             "numeric__Administration",
             "numeric__Marketing Spend"
           ],
-          "order_meaning": "reverse elimination, not forward entry",
-          "survivor": "numeric__R&D Spend"
+          "survivor": "numeric__R&D Spend",
+          "order_meaning": "reverse elimination, not forward entry"
         },
         "SFS": {
           "steps": [
@@ -25848,8 +25848,8 @@
             "numeric__Administration",
             "numeric__Marketing Spend"
           ],
-          "order_meaning": "reverse elimination, not forward entry",
-          "survivor": "numeric__R&D Spend"
+          "survivor": "numeric__R&D Spend",
+          "order_meaning": "reverse elimination, not forward entry"
         },
         "SFS": {
           "steps": [
@@ -26774,8 +26774,8 @@
             "numeric__Administration",
             "numeric__Marketing Spend"
           ],
-          "order_meaning": "reverse elimination, not forward entry",
-          "survivor": "numeric__R&D Spend"
+          "survivor": "numeric__R&D Spend",
+          "order_meaning": "reverse elimination, not forward entry"
         },
         "SFS": {
           "steps": [
@@ -27705,8 +27705,8 @@
             "state__State_New York",
             "numeric__Marketing Spend"
           ],
-          "order_meaning": "reverse elimination, not forward entry",
-          "survivor": "numeric__R&D Spend"
+          "survivor": "numeric__R&D Spend",
+          "order_meaning": "reverse elimination, not forward entry"
         },
         "SFS": {
           "steps": [
@@ -28654,8 +28654,8 @@
             "numeric__Administration",
             "numeric__Marketing Spend"
           ],
-          "order_meaning": "reverse elimination, not forward entry",
-          "survivor": "numeric__R&D Spend"
+          "survivor": "numeric__R&D Spend",
+          "order_meaning": "reverse elimination, not forward entry"
         },
         "SFS": {
           "steps": [
@@ -29684,8 +29684,8 @@
             "state__State_Florida",
             "numeric__Marketing Spend"
           ],
-          "order_meaning": "reverse elimination, not forward entry",
-          "survivor": "numeric__R&D Spend"
+          "survivor": "numeric__R&D Spend",
+          "order_meaning": "reverse elimination, not forward entry"
         },
         "SFS": {
           "steps": [
@@ -30667,8 +30667,8 @@
             "state__State_Florida",
             "numeric__Marketing Spend"
           ],
-          "order_meaning": "reverse elimination, not forward entry",
-          "survivor": "numeric__R&D Spend"
+          "survivor": "numeric__R&D Spend",
+          "order_meaning": "reverse elimination, not forward entry"
         },
         "SFS": {
           "steps": [
@@ -31655,8 +31655,8 @@
             "numeric__Administration",
             "numeric__Marketing Spend"
           ],
-          "order_meaning": "reverse elimination, not forward entry",
-          "survivor": "numeric__R&D Spend"
+          "survivor": "numeric__R&D Spend",
+          "order_meaning": "reverse elimination, not forward entry"
         },
         "SFS": {
           "steps": [
@@ -32660,8 +32660,8 @@
             "numeric__Administration",
             "numeric__Marketing Spend"
           ],
-          "order_meaning": "reverse elimination, not forward entry",
-          "survivor": "numeric__R&D Spend"
+          "survivor": "numeric__R&D Spend",
+          "order_meaning": "reverse elimination, not forward entry"
         },
         "SFS": {
           "steps": [
