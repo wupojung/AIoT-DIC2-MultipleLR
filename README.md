@@ -1,61 +1,77 @@
-# AIoT DIC-2 — Multiple Linear Regression
+# AIoT DIC-2 — Multiple Linear Regression Lab
 
-> NCHU AIoT 2026 · Doing in Class 2 · **50 Startups · Feature Selection review pending**
+[![Pages Deployment](https://github.com/wupojung/AIoT-DIC2-MultipleLR/actions/workflows/pages.yml/badge.svg)](https://github.com/wupojung/AIoT-DIC2-MultipleLR/actions/workflows/pages.yml)
+[![Python](https://img.shields.io/badge/Python-3.12%2B-3776AB?logo=python&logoColor=white)](python/README.md)
+[![CI](https://img.shields.io/badge/CI-Not%20Configured-lightgrey)](https://github.com/wupojung/AIoT-DIC2-MultipleLR/actions)
+[![Coverage](https://img.shields.io/badge/Coverage-Not%20Measured-lightgrey)](tests/)
 
-本專案用 **Python / scikit-learn** 練習多元線性迴歸（Multiple Linear Regression），以 **CRISP-DM** 六階段引導分析，並逐步製作簡潔的 **Regression Analysis Dashboard**。重點是理解分析流程、正確評估模型，以及將流程重用到第二個問題，而非只追求最高分數。
+**English** · [繁體中文](README.zh-TW.md)
 
-## Assignment scope
+**NCHU AIoT 2026 · Doing in Class 2** — A reproducible multiple linear regression and feature selection laboratory built with Python, scikit-learn, and the six-phase CRISP-DM methodology.
 
-- **Problem 1 — 50 Startups:** 預測 `Profit`，作為第一題的 CRISP-DM 練習。
-- **Problem 2 — Boston Housing:** 預測 `MEDV`，驗證第二題能否套用已建立的 Skill / Workflow。這是具倫理限制的歷史教學資料集，需記錄來源及限制。
-- 老師要求：完成兩個問題，最後選一個主題上傳。
-- **Optional bonus:** 下拉選單切換兩個問題；輸入自訂 CSV Dataset URL 後重新分析（不是顯示預先計算的假結果）。
+### Live demo
 
-> 課堂上曾使用「Kaggle regression dataset with 14–39 features」作為搜尋提示詞；是否構成正式作業限制尚待確認。
+**[Open the GitHub Pages dashboard](https://wupojung.github.io/AIoT-DIC2-MultipleLR/)** · [Check deployment status](https://github.com/wupojung/AIoT-DIC2-MultipleLR/actions/workflows/pages.yml)
 
-## Learning workflow — CRISP-DM
+> **Scope of the current demo:** The Web dashboard is a static UI preview, not a live model-serving application. Dataset switching, CSV import, and in-browser regression are not yet available. Follow the deployment status link to confirm whether the site is online.
 
-| Phase | Focus |
+<!-- Dashboard screenshot: intentionally deferred until an approved capture is provided. -->
+
+## Overview
+
+This project studies **ordinary least squares (OLS) multiple linear regression**, reproducible evaluation, and feature selection. Experiments and charts come from actual Python executions; visualizations are not hand-filled with synthetic scores.
+
+**What has been implemented**
+
+- **50 Startups baseline:** A pinned, checksum-verified dataset; 80/20 train/test split; fold-local preprocessing; LinearRegression and a mean-prediction Dummy baseline; five-fold training CV and a frozen holdout evaluation.
+- **Feature selection:** Pearson correlation, F-test, RFE, forward SFS, and LassoCV-based ranking, all evaluated with the same downstream LinearRegression model. Training-only CV and nested model-selection assessment prevent tuning on the holdout.
+- **Reproducibility:** Source hashes, split identifiers, validation checks, recorded predictions, executable verification, and traceable reports.
+- **Web UI foundation:** Responsive Overview / Feature Selection / Evaluation tabs, with actual model-data integration planned separately.
+
+**Planned:** Boston Housing workflow reuse ([Issue #5](https://github.com/wupojung/AIoT-DIC2-MultipleLR/issues/5)), interactive dashboard integration ([Issue #6](https://github.com/wupojung/AIoT-DIC2-MultipleLR/issues/6)), and custom CSV support ([Issue #7](https://github.com/wupojung/AIoT-DIC2-MultipleLR/issues/7)). These are **not described as delivered features**. The historic Boston Housing dataset has known ethical limitations.
+
+## Verified experimental results
+
+| Experiment | Measurement | Reported result |
+| --- | --- | ---: |
+| 50 Startups OLS baseline | Holdout R² | **0.898727** |
+| 50 Startups OLS baseline | Holdout RMSE | **9,055.957** |
+| Feature-selection procedure | Nested CV mean RMSE | **9,237.359** |
+| Frozen training-based selection | Selected method and feature count | **F-Test, k=3** |
+
+The holdout is **10 observations**. RMSE is in the source's numeric units; currency and reporting period are unverified. Nested CV figures are **not** new independent holdout scores. See the [baseline report](docs/reports/50_startups/report.md), [feature selection report](docs/reports/feature_selection/REPORT.md), and [evaluation protocol](docs/EVALUATION_PROTOCOL.md).
+
+## Engineering quality and deployment
+
+| Check | Current status | Evidence |
+| --- | --- | --- |
+| GitHub Pages deployment | GitHub Actions workflow is configured; live status must be checked | [Pages workflow](https://github.com/wupojung/AIoT-DIC2-MultipleLR/actions/workflows/pages.yml) |
+| Python / browser checks | Local tests and verification scripts exist; no dedicated CI workflow yet | [Tests](tests/) · [Verification reports](docs/reports/) |
+| Test coverage | Not yet measured; **no percentage claimed** | [Tests](tests/) |
+| Research provenance | Pinned dataset, stored metadata, fold isolation and reproducibility checks | [Data policy](data/README.md) · [Reports](docs/reports/) |
+
+A green deployment badge indicates the GitHub Pages workflow result, **not** that the regression backend or CSV analysis is working. The existing `.github/workflows/pages.yml` deploys the `web/` directory; README-only changes do **not** trigger its current path-filtered workflow.
+
+## CRISP-DM workflow
+
+| Phase | Purpose |
 | --- | --- |
-| 1. Business Understanding | 定義問題、Target 與應用情境 |
-| 2. Data Understanding | Dataset、EDA、欄位、統計與資料品質 |
-| 3. Data Preparation | 缺失值、編碼、Train/Test Split、避免 Data Leakage |
-| 4. Modeling | Scikit-learn LinearRegression；交叉驗證 |
-| 5. Evaluation | MAE、MSE、RMSE、R²、殘差與 Feature Selection |
-| 6. Deployment | 模型重用、報告與網頁展示 |
+| 1. Business Understanding | Define the target, scope, and research limitations |
+| 2. Data Understanding | Check provenance, schema, statistics, and data quality |
+| 3. Data Preparation | Split data and apply training-only preprocessing |
+| 4. Modeling | Run OLS, dummy baseline, and cross-validation |
+| 5. Evaluation | Report MAE, MSE, RMSE, R², diagnostics, and feature selection |
+| 6. Deployment | Publish reproducible results and progressively develop the UI |
 
-## Planned architecture
+**Research integrity:** All selectors are fitted inside the relevant training folds. Reported charts are generated from actual runs. Do not choose features using holdout results or compare RMSE directly across datasets with different target units.
 
-- **Python:** 可重現的資料分析與模型評估。
-- **Web:** Overview / Feature Selection / Evaluation 三個頁籤，與 Dataset 下拉選單。
-- **Docs:** CRISP-DM 學習文件、架構、ADR 決策紀錄及中英雙語術語表。
-- **Workflow:** 從 50 Startups 提取可重用流程，再套用 Boston Housing。
+## Quick start
 
-PR #14 的 50 Startups Baseline 已合併；現在另提供五方法 Feature Selection 的 training-only 實驗與巢狀驗證（待本次 PR 審查）。Web 尚未連接分析資料。**自訂 CSV 應採純前端 JS 還是後端 Python 尚未決議**，由後續 ADR 評估，勿將規劃描述為已完成。
+Requires Python **3.12+** and a browser. Dependencies and version constraints are documented in [requirements.txt](requirements.txt) and [constraints.txt](constraints.txt).
 
-## Development and issue tracking
-
-**Implementation agent: Codex.** 從 [Issue #1 — Initialization](https://github.com/wupojung/AIoT-DIC2-MultipleLR/issues/1) 開始，採用小步驟 **BUILD → RUN → TEST → VERIFY → PASS**。每個階段提供實際驗證結果，未驗證不得標記 PASS。透過獨立分支及 PR 交付；**未經人工確認不得自行 Merge**。
-
-- [GitHub Issues](https://github.com/wupojung/AIoT-DIC2-MultipleLR/issues)
-- [Teacher's reference repository](https://github.com/huanchen1107/AIoT-DIC2-MultipleLR)（唯讀參考）
-- [Previous experiment repository](https://github.com/wupojung/DIC-2_test)（僅參考，勿直接複製未驗證的分析結論）
-- Learning Journal / HackMD：待補
-
-## Initial setup
-
-需要 Python 3.12+（實測 3.14.2）與瀏覽器。分析相依及固定版本見 requirements.txt / constraints.txt；標準函式庫環境檢查與 ML baseline 為不同命令。
-
-在 Codex 選擇本地專案資料夾，或先 clone 再開啟：
 ```sh
 git clone https://github.com/wupojung/AIoT-DIC2-MultipleLR.git
 cd AIoT-DIC2-MultipleLR
-git remote -v
-```
-確認 origin 的 fetch/push 都是上述 URL。開工前讀取 [AGENTS.md](AGENTS.md)、本 README、目標 Issue 與架構文件；在獨立 feature branch 工作。
-
-macOS 快速開始：
-```sh
 python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install -r requirements.txt
@@ -64,46 +80,27 @@ python python/src/startups_baseline.py --run-id baseline-v1
 python -m unittest discover -s tests -v
 python -m http.server 8000 --directory web
 ```
-瀏覽 http://localhost:8000；也可直接開啟 web/index.html。Windows PowerShell 的完整指令見 [Python 指南](python/README.md)。
 
-- [50 Startups Baseline 實測報告與圖表（保留）](docs/reports/50_startups/report.md)
-- [Feature Selection 五方法比較、曲線與繁中報告](docs/reports/feature_selection/REPORT.md)
-- [Feature Selection 實驗協定與重現](docs/FEATURE_SELECTION_PROTOCOL.md)
-- [Web 操作與目前限制](web/README.md)
-- [資料來源與倫理要求](data/README.md)
-- [作業需求、證據與 Issue #3 開工清單](docs/ASSIGNMENT_REQUIREMENTS.md)
-- [兩題問題定義與資料限制](docs/PROBLEM_DEFINITIONS.md)
-- [評估協定提案](docs/EVALUATION_PROTOCOL.md)
-- [工作流程重用設計](docs/WORKFLOW_REUSE.md)
-- [CRISP-DM 六階段驗收](docs/CRISP_DM.md)
-- [目前／規劃架構](docs/ARCHITECTURE.md)
-- [中英術語表](docs/GLOSSARY.md)
-- [ADR 流程](docs/adr/README.md) 與 [ADR-0001 基礎架構提案](docs/adr/ADR-0001-project-foundation.md)
+Open <http://localhost:8000/> to preview the static UI. The baseline downloads the **pinned and SHA-256 verified** teaching CSV on its first run; generated outputs are excluded from Git. For feature selection execution and validation, follow the [reproduction instructions](docs/reports/feature_selection/REPORT.md). See [Python instructions](python/README.md) for other operating systems.
 
-Issue #2／PR #11 已由 owner 接受；依後續指示執行 Issue #3。教師未決問題 Q1–Q5、來源原始權利及幣別／期間仍未確認，不視為已獲教授核准。基準執行與限制見 [Python 指南](python/README.md)。
+## Public CSV examples — for future custom dataset support
 
-Web 僅頁籤切換可操作；資料集選單為停用的預留介面。Web 尚無 API、資料整合、模型執行、CSV 匯入或部署。遵循 BUILD → RUN → TEST → VERIFY → PASS，實際指令與結果記錄於 PR，人工審查前不關閉 Issue。
+The following public files are **candidate regression inputs** for testing the future import feature; **the current website cannot analyze them yet**. Users will need to select a numeric target and suitable feature columns, handle missing/categorical values, and fit the new dataset from scratch.
 
-## Research integrity
-
-特徵選擇、前處理與參數調整應在訓練資料內進行；測試集保留供最後評估。不同方法比較時必須使用一致的資料切分與評估方式。圖表與數據必須來自實際執行，不可寫死績效或最佳特徵數。
-
-## 自訂 CSV 測試資料 / Custom regression CSV examples
-
-以下是真實公開 CSV 的**候選測試資料**，已檢查 GitHub 原始檔來源及欄位名稱。適用於未來 Custom Dataset 功能驗證，**不表示目前網站已具備 CSV 匯入或分析功能**。來源屬第三方，網址可用性、CORS、授權與欄位內容可能變動；請在正式測試時重新驗證。
-
-| Dataset | CSV URL | Target (y) | 建議 Features (X) | 注意事項 |
+| Dataset | CSV | Suggested target | Suggested predictors | Caveat |
 | --- | --- | --- | --- | --- |
-| 50 Startups | [50_Startups.csv](https://raw.githubusercontent.com/Avik-Jain/100-Days-Of-ML-Code/master/datasets/50_Startups.csv) | `Profit` | `R&D Spend`, `Administration`, `Marketing Spend`, `State` | `State` 是類別欄位，需 one-hot；小樣本，評估有不確定性。 |
-| Auto MPG | [mpg.csv](https://raw.githubusercontent.com/mwaskom/seaborn-data/master/mpg.csv) | `mpg` | `cylinders`, `displacement`, `horsepower`, `weight`, `acceleration` | `horsepower` 有缺失值；`name` 不建議直接當連續數值特徵。 |
-| Restaurant Tips | [tips.csv](https://raw.githubusercontent.com/plotly/datasets/master/tips.csv) | `tip` | `total_bill`, `size` | 想加入 `sex`, `smoker`, `day`, `time` 等類別欄位時，必須先做適當編碼；避免將觀察關係誤解為因果。 |
+| 50 Startups | [CSV](https://raw.githubusercontent.com/Avik-Jain/100-Days-Of-ML-Code/master/datasets/50_Startups.csv) | `Profit` | `R&D Spend`, `Administration`, `Marketing Spend`, `State` | `State` requires encoding; small sample |
+| Auto MPG | [CSV](https://raw.githubusercontent.com/mwaskom/seaborn-data/master/mpg.csv) | `mpg` | `cylinders`, `displacement`, `horsepower`, `weight`, `acceleration` | Missing horsepower values |
+| Restaurant Tips | [CSV](https://raw.githubusercontent.com/plotly/datasets/master/tips.csv) | `tip` | `total_bill`, `size` | Other categorical fields need encoding; no causal claim |
 
-**預計使用方式（尚未實作）：** 將 CSV URL 貼入 Custom Dataset → 預覽資料 → 手動指定 Target 與兩個以上 Features → 檢查缺值與類別資料 → 選擇適合的前處理 → 重新訓練 Regression → 顯示來自本次資料的 MAE / MSE / RMSE / R² 與圖表。切勿重用別的資料集的模型、特徵排序或分數。
+CSV URL downloads may be blocked by **CORS**, authentication, or source restrictions. File upload is a proposed fallback, not a current capability. Arbitrary CSVs are not guaranteed to be valid regression datasets; feature/target types, sample count, dependence, leakage, and source rights require checking.
 
-如果網址被瀏覽器的 **CORS** 政策阻擋，改用「下載 CSV 後上傳檔案」（待實作）。不是每個 CSV 都適合多元線性迴歸；Target 須為可用的連續數值，且需要足夠獨立樣本，不得存在無法處理的資料洩漏、特徵共線性或有效樣本不足問題。這些示例**並非**課堂「14–39 特徵」的符合性證明。
+## Documentation and references
 
-## GitHub Pages preview deployment
+- **Research:** [CRISP-DM](docs/CRISP_DM.md) · [Feature-selection protocol](docs/FEATURE_SELECTION_PROTOCOL.md) · [Evaluation protocol](docs/EVALUATION_PROTOCOL.md) · [Workflow reuse](docs/WORKFLOW_REUSE.md)
+- **Architecture:** [Architecture](docs/ARCHITECTURE.md) · [ADR-0001 (Accepted)](docs/adr/ADR-0001-project-foundation.md) · [ADR index](docs/adr/README.md) · [ADR-0002 proposal](https://github.com/wupojung/AIoT-DIC2-MultipleLR/pull/12)
+- **Data:** [Dataset definitions and ethics](docs/PROBLEM_DEFINITIONS.md) · [Data policy](data/README.md) · [Glossary](docs/GLOSSARY.md)
+- **Project:** [Issues](https://github.com/wupojung/AIoT-DIC2-MultipleLR/issues) · [Course reference by Professor Huan Chen](https://github.com/huanchen1107/AIoT-DIC2-MultipleLR) · [Previous experiment](https://github.com/wupojung/DIC-2_test)
+- **UI inspiration:** [StatsUnlock multiple regression calculator](https://statsunlock.com/multiple-linear-regression-calculator/)
 
-正式預覽網址預計為 `https://wupojung.github.io/AIoT-DIC2-MultipleLR/`，但**必須等 GitHub Pages 正式啟用且部署成功後才能視為可用**。
-
-GitHub Repo → **Settings → Pages → Build and deployment → Source: GitHub Actions**。本 Repo 的 `.github/workflows/pages.yml` 將只發佈 `web/` 這個靜態資料夾，不會公開 `data/`、Python 產物或其他研究檔案。首次部署需確認 Settings 已啟用並檢查 Actions 實際結果；目前網頁僅為 Foundation UI，不支援 CSV 分析。
+**Development process:** Codex works in feature branches and follows **BUILD → RUN → TEST → VERIFY → PASS**. Pull requests require manual review and explicit approval before merging. The assignment's final submission requirements and historical source limitations remain subject to instructor confirmation.
