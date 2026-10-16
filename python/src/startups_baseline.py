@@ -16,13 +16,9 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-from sklearn.compose import ColumnTransformer
 from sklearn.dummy import DummyRegressor
-from sklearn.impute import SimpleImputer
-from sklearn.linear_model import LinearRegression
-from sklearn.model_selection import KFold, train_test_split
-from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import OneHotEncoder
+
+import regression_workflow as workflow
 
 ROOT = Path(__file__).resolve().parents[2]
 NUMERIC = ['R&D Spend', 'Administration', 'Marketing Spend']
@@ -30,11 +26,13 @@ FEATURES = NUMERIC + ['State']
 TARGET = 'Profit'
 SEED = 42
 MANIFEST = ROOT / 'data/50_startups_manifest.json'
+CONFIG = workflow.DatasetConfig('50_startups', TARGET, tuple(NUMERIC), ('State',),
+                                50, tuple(FEATURES + [TARGET]), categorical_block='state',
+                                expected_encoded_features=5)
 
 
 def write_json(path, value):
-    path.write_text(json.dumps(value, indent=2, ensure_ascii=False, allow_nan=False) + '\n',
-                    encoding='utf-8')
+    return workflow.write_json(path, value)
 
 
 def acquire_data(cache_dir):
@@ -68,55 +66,15 @@ def acquire_data(cache_dir):
 
 
 def validate_data(frame):
-    """Fail explicitly rather than silently changing schema, rows or target."""
-    if list(frame.columns) != FEATURES + [TARGET] or len(frame) != 50:
-        raise ValueError('Expected 50 rows with four predictors and Profit in canonical order')
-    if not frame.index.equals(pd.RangeIndex(50)):
-        raise ValueError('Expected original zero-based CSV row IDs')
-    for column in NUMERIC + [TARGET]:
-        if not pd.api.types.is_numeric_dtype(frame[column]):
-            raise ValueError(f'Non-numeric column: {column}')
-        values = frame[column].to_numpy(dtype=float)
-        if np.isinf(values).any() or frame[column].isna().all():
-            raise ValueError(f'Infinite or entirely missing column: {column}')
-    if frame[TARGET].isna().any():
-        raise ValueError('Missing target Profit is not permitted')
-    states = frame['State'].dropna()
-    if not states.map(lambda value: isinstance(value, str) and bool(value.strip())).all():
-        raise ValueError('State must contain nonblank strings or missing values')
-    if frame['State'].isna().all():
-        raise ValueError('Entirely missing State')
-    if frame.duplicated().any() or frame.duplicated(subset=FEATURES).any():
-        raise ValueError('Duplicate rows/predictor groups require a split-policy review')
+    return workflow.validate_data(frame, CONFIG)
 
 
 def make_pipeline():
-    numeric = Pipeline([('imputer', SimpleImputer(strategy='median'))])
-    categorical = Pipeline([
-        ('imputer', SimpleImputer(strategy='most_frequent')),
-        ('encoder', OneHotEncoder(drop='first', handle_unknown='ignore', sparse_output=False)),
-    ])
-    return Pipeline([
-        ('preprocess', ColumnTransformer([
-            ('numeric', numeric, NUMERIC), ('state', categorical, ['State']),
-        ])),
-        ('regressor', LinearRegression(fit_intercept=True)),
-    ])
+    return workflow.make_pipeline(CONFIG)
 
 
 def metrics(y, prediction):
-    y, prediction = np.asarray(y, dtype=float), np.asarray(prediction, dtype=float)
-    if y.shape != prediction.shape or not len(y) or not np.isfinite(prediction).all():
-        raise ValueError('Invalid predictions')
-    residual = y - prediction
-    mse = float(np.mean(residual ** 2))
-    denominator = float(np.sum((y - np.mean(y)) ** 2))
-    return {'mae': float(np.mean(np.abs(residual))), 'mse': mse,
-            'rmse': float(np.sqrt(mse)),
-            'r2': float(1 - np.sum(residual ** 2) / denominator)
-            if len(y) >= 2 and denominator > 0 else None,
-            'r2_undefined_reason': None if len(y) >= 2 and denominator > 0
-            else 'Fewer than two samples or constant target', 'n': len(y)}
+    return workflow.metrics(y, prediction)
 
 
 def fit_checked(pipeline, X, y):
@@ -222,9 +180,8 @@ def run_analysis(frame, provenance, output_root, run_id):
     if not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_-]{0,63}', run_id):
         raise ValueError('run-id must be 1–64 ASCII letters/digits/hyphens/underscores')
     validate_data(frame)
-    train_ids, test_ids = train_test_split(frame.index.to_numpy(), test_size=0.2,
-                                          random_state=SEED, shuffle=True)
-    fold_ids = list(KFold(n_splits=5, shuffle=True, random_state=SEED).split(train_ids))
+    train_ids, test_ids = workflow.split_row_ids(frame.index, test_size=0.2, seed=SEED)
+    fold_ids = workflow.folds(train_ids, n=5, seed=SEED)
     for fit, validation in fold_ids:
         for ids in [train_ids[fit], train_ids[validation], test_ids]:
             if len(ids) < 2 or frame.loc[ids, TARGET].nunique() < 2:

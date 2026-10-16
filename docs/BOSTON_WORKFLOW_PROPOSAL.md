@@ -98,7 +98,7 @@ holdout 選方法／k；不逐 k 掃 test、不重跑 seed 找高分。三種指
 
 在確認 A／B／C 前不載入 Boston 作實驗；也不將此提案寫成 Accepted ADR。
 
-## 最小必要重構（尚未實作）
+## 最小必要重構（共通核心已啟動，Boston 尚未實作）
 
 目前固定值主要在 startups_baseline.py 的 FEATURES/TARGET/50-row 驗證、State
 preprocessing，以及 feature_selection.py 的 k=1–5、三個 State levels、40-row split、
@@ -142,3 +142,20 @@ git diff origin/main HEAD -- docs/adr python/src tests docs/reports
 原有 **21 tests PASS**（8.351 秒），相對文件連結檢查包含本提案；whitespace check
 通過。既有程式／實驗／ADR 無修改。只新增此提案文件，不代表 Boston 的 BUILD/RUN/
 TEST/VERIFY/PASS 已完成。尚未執行 Boston 載入、schema 實測、EDA、訓練、選擇或評估。
+
+## 進度更新：可獨立執行的共通重構
+
+不依賴 Boston 未決政策，已開始實作：
+
+- regression_workflow.py：DatasetConfig、來源 schema 驗證、排除欄位防護、
+  Pipeline 建構、原樣 metrics／JSON、seeded split/folds。
+- Startups Baseline 保留既有入口、State block 名稱與規則，改為呼叫共通函式。
+- 原五方法與 nested engine 接收 config／alpha 參數，k 由實際編碼維度產生；
+  Startups config 仍嚴格要求五欄且保持原 alpha grid。
+- 圖表可設定特徵軸與單位；原 Startups 預設文字／樣式保持相同。
+- 另以純合成 60-row、12-numeric-feature 資料測試：沒有 State 假設、排除／target
+  不進入 predictors、不同樣本數的五折／三折、全部五方法與動態 k=1–12。
+
+這不是 Boston 資料測試。來源 loader／manifest、B 政策落實、Boston baseline／holdout、
+專屬 verifier、CRISP-DM 報告和實測圖表仍待政策確認後完成；不能把 synthetic 結果
+當作 Boston 結果。原實驗快照、原 verifier/tests、已接受協定與 ADR 未修改。
