@@ -174,6 +174,7 @@ def export_eda(frame, train_ids, directory):
     figure, axes = plt.subplots(2, 2, figsize=(10, 7))
     for axis, column in zip(axes.flat, NUMERIC + [TARGET]):
         axis.hist(train[column].dropna(), bins=10, edgecolor='white')
+        axis.locator_params(axis='x', nbins=5)
         axis.set(title=column, xlabel='Source units (currency/period unverified)', ylabel='Train count')
     figure.suptitle('Training data distributions only')
     save_plot(directory / 'train_distributions.png', figure)
