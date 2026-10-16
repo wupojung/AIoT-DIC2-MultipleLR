@@ -67,10 +67,16 @@ python -m http.server 8000 --directory web
 
 - [Web 操作與目前限制](web/README.md)
 - [資料來源與倫理要求](data/README.md)
+- [作業需求、證據與 Issue #3 開工清單](docs/ASSIGNMENT_REQUIREMENTS.md)
+- [兩題問題定義與資料限制](docs/PROBLEM_DEFINITIONS.md)
+- [評估協定提案](docs/EVALUATION_PROTOCOL.md)
+- [工作流程重用設計](docs/WORKFLOW_REUSE.md)
 - [CRISP-DM 六階段驗收](docs/CRISP_DM.md)
 - [目前／規劃架構](docs/ARCHITECTURE.md)
 - [中英術語表](docs/GLOSSARY.md)
 - [ADR 流程](docs/adr/README.md) 與 [ADR-0001 基礎架構提案](docs/adr/ADR-0001-project-foundation.md)
+
+Issue #2 文件為待審規格；資料來源、評估提案及教師未決要求仍需核准，不代表分析階段 PASS。
 
 Web 僅頁籤切換可操作；資料集選單為停用的預留介面。尚無 API、資料整合、模型訓練、CSV 匯入或部署。遵循 BUILD → RUN → TEST → VERIFY → PASS，實際指令與結果記錄於 PR，人工審查前不關閉 Issue。
 

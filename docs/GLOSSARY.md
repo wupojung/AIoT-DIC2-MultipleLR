@@ -30,3 +30,9 @@
 | static website | 靜態網站 | 以 HTML/CSS/JS 檔案提供介面。 | 本專案 web/index.html。 |
 | backend | 後端 | 在伺服器執行的應用服務。 | 可能由 Python 處理請求；目前未決議。 |
 | ADR | 架構決策紀錄 | 保留決策背景、選項與後果的文件。 | ADR-0001 提議基礎架構。 |
+| Holdout | 保留測試集 | 預先隔離、方法凍結後才評估的資料。 | 不用 test 分數選 k。 |
+| Fold | 驗證折 | 交叉驗證的一次訓練／驗證分組。 | 五折輪替各一組作 validation。 |
+| Pearson correlation | 皮爾森相關 | 衡量兩數值變數線性關係的係數，並不表示因果。 | 只在訓練資料內依 abs(r) 排序。 |
+| F-test (f_regression) | 單變量迴歸 F 檢定 | 各特徵與連續目標線性關係的統計檢定，不是多特徵整體模型的評分。 | 在 training fold 計算 F 分數選欄位。 |
+| Dummy baseline | 簡單參考基準 | 不使用特徵的比較對象。 | 用 training y 的均值作預測。 |
+| Nested cross-validation | 巢狀交叉驗證 | 內層選方法／參數、外層評估整個選擇流程。 | 外層驗證資料不參與內層選 alpha。 |
