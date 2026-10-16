@@ -1,7 +1,7 @@
 # CRISP-DM phase gates
 
 The tables below define phase gates. 50 Startups has technical baseline evidence
-(see the status note below), pending human phase review; Boston remains planned. For each
+(see the status note below), pending human phase review; Boston MVP technical evidence is available (human acceptance pending). For each
 phase record inputs, commands, outputs, checks and reviewer decision. A failed
 check keeps the phase open. Foundation PASS does not imply any analysis phase PASS.
 
@@ -22,13 +22,13 @@ check keeps the phase open. Foundation PASS does not imply any analysis phase PA
 
 Neither raw dataset is bundled. 50 Startups now uses a pinned, hash-verified mirror
 for owner-requested local baseline verification; original collection rights/units remain
-explicit limitations, not assumed resolved. Boston source/ethics approval remains pending. Issue #4 implements feature-selection comparisons with the same leakage/comparison gates;
+explicit limitations, not assumed resolved. Boston uses the explicit provisional owner policy in PR #17; original rights and instructor acceptance remain unresolved. Issue #4 implements feature-selection comparisons with the same leakage/comparison gates;
 technical evidence and human review status are recorded below. Custom CSV is optional
 and has no approved execution architecture yet.
 
 ## 狀態與證據紀錄 / Status and evidence
 
-- **Planned**：交付物與驗收已定義，尚未執行。Boston 所有分析階段仍為 Planned；50 Startups 狀態見下方。
+- **Planned**：交付物與驗收已定義，尚未執行。Boston 最新狀態見 Issue #5 evidence；50 Startups 狀態見下方。
 - **Work in progress**：已有實際輸入／執行紀錄，但驗證尚未完整；列出缺少的證據。
 - **PASS**：保存可重現的輸入、命令、產物與驗證結果，且該 gate 已經 reviewer 確認。
   Foundation 或規格文件的技術 PASS 不等於資料分析 PASS，也不取代人工審查。
@@ -63,7 +63,7 @@ Owner 在 Issue #2 關閉後要求接續；已依固定 baseline 產生本地證
 已有問題定義、鏡像 manifest、結構稽核、training-only EDA、split/CV、
 fold-local 前處理、一次 holdout 與重現測試，尚未宣稱教師／reviewer 的 phase PASS。
 Phase 6 的本地重現報告已有證據，最終主題／提交與部署仍 Planned。
-Boston 全部 Planned。教授 Q1–Q5、原始權利／單位與抽樣獨立性仍是明示限制。
+Boston 最新實測狀態見下方 Issue #5。教授 Q1–Q5、原始權利／單位與抽樣獨立性仍是明示限制。
 
 ## Issue #4 — selection evidence (human review pending)
 
@@ -73,3 +73,11 @@ RFE、SFS、LassoCV + All Features，不覆寫舊結果。Phase 3–5 增加 fol
 holdout。這些是技術證據，仍等待人工 review，不自行改標教師 gate PASS。
 [實驗協定](FEATURE_SELECTION_PROTOCOL.md)、[繁中實測報告](reports/feature_selection/REPORT.md)。
 Boston、Custom CSV、Web 資料整合及部署不在本次工作範圍。
+
+## Issue #5 — Boston MVP evidence (human review pending)
+
+依 PR #17 owner 暫行政策，Phase 1–6 已有本地技術產物：版本／hash/schema、
+B 排除、train-only 準備、共用五方法／nested CV、凍結後 holdout、繁中報告與重現。
+[實測報告](reports/boston_housing/REPORT.md)、[必要驗證](reports/boston_housing/VERIFICATION.md)。
+這些不是教師 phase PASS；原始授權、代理偏誤、空間依賴與教師接受仍明示待審。
+完整 QA 延至 Issue #8，未做 Web 資料整合或部署。

@@ -1,0 +1,28 @@
+{
+  "shape": [
+    506,
+    14
+  ],
+  "missing": 0,
+  "duplicate_rows": 0,
+  "medv_at_50": 16,
+  "predictors": [
+    "CRIM",
+    "ZN",
+    "INDUS",
+    "CHAS",
+    "NOX",
+    "RM",
+    "AGE",
+    "DIS",
+    "RAD",
+    "TAX",
+    "PTRATIO",
+    "LSTAT"
+  ],
+  "excluded": [
+    "B"
+  ],
+  "train_rows": 404,
+  "test_rows": 102
+}

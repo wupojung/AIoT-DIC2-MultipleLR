@@ -51,7 +51,7 @@ ASCII 字母／數字／底線／連字號。既有 run 直接失敗，不覆寫
 擬合；unknown State 記數並編成全零，可能與 reference category 重合。全空欄、
 缺失 target、錯誤 schema、非有限值及重複 predictors 明確拒絕，需另行 review，
 不依 holdout 成績刪列。不能用多次重跑找最佳 seed/k；不同 run-id 的重跑僅供重現核對。
-Baseline 命令沒有特徵選擇；本次沒有 Boston、Web 整合或部署。原始蒐集、幣別、期間及公司獨立性未知，
+Baseline 命令沒有特徵選擇；此 Baseline 入口不執行 Boston、Web 整合或部署。原始蒐集、幣別、期間及公司獨立性未知，
 不作因果推論。來源 repository 的 MIT 不代表原始資料權利已獨立查明；不提交原始 CSV。
 
 參考：[評估協定](../docs/EVALUATION_PROTOCOL.md)、
@@ -80,3 +80,18 @@ run-id 和報告目錄不得已存在。第一個命令僅讓原 40 train 進入
 審查快照；每次新 run 都自行重算。Verifier 會驗原始 row IDs／每次 fit 的統計、重 fit
 所選欄位的 OLS、重算預測指標、replay 多 alpha path，並由 CSV 重畫比對兩張 PNG。
 曲線最低點、nested 選模成績及最後三折凍結方案是不同層級，不混稱最佳 test 結果。
+
+## Issue #5 — Boston Housing MVP
+
+```sh
+python python/src/boston_workflow.py --run-id boston-v1
+python python/src/verify_boston_run.py outputs/boston_housing/boston-v1
+```
+
+以相同依賴重用共通 Pipeline、split/folds、metrics、五方法／nested engine 與繪圖。
+Pinned CSV 首次下載且核對 SHA256/Git blob/size；cache 可離線重跑，run-id 禁止覆寫。
+主模型排除 B，12 numeric predictors，MEDV 歷史千美元；CHAS 二元／RAD numeric，不沿用 State encoding。
+seed42、80/20、5/3/3 CV，Boston alpha grid 1e-4..1e2，最終 LR。
+training-only 選方法/k，凍結後一次 holdout；runtime outputs 位於獨立 boston_housing/<run-id>/。
+[繁中報告](../docs/reports/boston_housing/REPORT.md)、[實測驗證](../docs/reports/boston_housing/VERIFICATION.md)、
+[來源／倫理限制](../docs/BOSTON_WORKFLOW_PROPOSAL.md)。完整 QA 留待 Issue #8，人工接受仍待 Review。

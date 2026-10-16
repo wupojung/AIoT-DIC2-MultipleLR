@@ -104,3 +104,16 @@ CSV URL downloads may be blocked by **CORS**, authentication, or source restrict
 - **UI inspiration:** [StatsUnlock multiple regression calculator](https://statsunlock.com/multiple-linear-regression-calculator/)
 
 **Development process:** Codex works in feature branches and follows **BUILD → RUN → TEST → VERIFY → PASS**. Pull requests require manual review and explicit approval before merging. The assignment's final submission requirements and historical source limitations remain subject to instructor confirmation.
+
+## Boston Housing MVP — Issue #5
+
+[繁中分析報告與 RMSE/R² 圖](docs/reports/boston_housing/REPORT.md) · [實測驗證](docs/reports/boston_housing/VERIFICATION.md) · [來源與倫理政策](docs/BOSTON_WORKFLOW_PROPOSAL.md)
+
+```sh
+python python/src/boston_workflow.py --run-id boston-v1
+python python/src/verify_boston_run.py outputs/boston_housing/boston-v1
+```
+
+Pinned historical CSV，506 rows；B 排除後 12 predictors，MEDV（歷史千美元）。
+重用共通 Regression／五種 Feature Selection；原始資料不隨 repo 散布。
+Owner 暫准教學 MVP，不代表原始授權或教師審查已完成；Web 尚未整合分析資料。

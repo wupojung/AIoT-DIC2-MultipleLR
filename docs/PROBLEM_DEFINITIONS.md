@@ -2,7 +2,8 @@
 
 狀態：50 Startups baseline 已實作並作本地技術驗證（PR 待審），
 原先的預期 schema 保留於下表；實測與限制見 [review report](reports/50_startups/report.md)。
-Boston 仍為 Planned，未取得或分析資料。
+Boston 已依 PR #17 owner 暫行決策完成 MVP 技術實測；[報告](reports/boston_housing/REPORT.md) 與
+[來源政策](BOSTON_WORKFLOW_PROPOSAL.md) 記錄實際處理；不代表教師核准或原始權利已釐清。
 需求來源與待教授確認事項見 [需求矩陣](ASSIGNMENT_REQUIREMENTS.md)。
 
 ## Problem 1 — 50 Startups / Profit prediction
@@ -32,12 +33,12 @@ Issue #3 改用 manifest 固定的鏡像 revision，校驗後取得 CSV 並獨�
 
 目的：檢查第一題建立的 CRISP-DM 流程可否移轉至另一個問題，同時討論歷史資料限制。
 歷史觀測單位是 Boston 地區 census tract 層級，不是當代個別房屋。
-MEDV 指自住房屋價值中位數，歷史定義單位為千美元；候選版本仍需逐項驗證。
+MEDV 指自住房屋價值中位數，歷史定義單位為千美元；本次版本與實測見 Boston 來源政策與報告。
 
 [sklearn 歷史 schema 說明](https://github.com/scikit-learn/scikit-learn/blob/1.1.3/sklearn/datasets/descr/boston_house_prices.rst)
 列出 13 個 predictors：CRIM、ZN、INDUS、CHAS、NOX、RM、AGE、
 DIS、RAD、TAX、PTRATIO、B、LSTAT；含 MEDV 共 14 欄不代表有 14 個特徵。
-數量、樣本與變數編碼是來源的預期描述，本專案尚未對任何檔案實測。
+已實際驗證固定版本 506×14；B 排除後模型為 12 欄，CHAS 二元、RAD 數值索引。
 
 資料含不恰當的種族構造變數 B，變數定義與資料蒐集背景有倫理問題。
 不能把 B 或 LSTAT 當作中性的個人屬性，也不能以移除 B 宣稱已消除偏誤。
@@ -47,7 +48,7 @@ MEDV 的上限截斷、年代、地理範圍、聚合觀測與潛在空間相關
 [sklearn 歷史資料說明](https://scikit-learn.org/1.1/modules/generated/sklearn.datasets.load_boston.html)
 解釋變數與倫理背景；[1.2.0 官方移除訊息](https://github.com/scikit-learn/scikit-learn/blob/1.2.0/sklearn/datasets/__init__.py#L100-L147)
 記錄 `load_boston` 已移除。本專案不得呼叫它、降版繞過移除或直接下載未審查鏡像。
-後續由教師確認允許的歷史資料版本、license、來源、變數處置與教學限制，再建立 manifest。
+本次依 PR #17 owner 暫行決策建立 pinned manifest 並執行教學 MVP；教師接受與原始權利仍待確認。
 若無法核准，提出替代資料問題交教師決策，不能自行更換指定題目。
 
 ## 共同輸出與邊界 / Shared deliverables

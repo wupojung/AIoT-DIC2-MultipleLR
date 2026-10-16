@@ -13,11 +13,11 @@ import numpy as np
 import pandas as pd
 from sklearn.feature_selection import RFE, f_regression, r_regression
 from sklearn.linear_model import Lasso, LassoCV, LinearRegression
-from sklearn.model_selection import KFold, train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.exceptions import ConvergenceWarning
 
 import startups_baseline as baseline
+import regression_workflow as workflow
 
 METHODS = ['Pearson', 'F-Test', 'RFE', 'SFS', 'LassoCV']
 ALPHAS = np.logspace(0, 5, 21).tolist()
@@ -50,34 +50,41 @@ class Prepared:
         return table.reindex(columns=names or self.names, fill_value=0).to_numpy()
 
 
-def prepare(X, context, audit):
-    for column in baseline.FEATURES:
+def prepare(X, context, audit, config=baseline.CONFIG):
+    for column in config.features:
         if X[column].isna().all():
             raise ValueError(f'Entirely missing training column {column} in {context}')
-    preprocess = baseline.make_pipeline().named_steps['preprocess']
+    preprocess = workflow.make_pipeline(config).named_steps['preprocess']
     values = preprocess.fit_transform(X)
     names = preprocess.get_feature_names_out().tolist()
     scaler = StandardScaler().fit(values)
-    state = preprocess.named_transformers_['state']
-    audit.append({'context': context, 'fit_row_ids': X.index.tolist(),
-                  'encoded_names': names,
-                  'numeric_medians': preprocess.named_transformers_['numeric']
-                  .named_steps['imputer'].statistics_.tolist(),
-                  'state_categories': state.named_steps['encoder'].categories_[0].tolist(),
-                  'state_reference': state.named_steps['encoder'].categories_[0][0],
-                  'scaler_mean': scaler.mean_.tolist(), 'scaler_scale': scaler.scale_.tolist()})
+    record = {'context': context, 'fit_row_ids': X.index.tolist(),
+              'encoded_names': names,
+              'numeric_medians': (preprocess.named_transformers_['numeric']
+                                  .named_steps['imputer'].statistics_.tolist() if config.numeric else [])}
+    if config.categorical:
+        encoder = preprocess.named_transformers_[config.categorical_block].named_steps['encoder']
+        if config.categorical_block == 'state' and config.categorical == ('State',):
+            record.update({'state_categories': encoder.categories_[0].tolist(),
+                           'state_reference': encoder.categories_[0][0]})
+        else:
+            record['categorical_schema'] = {
+                name: {'categories': categories.tolist(), 'reference': categories[0]}
+                for name, categories in zip(config.categorical, encoder.categories_)}
+    record.update({'scaler_mean': scaler.mean_.tolist(), 'scaler_scale': scaler.scale_.tolist()})
+    audit.append(record)
     return Prepared(preprocess, scaler, values, names)
 
 
 def folds(X, n=3):
-    return list(KFold(n_splits=n, shuffle=True, random_state=baseline.SEED).split(X))
+    return workflow.folds(X, n=n, seed=baseline.SEED)
 
 
 def ranked(names, scores):
     return sorted(names, key=lambda name: (-float(scores[names.index(name)]), name))
 
 
-def lasso_rank(X, y, prepared, context, audit):
+def lasso_rank(X, y, prepared, context, audit, config=baseline.CONFIG, alphas=None):
     """Real multi-alpha LassoCV on disjoint, independently preprocessed fold blocks.
 
     Each CV split accesses only its own block. Explicit alphas avoid a global
@@ -87,7 +94,7 @@ def lasso_rank(X, y, prepared, context, audit):
     blocks, targets, cv, records = [], [], [], []
     offset = 0
     for i, (fit, val) in enumerate(folds(X)):
-        local = prepare(X.iloc[fit], f'{context}/lasso/{i}', audit)
+        local = prepare(X.iloc[fit], f'{context}/lasso/{i}', audit, config)
         train_values = local.scaler.transform(local.values)
         validation_values = local.scaler.transform(local.transform(X.iloc[val]))
         # Column meanings may differ across blocks. Fits are independent, so
@@ -109,7 +116,7 @@ def lasso_rank(X, y, prepared, context, audit):
         offset += len(block)
     with warnings.catch_warnings():
         warnings.simplefilter('error', ConvergenceWarning)
-        selector = LassoCV(alphas=ALPHAS, cv=cv, fit_intercept=True, max_iter=100000,
+        selector = LassoCV(alphas=ALPHAS if alphas is None else alphas, cv=cv, fit_intercept=True, max_iter=100000,
                            tol=1e-8, selection='cyclic', n_jobs=1).fit(np.vstack(blocks), np.concatenate(targets))
         model = Lasso(alpha=float(selector.alpha_), max_iter=100000, tol=1e-8,
                       selection='cyclic').fit(prepared.scaler.transform(prepared.values), y)
@@ -121,11 +128,11 @@ def lasso_rank(X, y, prepared, context, audit):
         'refit': 'Lasso on full local training at LassoCV alpha; stacked refit coefficients not used'}
 
 
-def sfs_rank(X, y, prepared, context, audit):
+def sfs_rank(X, y, prepared, context, audit, config=baseline.CONFIG):
     # Cache fold-local transformations once, not a globally fitted design.
     blocks, fold_records = [], []
     for i, (fit, val) in enumerate(folds(X)):
-        local = prepare(X.iloc[fit], f'{context}/sfs/{i}', audit)
+        local = prepare(X.iloc[fit], f'{context}/sfs/{i}', audit, config)
         fold_records.append({'fold': i, 'fit_row_ids': X.iloc[fit].index.tolist(),
                              'validation_row_ids': X.iloc[val].index.tolist(),
                              'encoded_names': local.names,
@@ -151,18 +158,20 @@ def sfs_rank(X, y, prepared, context, audit):
     return selected, {'steps': steps, 'folds': fold_records, 'implementation': 'greedy forward, recomputed candidate CV each step'}
 
 
-def fit_selectors(X, y, context, audit):
-    prepared = prepare(X, context, audit)
-    if len(prepared.names) != 5:
-        raise ValueError('Fixed k=1..5 requires three observed State levels in each selector training set')
+def fit_selectors(X, y, context, audit, config=baseline.CONFIG, alphas=None):
+    prepared = prepare(X, context, audit, config)
+    if config.expected_encoded_features is not None and len(prepared.names) != config.expected_encoded_features:
+        if config.dataset_id == '50_startups':
+            raise ValueError('Fixed k=1..5 requires three observed State levels in each selector training set')
+        raise ValueError(f'Expected {config.expected_encoded_features} encoded features')
     values, names = prepared.values, prepared.names
     pearson = np.abs(r_regression(values, y, force_finite=True))
     f_scores = f_regression(values, y, force_finite=True)[0]
     recursive = RFE(LinearRegression(), n_features_to_select=1, step=1)
     recursive.fit(prepared.scaler.transform(values), y)
     rfe_order = sorted(names, key=lambda name: int(recursive.ranking_[names.index(name)]))
-    sfs_order, sfs_trace = sfs_rank(X, y, prepared, context, audit)
-    lasso_order, lasso_trace = lasso_rank(X, y, prepared, context, audit)
+    sfs_order, sfs_trace = sfs_rank(X, y, prepared, context, audit, config)
+    lasso_order, lasso_trace = lasso_rank(X, y, prepared, context, audit, config, alphas)
     orders = {'Pearson': ranked(names, pearson), 'F-Test': ranked(names, f_scores),
               'RFE': rfe_order, 'SFS': sfs_order, 'LassoCV': lasso_order}
     details = {'Pearson': {'absolute_r': dict(zip(names, pearson.tolist()))},
@@ -173,14 +182,14 @@ def fit_selectors(X, y, context, audit):
                'SFS': sfs_trace, 'LassoCV': lasso_trace}
     return prepared, {'context': context, 'fit_row_ids': X.index.tolist(),
                       'encoded_names': names, 'orders': orders, 'details': details,
-                      'subsets': {method: {str(k): order[:k] for k in range(1, 6)}
+                      'subsets': {method: {str(k): order[:k] for k in range(1, len(names) + 1)}
                                   for method, order in orders.items()}}
 
 
 def candidates(record):
-    yield 'All Features', 5, record['encoded_names']
+    yield 'All Features', len(record['encoded_names']), record['encoded_names']
     for method in METHODS:
-        for k in range(1, 6):
+        for k in range(1, len(record['encoded_names']) + 1):
             yield method, k, record['orders'][method][:k]
 
 
@@ -215,11 +224,11 @@ def choose(summary):
     return min(summary, key=lambda row: (row['rmse_mean'], row['k'], row['method']))
 
 
-def cv_candidates(X, y, n_folds, prefix, audit, traces):
+def cv_candidates(X, y, n_folds, prefix, audit, traces, config=baseline.CONFIG, alphas=None):
     records, predictions = [], []
     for i, (fit, val) in enumerate(folds(X, n_folds)):
         context = f'{prefix}/{i}'
-        prepared, selection = fit_selectors(X.iloc[fit], y.iloc[fit], context, audit)
+        prepared, selection = fit_selectors(X.iloc[fit], y.iloc[fit], context, audit, config, alphas)
         selection['validation_row_ids'] = X.iloc[val].index.tolist()
         traces.append(selection)
         scores, predicted = evaluate(X, y, fit, val, context, prepared, selection)
@@ -228,17 +237,17 @@ def cv_candidates(X, y, n_folds, prefix, audit, traces):
     return records, predictions
 
 
-def training_experiment(X, y):
-    """Only the 40 training rows enter this API. No holdout argument exists."""
+def training_experiment(X, y, config=baseline.CONFIG, alphas=None):
+    """Only local training rows enter this API. No holdout argument exists."""
     audit, traces, comparison, all_predictions, tuning, nested = [], [], [], [], [], []
     for outer, (fit, val) in enumerate(folds(X, 5)):
         local_X, local_y = X.iloc[fit], y.iloc[fit]
-        inner, inner_predictions = cv_candidates(local_X, local_y, 3, f'outer{outer}/inner', audit, traces)
+        inner, inner_predictions = cv_candidates(local_X, local_y, 3, f'outer{outer}/inner', audit, traces, config, alphas)
         choice = choose(summarize(inner))
         tuning.extend(inner)
         all_predictions.extend(inner_predictions)
         context = f'outer{outer}'
-        prepared, selection = fit_selectors(local_X, local_y, context, audit)
+        prepared, selection = fit_selectors(local_X, local_y, context, audit, config, alphas)
         selection['validation_row_ids'] = X.iloc[val].index.tolist()
         traces.append(selection)
         scores, predicted = evaluate(X, y, fit, val, context, prepared, selection)
@@ -248,12 +257,12 @@ def training_experiment(X, y):
         nested.append({**chosen, 'selection_cv_rmse': choice['rmse_mean'],
                        'selected_using': f'outer{outer}/inner', 'selection_folds': 3})
         print(f'RUN outer fold {outer + 1}/5 complete', flush=True)
-    final_scores, final_predictions = cv_candidates(X, y, 3, 'final/inner', audit, traces)
+    final_scores, final_predictions = cv_candidates(X, y, 3, 'final/inner', audit, traces, config, alphas)
     tuning.extend(final_scores)
     all_predictions.extend(final_predictions)
     final_summary = summarize(final_scores)
     choice = choose(final_summary)
-    _, final = fit_selectors(X, y, 'full_training', audit)
+    _, final = fit_selectors(X, y, 'full_training', audit, config, alphas)
     traces.append(final)
     features = (final['encoded_names'] if choice['method'] == 'All Features'
                 else final['subsets'][choice['method']][str(choice['k'])])
@@ -266,7 +275,8 @@ def training_experiment(X, y):
             'traces': traces, 'audit': audit, 'predictions': all_predictions}
 
 
-def plot_curves(summary, directory):
+def plot_curves(summary, directory, xlabel='Number of encoded features (State dummies separate)',
+                units='source units'):
     table = pd.DataFrame(summary)
     for metric in ['rmse', 'r2']:
         figure, axis = baseline.plt.subplots(figsize=(9, 6))
@@ -275,10 +285,10 @@ def plot_curves(summary, directory):
             axis.errorbar(rows['k'], rows[f'{metric}_mean'], yerr=rows[f'{metric}_std'],
                           marker=marker, linestyle=style, capsize=3, label=method, alpha=0.8)
         full = table[table['method'] == 'All Features'].iloc[0]
-        axis.axhline(full[f'{metric}_mean'], linestyle='--', color='black', label='All Features (k=5)')
-        axis.set(xlabel='Number of encoded features (State dummies separate)',
-                 ylabel='CV RMSE (source units)' if metric == 'rmse' else 'CV R²',
-                 title='Fixed method/k: 5-fold training CV (error bars: fold std)', xticks=range(1, 6))
+        axis.axhline(full[f'{metric}_mean'], linestyle='--', color='black', label=f"All Features (k={int(full['k'])})")
+        axis.set(xlabel=xlabel,
+                 ylabel=f'CV RMSE ({units})' if metric == 'rmse' else 'CV R²',
+                 title='Fixed method/k: 5-fold training CV (error bars: fold std)', xticks=range(1, int(table['k'].max()) + 1))
         axis.legend()
         baseline.save_plot(directory / f'features_vs_{metric}.png', figure)
 
@@ -287,8 +297,7 @@ def run(frame, provenance, output_root, run_id):
     if not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_-]{0,63}', run_id):
         raise ValueError('Invalid run-id')
     baseline.validate_data(frame)
-    train_ids, test_ids = train_test_split(frame.index.to_numpy(), test_size=0.2,
-                                          random_state=baseline.SEED, shuffle=True)
+    train_ids, test_ids = workflow.split_row_ids(frame.index, test_size=0.2, seed=baseline.SEED)
     directory = Path(output_root) / '50_startups/feature_selection' / run_id
     directory.mkdir(parents=True, exist_ok=False)
     baseline.write_json(directory / 'protocol.json', protocol())

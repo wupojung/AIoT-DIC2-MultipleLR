@@ -1,0 +1,39 @@
+test_excluded_b_is_validated_but_never_used_for_prediction (test_boston_workflow.BostonGuards.test_excluded_b_is_validated_but_never_used_for_prediction) ... ok
+test_source_hash_and_schema_are_checked_before_use (test_boston_workflow.BostonGuards.test_source_hash_and_schema_are_checked_before_use) ... ok
+test_training_only_imputation_and_fixed_boston_protocol (test_boston_workflow.BostonGuards.test_training_only_imputation_and_fixed_boston_protocol) ... ok
+test_all_features_matches_existing_baseline_cv (test_feature_selection.SelectionIntegrationTests.test_all_features_matches_existing_baseline_cv) ... ok
+test_independent_verifier_and_tampered_predictions (test_feature_selection.SelectionIntegrationTests.test_independent_verifier_and_tampered_predictions) ... ok
+test_no_holdout_mutation_can_change_selection_or_curves (test_feature_selection.SelectionIntegrationTests.test_no_holdout_mutation_can_change_selection_or_curves) ... ok
+test_verifier_rejects_preprocessor_fitted_on_parent_fold (test_feature_selection.SelectionIntegrationTests.test_verifier_rejects_preprocessor_fitted_on_parent_fold) ... ok
+test_curves_use_actual_input_data (test_feature_selection.SelectorTests.test_curves_use_actual_input_data) ... ok
+test_orders_and_subsets_match_computed_statistics (test_feature_selection.SelectorTests.test_orders_and_subsets_match_computed_statistics) ... ok
+test_real_algorithms_and_multialpha_cv_execute (test_feature_selection.SelectorTests.test_real_algorithms_and_multialpha_cv_execute) ... ok
+test_sfs_responds_to_target_not_fixed_order (test_feature_selection.SelectorTests.test_sfs_responds_to_target_not_fixed_order) ... ok
+test_validation_values_do_not_fit_encoder_imputer_or_scaler (test_feature_selection.SelectorTests.test_validation_values_do_not_fit_encoder_imputer_or_scaler) ... ok
+test_environment_entry_point (test_foundation.FoundationTests.test_environment_entry_point) ... ok
+test_local_document_links (test_foundation.FoundationTests.test_local_document_links) ... ok
+test_required_structure (test_foundation.FoundationTests.test_required_structure) ... ok
+test_config_prevents_target_and_exclusion_leakage (test_regression_workflow.WorkflowTests.test_config_prevents_target_and_exclusion_leakage) ... ok
+test_existing_startups_adapter_uses_the_same_core (test_regression_workflow.WorkflowTests.test_existing_startups_adapter_uses_the_same_core) ... ok
+test_medians_are_fit_on_local_training_rows (test_regression_workflow.WorkflowTests.test_medians_are_fit_on_local_training_rows) ... ok
+test_numeric_only_dataset_has_no_state_or_excluded_input (test_regression_workflow.WorkflowTests.test_numeric_only_dataset_has_no_state_or_excluded_input) ... ok
+test_plot_feature_axis_and_units_follow_supplied_experiment (test_regression_workflow.WorkflowTests.test_plot_feature_axis_and_units_follow_supplied_experiment) ... ok
+test_shared_nested_engine_accepts_different_sample_and_feature_counts (test_regression_workflow.WorkflowTests.test_shared_nested_engine_accepts_different_sample_and_feature_counts) ... ok
+test_shared_selectors_accept_twelve_numeric_columns_and_custom_alpha (test_regression_workflow.WorkflowTests.test_shared_selectors_accept_twelve_numeric_columns_and_custom_alpha) ... ok
+test_split_and_fold_functions_preserve_sklearn_contract (test_regression_workflow.WorkflowTests.test_split_and_fold_functions_preserve_sklearn_contract) ... ok
+test_exported_metrics_recompute_from_predictions (test_startups_baseline.BaselineIntegrationTests.test_exported_metrics_recompute_from_predictions) ... ok
+test_holdout_changes_cannot_change_training_outputs (test_startups_baseline.BaselineIntegrationTests.test_holdout_changes_cannot_change_training_outputs) ... ok
+test_independent_verifier_rejects_tampered_metrics (test_startups_baseline.BaselineIntegrationTests.test_independent_verifier_rejects_tampered_metrics) ... ok
+test_reproducibility_and_no_overwrite_or_path_escape (test_startups_baseline.BaselineIntegrationTests.test_reproducibility_and_no_overwrite_or_path_escape) ... ok
+test_split_fold_isolation_and_fold_local_statistics (test_startups_baseline.BaselineIntegrationTests.test_split_fold_isolation_and_fold_local_statistics) ... ok
+test_imputation_and_encoding_do_not_learn_validation_values (test_startups_baseline.BaselineUnitTests.test_imputation_and_encoding_do_not_learn_validation_values) ... ok
+test_metrics_independent_known_answer_and_undefined_r2 (test_startups_baseline.BaselineUnitTests.test_metrics_independent_known_answer_and_undefined_r2) ... ok
+test_reject_bad_source_schema_target_and_duplicates (test_startups_baseline.BaselineUnitTests.test_reject_bad_source_schema_target_and_duplicates) ... ok
+test_source_download_cache_and_hash_tampering (test_startups_baseline.BaselineUnitTests.test_source_download_cache_and_hash_tampering) ... ok
+
+----------------------------------------------------------------------
+Ran 32 tests in 11.811s
+
+OK
+PASS: source/splits, 6240 predictions, 600 subsets, preprocessing, nested choices, CSV/JSON and both PNGs; all 24 real multi-alpha LassoCV paths independently replayed
+PASS: source hash, 40/10 split, five folds, CV/holdout metrics, train-only correlation, six PNGs

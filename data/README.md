@@ -10,5 +10,8 @@ ignored 的 data/50_startups/，記錄 retrieval.json，之後使用校驗過的
 Profit 與支出的幣別／期間無可靠證據，圖表使用 source units。無企業識別／時間資料，
 不能完整驗證樣本獨立性；拒絕重複 predictors，仍不代表解決所有抽樣偏誤。
 
-Boston 不下載、不訓練；須另行確認歷史來源、license、變數與倫理限制。私有／自訂資料
-不得提交。新增 tracked dataset 需要明確決策，本次只追蹤 metadata manifest。
+[Boston manifest](boston_housing_manifest.json) 固定歷史 sklearn CSV revision、Git blob、SHA256 與 schema。
+依 [owner 暫行政策](../docs/BOSTON_WORKFLOW_PROPOSAL.md) 執行本地教學 MVP；B 不進入模型。
+`boston_workflow.py` 首次下載到 ignored data/boston_housing/，每次核對 hash；不提交 raw CSV。
+原始資料專屬授權／來源權利尚未完全確證，不以 repository BSD 當作資料重新授權。
+私有／自訂資料不得提交；本次只新增 metadata manifest 與衍生實驗證據。
