@@ -88,7 +88,7 @@ Open <http://localhost:8000/> to preview the static UI. The baseline downloads t
 
 ## Public CSV examples — Custom Regression MVP
 
-The following public files are **candidate regression inputs** for testing the future import feature; **the current website cannot analyze them yet**. Users will need to select a numeric target and suitable feature columns, handle missing/categorical values, and fit the new dataset from scratch.
+The following public files are **candidate regression inputs** for the Custom Regression MVP. Select a numeric target and suitable feature columns; each supported import fits a new model. Inputs must meet the documented size/schema limits.
 
 | Dataset | CSV | Suggested target | Suggested predictors | Caveat |
 | --- | --- | --- | --- | --- |

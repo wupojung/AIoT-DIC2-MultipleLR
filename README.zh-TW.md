@@ -86,7 +86,7 @@ python -m http.server 8000 --directory web
 
 ## 自訂 CSV 測試範例（Regression MVP）
 
-以下均為公開可取得的**候選資料集**，不代表目前網頁可以立即輸入並分析。未來每次匯入都必須重新指定數值型 Target（y）與可用 Features（X），並重新執行前處理、訓練和評估。
+以下為 Custom Regression MVP 的公開**候選資料集**；每次匯入須選擇數值型 Target（y）與可用 Features（X），由瀏覽器重新執行前處理、訓練和評估，且必須符合資料大小／Schema 限制。
 
 | Dataset | CSV | Target（y） | 建議 Features（X） | 注意事項 |
 | --- | --- | --- | --- | --- |
@@ -94,7 +94,7 @@ python -m http.server 8000 --directory web
 | Auto MPG | [下載](https://raw.githubusercontent.com/mwaskom/seaborn-data/master/mpg.csv) | `mpg` | cylinders、displacement、horsepower、weight、acceleration | horsepower 有缺值 |
 | Restaurant Tips | [下載](https://raw.githubusercontent.com/plotly/datasets/master/tips.csv) | `tip` | total_bill、size | 其他類別欄位需編碼，不作因果推論 |
 
-CSV URL 可能受到 CORS、驗證或授權限制；本機 CSV 上傳只是尚待實作的替代設計。**並非任何 CSV 都能直接進行多元線性迴歸**，仍需檢查資料型別、有效樣本數、獨立性與資料洩漏。課堂「14–39 Features」提示是否為正式條件尚待教師確認。
+CSV URL 可能受到 CORS、驗證或授權限制；本機 CSV 上傳已可作為替代。**並非任何 CSV 都能直接進行多元線性迴歸**，仍需檢查資料型別、有效樣本數、獨立性與資料洩漏。課堂「14–39 Features」提示是否為正式條件尚待教師確認。
 
 ## 架構、文件與參考
 
