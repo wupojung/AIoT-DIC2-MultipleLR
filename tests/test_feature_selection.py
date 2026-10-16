@@ -56,6 +56,8 @@ class SelectorTests(unittest.TestCase):
         for method, key in [('Pearson', 'absolute_r'), ('F-Test', 'f_scores')]:
             computed = trace['details'][method][key]
             self.assertEqual(trace['orders'][method], sorted(prepared.names, key=lambda name: (-computed[name], name)))
+        self.assertEqual(trace['details']['RFE']['elimination_order'], list(reversed(trace['orders']['RFE'][1:])))
+        self.assertEqual(trace['details']['RFE']['survivor'], trace['orders']['RFE'][0])
         for step in trace['details']['SFS']['steps']:
             for candidate in step['candidates']:
                 self.assertAlmostEqual(candidate['mean_rmse'], np.mean(candidate['fold_rmse']))

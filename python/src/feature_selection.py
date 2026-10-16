@@ -168,7 +168,7 @@ def fit_selectors(X, y, context, audit):
     details = {'Pearson': {'absolute_r': dict(zip(names, pearson.tolist()))},
                'F-Test': {'f_scores': dict(zip(names, f_scores.tolist()))},
                'RFE': {'ranking': dict(zip(names, recursive.ranking_.tolist())),
-                       'elimination_order': list(reversed(rfe_order)),
+                       'elimination_order': list(reversed(rfe_order[1:])), 'survivor': rfe_order[0],
                        'order_meaning': 'reverse elimination, not forward entry'},
                'SFS': sfs_trace, 'LassoCV': lasso_trace}
     return prepared, {'context': context, 'fit_row_ids': X.index.tolist(),
