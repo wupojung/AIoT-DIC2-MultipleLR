@@ -1,6 +1,8 @@
 # 問題定義 / Problem definitions
 
-狀態：Planned；未下載資料、未驗證 row counts 或跑模型。
+狀態：50 Startups baseline 已實作並作本地技術驗證（PR 待審），
+原先的預期 schema 保留於下表；實測與限制見 [review report](reports/50_startups/report.md)。
+Boston 仍為 Planned，未取得或分析資料。
 需求來源與待教授確認事項見 [需求矩陣](ASSIGNMENT_REQUIREMENTS.md)。
 
 ## Problem 1 — 50 Startups / Profit prediction
@@ -23,7 +25,8 @@
 不能預先以全資料學到的類別清單擬合 encoder。
 
 教師來源：[固定版本 README](https://github.com/huanchen1107/AIoT-DIC2-MultipleLR/blob/8b65e3bd9745e650ae7bea28f9562c059d5029ed/README.md)。
-本文件未下載其連結的 CSV，也未使用教師的結果當作本專案結果。
+Issue #3 改用 manifest 固定的鏡像 revision，校驗後取得 CSV 並獨立執行；
+沒有使用教師的結果當作本專案結果。
 
 ## Problem 2 — Boston Housing / MEDV prediction
 

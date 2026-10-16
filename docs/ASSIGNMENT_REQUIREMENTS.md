@@ -1,6 +1,6 @@
 # 作業需求 / Assignment requirements
 
-文件狀態：**Proposed for review**；2026-10-16 查證。這是 Issue #2 的規格，
+文件狀態：**Issue #2 / PR #11 已由 owner 接受**（2026-10-16）；Issue #3 實作待另次審查。這是需求規格，
 不是資料分析結果或教授已核准所有提案的聲明。
 
 ## 證據與狀態 / Evidence and status
@@ -52,12 +52,14 @@ T1 以 50 Startups 為示範，P1 指定兩題；所以不能僅依搜尋提示�
 
 ## 決策與 Issue #3 readiness / 開工清單
 
-目前 **規格可供審查，資料／分析尚未就緒**。以下核准不得由 Codex 假定：
+Issue #2 已關閉，PR #11 已 merge；owner 後續指示接續執行 Issue #3。
+這授權第一題 baseline 的實作與本地技術驗證，不等於教授確認 Q1–Q5 或原始資料權利。
+原規劃清單保留，未取得的確認不得由 Codex 補成已核准：
 
 - [x] ADR-0001 Accepted，foundation 已由 owner merge。
 - [x] 兩題目標、預期特徵及限制已有規格，非實測 schema。
 - [x] [評估協定](EVALUATION_PROTOCOL.md) 已提出；[工作流程](WORKFLOW_REUSE.md) 已定義未來介面。
-- [ ] Owner 接受 Issue #2 PR 與評估提案（80/20、seed 42、5-fold、無洩漏管線）。
+- [x] Owner 合併 PR #11 並關閉 Issue #2；接續指示採用 80/20、seed 42、5-fold、無洩漏 baseline 設計。
 - [ ] 教授／owner 釐清 Q1–Q5，或逐項記錄允許先做 I3 的暫行範圍；不得標成教師已確認。
 - [ ] 核准 50 Startups 來源、版本／可用性、license、取得方式與單位；I3 取得後記錄 checksum。
 - [ ] I3 實測核對預期 50 rows、四個原始 predictors、Profit、缺失與重複；不合即停止查明。
@@ -68,3 +70,8 @@ T1 以 50 Startups 為示範，P1 指定兩題；所以不能僅依搜尋提示�
 I3 僅實作 50 Startups baseline、EDA、訓練 CV 與一次 holdout、圖表與可重現匯出。
 不包含 feature-selection suite、Boston 訓練、Web 整合或 CSV URL。成功門檻是正確、
 可重算且無洩漏，不擅設最低 R²。實作測試與產物契約見另外兩份規格。
+
+Issue #3 已新增來源 manifest、cache 校驗、執行入口與可重現驗證；技術結果見
+[baseline review report](reports/50_startups/report.md)。幣別／期間、原始資料權利、
+公司識別與教授評分要求仍未知。State 及補值行為在程式／測試和 PR 中供 owner 審查，
+不把「已有實作」視為清單所有核准已完成。Boston 和選擇器不在此期執行。

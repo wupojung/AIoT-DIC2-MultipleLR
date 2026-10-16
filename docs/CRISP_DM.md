@@ -1,6 +1,7 @@
 # CRISP-DM phase gates
 
-All phases below are planned analysis, not completed by the foundation. For each
+The tables below define phase gates. 50 Startups has technical baseline evidence
+(see the status note below), pending human phase review; Boston remains planned. For each
 phase record inputs, commands, outputs, checks and reviewer decision. A failed
 check keeps the phase open. Foundation PASS does not imply any analysis phase PASS.
 
@@ -19,14 +20,15 @@ check keeps the phase open. Foundation PASS does not imply any analysis phase PA
 | 50 Startups | Profit target; verify currency/units, source and actual schema, including State if present | Review small-sample split/CV feasibility; encode categorical features within folds | Record uncertainty and overfitting risk; obtain review before reusing workflow |
 | Boston Housing | MEDV target; verify units/source/license, historical context, problematic racial variable and ethical restrictions with teacher | Reassess schema and features explicitly; do not inherit Startups transformations blindly | Record historical/ethical and target limitations; verify transfer workflow without claiming current-world suitability |
 
-Neither dataset is bundled. Do not fetch or analyze until source and ethical
-questions are resolved. Feature-selection methods (RFE, SFS, LassoCV) are future
+Neither raw dataset is bundled. 50 Startups now uses a pinned, hash-verified mirror
+for owner-requested local baseline verification; original collection rights/units remain
+explicit limitations, not assumed resolved. Boston source/ethics approval remains pending. Feature-selection methods (RFE, SFS, LassoCV) are future
 work and must follow the same leakage and comparison gates. Custom CSV is optional
 and has no approved execution architecture yet.
 
 ## 狀態與證據紀錄 / Status and evidence
 
-- **Planned**：交付物與驗收已定義，尚未執行。兩題所有分析階段目前都是 Planned。
+- **Planned**：交付物與驗收已定義，尚未執行。Boston 所有分析階段仍為 Planned；50 Startups 狀態見下方。
 - **Work in progress**：已有實際輸入／執行紀錄，但驗證尚未完整；列出缺少的證據。
 - **PASS**：保存可重現的輸入、命令、產物與驗證結果，且該 gate 已經 reviewer 確認。
   Foundation 或規格文件的技術 PASS 不等於資料分析 PASS，也不取代人工審查。
@@ -37,9 +39,9 @@ artifact paths、validation commands/results、reviewer 與未決項目。失敗
 
 ## 兩題具體交付 / Dataset-specific traceability
 
-下列均為 **Planned**，對應 [需求 R1–R7](ASSIGNMENT_REQUIREMENTS.md)、
+下列為驗收契約（非完成聲明），對應 [需求 R1–R7](ASSIGNMENT_REQUIREMENTS.md)、
 [問題定義](PROBLEM_DEFINITIONS.md) 與 [E1–E5 評估協定](EVALUATION_PROTOCOL.md)。
-共通 E1–E5 為待審提案；資料來源與倫理未核准前不開始分析。
+共通規劃隨 PR #11 接受；Issue #3 程式與具體處理仍待 review，原始來源限制不得隱去。
 
 | Phase | 50 Startups evidence / 第一題 | Boston Housing evidence / 第二題 | Validation / PASS gate |
 | --- | --- | --- | --- |
@@ -52,3 +54,13 @@ artifact paths、validation commands/results、reviewer 與未決項目。失敗
 
 Readiness：見 [Issue #3 開工清單](ASSIGNMENT_REQUIREMENTS.md)。
 重用介面與非目標見 [WORKFLOW_REUSE](WORKFLOW_REUSE.md)。
+
+## Issue #3 execution status / 技術證據與人工 gate
+
+Owner 在 Issue #2 關閉後要求接續；已依固定 baseline 產生本地證據，
+[review report](reports/50_startups/report.md) 提供實測及限制。
+50 Startups Phase 1–5 為 **Work in progress / human review pending**：
+已有問題定義、鏡像 manifest、結構稽核、training-only EDA、split/CV、
+fold-local 前處理、一次 holdout 與重現測試，尚未宣稱教師／reviewer 的 phase PASS。
+Phase 6 的本地重現報告已有證據，最終主題／提交與部署仍 Planned。
+Boston 全部 Planned。教授 Q1–Q5、原始權利／單位與抽樣獨立性仍是明示限制。

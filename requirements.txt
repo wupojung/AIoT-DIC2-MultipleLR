@@ -1,2 +1,6 @@
-# Foundation uses only the Python standard library.
-# Add justified, versioned analysis dependencies in a follow-up issue.
+-c constraints.txt
+# Direct analysis dependencies: numerical checks, tabular EDA, pipelines/CV, plots.
+numpy==2.5.4
+pandas==3.0.6
+scikit-learn==1.9.1
+matplotlib==3.11.2

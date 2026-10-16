@@ -3,18 +3,20 @@
 ## Implemented foundation
 | Area | Responsibility |
 | --- | --- |
-| python/src | Standard-library environment check only |
+| python/src | Environment check + 50 Startups baseline CLI (review pending) |
 | web | Responsive static shell, local tab navigation, disabled dataset selector |
-| data | Source/ethics policy; no data |
+| data | Pinned source metadata; ignored verified download cache |
 | outputs | Ignored generated artifacts; tracked placeholder only |
 | docs | CRISP-DM gates, glossary and architecture decisions |
-| tests | Repeatable foundation integrity and smoke checks |
+| tests | Foundation/browser checks + offline leakage, metrics, integrity and reproducibility tests |
 
 The Web has no dependency on Python execution and uses no external assets.
 
 ## Planned, not implemented
-Python will own reproducible preparation, regression and evaluation, beginning
-with 50 Startups then transferring the reviewed workflow to Boston Housing.
+Python now implements the 50 Startups baseline with fold-local preprocessing, training CV,
+once-per-run frozen holdout evaluation and dataset/run-specific artifact export.
+Feature selection and transfer to Boston Housing remain future work.
+Runtime artifacts are ignored; curated review figures may be recorded in docs/reports/.
 Web may display verified exports in future. No artifact schema or connection is
 implemented. Dynamic custom CSV processing in browser versus Python backend
 remains undecided and needs its own ADR. No API, hosting or deployment exists.
