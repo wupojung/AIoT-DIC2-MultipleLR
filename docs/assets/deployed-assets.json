@@ -1,0 +1,32 @@
+[
+  {
+    "asset": "index.html",
+    "http_status": 200,
+    "sha256": "d176ee0ad25469f81d5f015c1494b3535195045b5b3bb45a65b281a010e1e08c",
+    "matches_local": true
+  },
+  {
+    "asset": "app.js",
+    "http_status": 200,
+    "sha256": "afa25ccb971a6b2c957bf4a9e3f6c16cae6b7bd553b00bc853e95e539ffd7aa2",
+    "matches_local": true
+  },
+  {
+    "asset": "styles.css",
+    "http_status": 200,
+    "sha256": "2daa0094ef0f9cac0d9f3ae8e544267f4b0e6a2afa4b2ecbad0fb59aa05d3526",
+    "matches_local": true
+  },
+  {
+    "asset": "data/50_startups.json",
+    "http_status": 200,
+    "sha256": "248e1df9112495b5fdc673046b2754521f2ad9b326677bb198f4a61a2bce23c6",
+    "matches_local": true
+  },
+  {
+    "asset": "data/boston_housing.json",
+    "http_status": 200,
+    "sha256": "9f2712f02086a2929c90b58ff536f128a5f52874a03a31f733550530463a9d75",
+    "matches_local": true
+  }
+]

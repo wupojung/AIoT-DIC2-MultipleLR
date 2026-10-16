@@ -13,9 +13,11 @@
 
 **[Open the GitHub Pages dashboard](https://wupojung.github.io/AIoT-DIC2-MultipleLR/)** · [Check deployment status](https://github.com/wupojung/AIoT-DIC2-MultipleLR/actions/workflows/pages.yml)
 
-> **Scope of the current demo:** The Web dashboard is a static UI preview, not a live model-serving application. Dataset switching, CSV import, and in-browser regression are not yet available. Follow the deployment status link to confirm whether the site is online.
+> **Live Dashboard MVP:** Switch between 50 Startups and Boston Housing across Overview, Feature Selection and Evaluation. All metrics, curves and feature ranks come from reviewed static experiment JSON. No live training or Custom CSV analysis. Training CV, nested CV and holdout are explicitly separated.
 
-<!-- Dashboard screenshot: intentionally deferred until an approved capture is provided. -->
+![50 Startups Dashboard — real browser capture, desktop 1920×1080](docs/assets/dashboard-50_startups-overview-1920x1080.png)
+
+[View Boston Housing](docs/assets/dashboard-boston_housing-overview-1920x1080.png) · [All six desktop captures and verification](docs/assets/README.md)
 
 ## Overview
 
@@ -26,9 +28,10 @@ This project studies **ordinary least squares (OLS) multiple linear regression**
 - **50 Startups baseline:** A pinned, checksum-verified dataset; 80/20 train/test split; fold-local preprocessing; LinearRegression and a mean-prediction Dummy baseline; five-fold training CV and a frozen holdout evaluation.
 - **Feature selection:** Pearson correlation, F-test, RFE, forward SFS, and LassoCV-based ranking, all evaluated with the same downstream LinearRegression model. Training-only CV and nested model-selection assessment prevent tuning on the holdout.
 - **Reproducibility:** Source hashes, split identifiers, validation checks, recorded predictions, executable verification, and traceable reports.
-- **Web UI foundation:** Responsive Overview / Feature Selection / Evaluation tabs, with actual model-data integration planned separately.
+- **Boston Housing:** Merged PR #17; pinned 506-row historical data, B excluded, baseline/dummy and five-method feature-selection evidence.
+- **Dashboard MVP:** Real static results for both datasets, three tabs, locally rendered RMSE/R² curves and actual feature names/ranks. No external chart dependency.
 
-**Planned:** Boston Housing workflow reuse ([Issue #5](https://github.com/wupojung/AIoT-DIC2-MultipleLR/issues/5)), interactive dashboard integration ([Issue #6](https://github.com/wupojung/AIoT-DIC2-MultipleLR/issues/6)), and custom CSV support ([Issue #7](https://github.com/wupojung/AIoT-DIC2-MultipleLR/issues/7)). These are **not described as delivered features**. The historic Boston Housing dataset has known ethical limitations.
+**Deferred:** Custom CSV analysis ([Issue #7](https://github.com/wupojung/AIoT-DIC2-MultipleLR/issues/7)), ADR-0002 and complete QA/coverage (Issue #8). The historic Boston dataset retains explicit ethical and licensing limitations.
 
 ## Verified experimental results
 
@@ -116,4 +119,18 @@ python python/src/verify_boston_run.py outputs/boston_housing/boston-v1
 
 Pinned historical CSV，506 rows；B 排除後 12 predictors，MEDV（歷史千美元）。
 重用共通 Regression／五種 Feature Selection；原始資料不隨 repo 散布。
-Owner 暫准教學 MVP，不代表原始授權或教師審查已完成；Web 尚未整合分析資料。
+Owner-authorized educational MVP; original dataset rights and instructor acceptance remain limitations. Issue #6 now presents these actual experiment snapshots in Web.
+
+## Dashboard MVP reproduction — no model rerun
+
+```sh
+python3 python/src/export_dashboard.py --check
+python3 -m http.server 8000 --directory web
+# External development Playwright installation:
+NODE_PATH=/tmp/dic2-browser/node_modules node tests/dashboard_smoke.cjs
+```
+
+Open http://localhost:8000/. No ML dependency installation or nested CV is needed to display the accepted results.
+The export check traces both static payloads to reviewed source JSON and SHA256 lineage.
+1920×1080 browser verification checks dataset round trips, three tabs, exact metrics, every curve coordinate, ranks and console/network errors.
+[Actual results and deployment evidence](docs/assets/README.md). Full Python regressions, five-size browser matrix and coverage were intentionally not rerun for this urgent MVP.

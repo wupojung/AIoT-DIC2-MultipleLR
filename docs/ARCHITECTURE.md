@@ -4,7 +4,7 @@
 | Area | Responsibility |
 | --- | --- |
 | python/src | Environment check + accepted baseline + training-only feature selection CLI (review pending) |
-| web | Responsive static shell, local tab navigation, disabled dataset selector |
+| web | Static dual-dataset Dashboard; Overview/Feature Selection/Evaluation, local SVG charts and reviewed JSON exports |
 | data | Pinned source metadata; ignored verified download cache |
 | outputs | Ignored generated artifacts; tracked placeholder only |
 | docs | CRISP-DM gates, glossary and architecture decisions |
@@ -22,7 +22,7 @@ Issue #3 code/results and accepted ADRs remain intact. Boston MVP now uses the s
 12-predictor configuration (B excluded), dummy baseline, frozen final holdout and report/verifier.
 See [Boston evidence](reports/boston_housing/REPORT.md); human review remains pending.
 Runtime artifacts are ignored; curated review figures may be recorded in docs/reports/.
-Web may display verified exports in future. No artifact schema or connection is
-implemented. Dynamic custom CSV processing in browser versus Python backend
-remains undecided and needs its own ADR. No API, hosting or deployment exists.
+Issue #6 adds the standard-library export_dashboard.py adapter and schema_version=1 static JSON in web/data.
+The browser fetches both snapshots once and redraws all panels on dataset change. No ML execution occurs in Web. Dynamic custom CSV processing in browser versus Python backend
+remains undecided and needs its own ADR. No API or model service exists; the existing GitHub Pages workflow hosts only web/.
 See [ADR-0001](adr/ADR-0001-project-foundation.md) and [CRISP-DM](CRISP_DM.md).
