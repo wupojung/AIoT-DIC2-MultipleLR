@@ -7,6 +7,7 @@
   <title>MLR Lab · Regression Analysis Dashboard</title>
   <link rel="stylesheet" href="styles.css">
   <script src="app.js" defer></script>
+  <script type="module" src="custom-ui.mjs"></script>
 </head>
 <body>
   <aside class="sidebar">
@@ -23,7 +24,14 @@
   <main>
     <header class="topbar"><span>WORKSPACE <span class="slash">/</span> Multiple Linear Regression</span><span class="top-tag"><span class="live-dot"></span> Verified experiment data</span></header>
     <div class="page-heading"><div><p class="eyebrow">NCHU AIoT · EXPERIMENT EXPLORER</p><h1>Regression Analysis Dashboard<span class="title-dot">.</span></h1><p class="subheading">From features to evidence. Explore two real regression experiments.</p></div><span class="version">DIC-2 / MVP</span></div>
-    <div class="dataset-bar"><div><label for="dataset">ACTIVE DATASET</label><select id="dataset"><option value="50_startups">50 Startups</option><option value="boston_housing">Boston Housing</option><option disabled>Custom Dataset · coming later</option></select></div><div id="dataset-description"></div><span class="snapshot-tag">PRECOMPUTED · NO LIVE TRAINING</span></div>
+    <div class="dataset-bar"><div><label for="dataset">ACTIVE DATASET</label><select id="dataset"><option value="50_startups">50 Startups</option><option value="boston_housing">Boston Housing</option><option value="custom" disabled>Custom Dataset</option></select></div><div id="dataset-description"></div><span class="snapshot-tag">PRECOMPUTED · NO LIVE TRAINING</span></div>
+    <section id="custom-import" class="card" hidden aria-labelledby="custom-heading">
+      <div class="section-heading"><div><p class="eyebrow">YOUR DATA · BROWSER COMPUTATION</p><h2 id="custom-heading">Custom CSV Regression</h2></div><span class="snapshot-tag">LOCAL COMPUTATION · NO SERVER UPLOAD</span></div>
+      <p class="muted">UTF-8 comma-separated CSV. Limits: 2 MiB · 20–2000 rows · 40 columns · 12 predictors / 20 encoded inputs. No group/time/spatial split support.</p>
+      <div class="import-grid"><div><label for="csv-file">LOCAL CSV FILE</label><input id="csv-file" type="file" accept=".csv,text/csv"><p class="muted">Files stay in this browser. Results are downloaded only if you choose.</p></div><div><label for="csv-url">PUBLIC CSV URL (CORS REQUIRED)</label><div class="url-row"><input id="csv-url" type="url" placeholder="https://example.org/data.csv"><button id="load-csv-url" type="button">Load URL</button></div><p class="muted">No proxy or authentication. If CORS fails, upload the file instead.</p></div></div>
+      <p id="custom-status" role="status" aria-live="polite">Choose a file or a public CSV URL to begin.</p>
+      <div id="csv-config" hidden><div id="csv-preview"></div><div class="import-grid"><div><label for="target-column">TARGET Y · CONTINUOUS NUMERIC</label><select id="target-column"><option value="">Choose a target…</option></select><p class="muted">Target must be complete, finite and have at least five distinct values.</p></div><fieldset><legend>FEATURES X · SELECT 2–12</legend><div id="feature-columns"></div></fieldset></div><div class="run-controls"><button id="run-custom" type="button" disabled>Run new regression</button><button id="cancel-custom" type="button" hidden>Cancel</button><button id="download-custom" type="button" disabled>Download run JSON</button><span class="muted">Seed 42 · 80/20 · training-only preprocessing</span></div></div>
+    </section>
     <p id="status" role="status">Loading reviewed experiment data…</p>
     <div id="content" hidden>
       <section id="overview" role="tabpanel" aria-labelledby="tab-overview" tabindex="0"></section>

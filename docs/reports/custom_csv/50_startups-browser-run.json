@@ -1,0 +1,246 @@
+{
+  "schema_version": 1,
+  "engine": "MLR-JS-OLS-v1 / ml-matrix 6.12.1 SVD",
+  "target": "Profit",
+  "features": [
+    "R&D Spend",
+    "Administration",
+    "Marketing Spend",
+    "State"
+  ],
+  "rows": 50,
+  "configuration": {
+    "seed": 42,
+    "test_size": 0.2,
+    "split_algorithm": "NumPy RandomState MT19937 permutation; ceil(0.2*n) test rows",
+    "numeric": "training median imputation",
+    "categorical": "training most frequent; lexical ties, sorted drop-first one-hot; unknown -> all zero",
+    "estimator": "centered/scaled SVD OLS, fit intercept; coefficients converted to source units",
+    "feature_selection": "Not Available: Regression MVP only; holdout is not used to choose k",
+    "units": "user source units; not verified"
+  },
+  "splits": {
+    "train": [
+      12,
+      4,
+      37,
+      8,
+      3,
+      6,
+      41,
+      46,
+      47,
+      15,
+      9,
+      16,
+      24,
+      34,
+      31,
+      0,
+      44,
+      27,
+      33,
+      5,
+      29,
+      11,
+      36,
+      1,
+      21,
+      2,
+      43,
+      35,
+      23,
+      40,
+      10,
+      22,
+      18,
+      49,
+      20,
+      7,
+      42,
+      14,
+      28,
+      38
+    ],
+    "test": [
+      13,
+      39,
+      30,
+      45,
+      17,
+      48,
+      26,
+      25,
+      32,
+      19
+    ]
+  },
+  "preprocessing": {
+    "specs": [
+      {
+        "name": "R&D Spend",
+        "index": 0,
+        "type": "numeric",
+        "median": 75124.20999999999
+      },
+      {
+        "name": "Administration",
+        "index": 1,
+        "type": "numeric",
+        "median": 120134.70000000001
+      },
+      {
+        "name": "Marketing Spend",
+        "index": 2,
+        "type": "numeric",
+        "median": 249791.995
+      },
+      {
+        "name": "State",
+        "index": 3,
+        "type": "categorical",
+        "mode": "Florida",
+        "categories": [
+          "California",
+          "Florida",
+          "New York"
+        ],
+        "reference": "California"
+      }
+    ],
+    "names": [
+      "R&D Spend",
+      "Administration",
+      "Marketing Spend",
+      "State=Florida",
+      "State=New York"
+    ]
+  },
+  "fit": {
+    "means": [
+      77687.8455,
+      121142.92274999994,
+      235747.08099999995,
+      0.35,
+      0.325
+    ],
+    "scales": [
+      47294.99429798803,
+      27108.76158002317,
+      113419.04441256064,
+      0.47696960070847283,
+      0.4683748498798799
+    ],
+    "coefficients": [
+      0.8056300637169757,
+      -0.06878788228041084,
+      0.0298554429220377,
+      938.7930061484439,
+      6.987759966986927
+    ],
+    "intercept": 54028.03959405864,
+    "rank": 5,
+    "condition": 2.989837749599996,
+    "training_target_mean": 115651.72050000001
+  },
+  "unknown_category_count": 0,
+  "holdout": {
+    "linear_regression": {
+      "mae": 6961.477813275563,
+      "mse": 82010363.04501379,
+      "rmse": 9055.95732349782,
+      "r2": 0.8987266414319836,
+      "n": 10
+    },
+    "dummy_mean": {
+      "mae": 25295.290200000007,
+      "mse": 1140864891.3968465,
+      "rmse": 33776.691540126405,
+      "r2": -0.4088368217645486,
+      "n": 10
+    }
+  },
+  "predictions": [
+    {
+      "row_id": 13,
+      "actual": 134307.35,
+      "prediction": 126362.87908251512,
+      "residual": 7944.470917484883,
+      "dummy_prediction": 115651.72050000001
+    },
+    {
+      "row_id": 39,
+      "actual": 81005.76,
+      "prediction": 84608.45383643438,
+      "residual": -3602.6938364343805,
+      "dummy_prediction": 115651.72050000001
+    },
+    {
+      "row_id": 30,
+      "actual": 99937.59,
+      "prediction": 99677.49425154633,
+      "residual": 260.09574845366296,
+      "dummy_prediction": 115651.72050000001
+    },
+    {
+      "row_id": 45,
+      "actual": 64926.08,
+      "prediction": 46357.460685824655,
+      "residual": 18568.619314175347,
+      "dummy_prediction": 115651.72050000001
+    },
+    {
+      "row_id": 17,
+      "actual": 125370.37,
+      "prediction": 128750.48288496588,
+      "residual": -3380.1128849658853,
+      "dummy_prediction": 115651.72050000001
+    },
+    {
+      "row_id": 48,
+      "actual": 35673.41,
+      "prediction": 50912.41741904578,
+      "residual": -15239.007419045774,
+      "dummy_prediction": 115651.72050000001
+    },
+    {
+      "row_id": 26,
+      "actual": 105733.54,
+      "prediction": 109741.35032700335,
+      "residual": -4007.8103270033607,
+      "dummy_prediction": 115651.72050000001
+    },
+    {
+      "row_id": 25,
+      "actual": 107404.34,
+      "prediction": 100643.24281644382,
+      "residual": 6761.0971835561795,
+      "dummy_prediction": 115651.72050000001
+    },
+    {
+      "row_id": 32,
+      "actual": 97427.84,
+      "prediction": 97599.27574600166,
+      "residual": -171.43574600166176,
+      "dummy_prediction": 115651.72050000001
+    },
+    {
+      "row_id": 19,
+      "actual": 122776.86,
+      "prediction": 113097.4252443655,
+      "residual": 9679.434755634502,
+      "dummy_prediction": 115651.72050000001
+    }
+  ],
+  "warnings": [
+    "Historical/sample random split only; no group/time/spatial generalization claim.",
+    "Repeated reruns after viewing holdout make it exploratory, not a new independent test."
+  ],
+  "source": {
+    "kind": "public URL",
+    "name": "https://raw.githubusercontent.com/Avik-Jain/100-Days-Of-ML-Code/5d67810c1498082e7bb262cf6397d7861dfd9891/datasets/50_Startups.csv",
+    "sha256": "c6075ca5a7551243b31193bad9228f0a1b9468cdde2475c6586c56dcfac5630d"
+  },
+  "executed_at": "2026-10-16T16:03:51.492Z",
+  "execution_ms": 2.5
+}

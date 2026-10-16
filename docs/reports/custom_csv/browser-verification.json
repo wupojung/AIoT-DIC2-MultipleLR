@@ -1,0 +1,75 @@
+{
+  "status": "PASS",
+  "url": "https://wupojung.github.io/AIoT-DIC2-MultipleLR/",
+  "tested_at": "2026-10-16T16:03:53.448Z",
+  "browser": "155.0.8059.84",
+  "viewport": {
+    "width": 1920,
+    "height": 1080
+  },
+  "cases": [
+    "50_startups: import, configure, worker fit, JSON download, sklearn equivalence, residual charts, Not Available feature selection",
+    "custom_numeric: import, configure, worker fit, JSON download, sklearn equivalence, residual charts, Not Available feature selection",
+    "configuration change clears stale model/results",
+    "invalid duplicate-header/insufficient CSV rejected",
+    "real example.com CORS denial shows local-file fallback",
+    "50_startups built-in three-page regression intact",
+    "boston_housing built-in three-page regression intact"
+  ],
+  "runs": [
+    {
+      "name": "50_startups",
+      "holdout": {
+        "linear_regression": {
+          "mae": 6961.477813275563,
+          "mse": 82010363.04501379,
+          "rmse": 9055.95732349782,
+          "r2": 0.8987266414319836,
+          "n": 10
+        },
+        "dummy_mean": {
+          "mae": 25295.290200000007,
+          "mse": 1140864891.3968465,
+          "rmse": 33776.691540126405,
+          "r2": -0.4088368217645486,
+          "n": 10
+        }
+      },
+      "execution_ms": 2.5,
+      "max_prediction_abs_error": 2.44071998167783e-07
+    },
+    {
+      "name": "custom_numeric",
+      "holdout": {
+        "linear_regression": {
+          "mae": 4.770169268993307,
+          "mse": 35.80557629527097,
+          "rmse": 5.983776090001276,
+          "r2": 0.9985570649577903,
+          "n": 20
+        },
+        "dummy_mean": {
+          "mae": 142.88341551028765,
+          "mse": 27697.921411832394,
+          "rmse": 166.42692514083288,
+          "r2": -0.11620327157765131,
+          "n": 20
+        }
+      },
+      "execution_ms": 2.5,
+      "max_prediction_abs_error": 3.410605131648481e-13
+    }
+  ],
+  "js_errors": [],
+  "unexpected_console_errors": [],
+  "expected_cors_errors": [
+    "Access to fetch at 'https://example.com/' from origin 'https://wupojung.github.io' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+    "Failed to load resource: net::ERR_FAILED"
+  ],
+  "deployed_commit": "f19dc0111c950cec140d2998adfe44d79a9e16d6",
+  "deployment_run": "https://github.com/wupojung/AIoT-DIC2-MultipleLR/actions/runs/38928694867",
+  "screenshots": [
+    "docs/assets/custom-csv-import-1920x1080.png",
+    "docs/assets/custom-csv-regression-1920x1080.png"
+  ]
+}

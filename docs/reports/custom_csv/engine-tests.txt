@@ -1,0 +1,17 @@
+✔ CSV quoted header/BOM/newline parsing; all row-to-column mappings (2.198666ms)
+✔ MT19937 split matches sklearn exact row IDs/order across six sizes (1.741333ms)
+✔ new CSV fit matches sklearn: 50_startups (2.289583ms)
+✔ new CSV fit matches sklearn: custom_numeric (2.471709ms)
+✔ test X/y changes cannot fit medians/scales/coefficients; fresh training y changes do (2.28725ms)
+✔ category vocabulary/imputation use train only, unknown test category is disclosed (1.090458ms)
+✔ target leakage, insufficient features, collinearity, duplicates are refused (1.463333ms)
+✔ empty/malformed/duplicate headers/nonfinite/oversized/insufficient data fail clearly (1.001042ms)
+✔ independent metrics known answer and constant target undefined R² (0.071625ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 9
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 82.699416
