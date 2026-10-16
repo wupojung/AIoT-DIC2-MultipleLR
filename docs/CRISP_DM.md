@@ -22,8 +22,8 @@ check keeps the phase open. Foundation PASS does not imply any analysis phase PA
 
 Neither raw dataset is bundled. 50 Startups now uses a pinned, hash-verified mirror
 for owner-requested local baseline verification; original collection rights/units remain
-explicit limitations, not assumed resolved. Boston source/ethics approval remains pending. Feature-selection methods (RFE, SFS, LassoCV) are future
-work and must follow the same leakage and comparison gates. Custom CSV is optional
+explicit limitations, not assumed resolved. Boston source/ethics approval remains pending. Issue #4 implements feature-selection comparisons with the same leakage/comparison gates;
+technical evidence and human review status are recorded below. Custom CSV is optional
 and has no approved execution architecture yet.
 
 ## 狀態與證據紀錄 / Status and evidence
@@ -64,3 +64,12 @@ Owner 在 Issue #2 關閉後要求接續；已依固定 baseline 產生本地證
 fold-local 前處理、一次 holdout 與重現測試，尚未宣稱教師／reviewer 的 phase PASS。
 Phase 6 的本地重現報告已有證據，最終主題／提交與部署仍 Planned。
 Boston 全部 Planned。教授 Q1–Q5、原始權利／單位與抽樣獨立性仍是明示限制。
+
+## Issue #4 — selection evidence (human review pending)
+
+沿用已合併 Baseline 的來源、切分、seed，另在 training 內比較 Pearson、F-Test、
+RFE、SFS、LassoCV + All Features，不覆寫舊結果。Phase 3–5 增加 fold-local
+前處理／選擇 audit、nested 決策與預測／圖表重算證據；不新增 test 評估或宣稱新獨立
+holdout。這些是技術證據，仍等待人工 review，不自行改標教師 gate PASS。
+[實驗協定](FEATURE_SELECTION_PROTOCOL.md)、[繁中實測報告](reports/feature_selection/REPORT.md)。
+Boston、Custom CSV、Web 資料整合及部署不在本次工作範圍。

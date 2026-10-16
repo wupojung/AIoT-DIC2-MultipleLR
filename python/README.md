@@ -51,7 +51,7 @@ ASCII 字母／數字／底線／連字號。既有 run 直接失敗，不覆寫
 擬合；unknown State 記數並編成全零，可能與 reference category 重合。全空欄、
 缺失 target、錯誤 schema、非有限值及重複 predictors 明確拒絕，需另行 review，
 不依 holdout 成績刪列。不能用多次重跑找最佳 seed/k；不同 run-id 的重跑僅供重現核對。
-本次沒有特徵選擇、Boston、Web 整合或部署。原始蒐集、幣別、期間及公司獨立性未知，
+Baseline 命令沒有特徵選擇；本次沒有 Boston、Web 整合或部署。原始蒐集、幣別、期間及公司獨立性未知，
 不作因果推論。來源 repository 的 MIT 不代表原始資料權利已獨立查明；不提交原始 CSV。
 
 參考：[評估協定](../docs/EVALUATION_PROTOCOL.md)、
@@ -61,3 +61,22 @@ ASCII 字母／數字／底線／連字號。既有 run 直接失敗，不覆寫
 
 [實測結果與六張圖](../docs/reports/50_startups/report.md) 是供審查的固定執行證據，
 不由程式寫死；新的 run 會在 outputs 另行產生自己的結果。
+
+## Issue #4 — Feature Selection
+
+不更動 Baseline；同一套相依即可執行五種真正選擇器及 All Features 對照：
+```sh
+python python/src/feature_selection.py --run-id fs-v1
+python python/src/verify_feature_selection.py outputs/50_startups/feature_selection/fs-v1 --source data/50_startups/50_Startups.csv --replay-lasso
+python python/src/report_feature_selection.py outputs/50_startups/feature_selection/fs-v1 --output-dir /tmp/fs-review
+```
+Windows 同樣可用 `.\.venv\Scripts\python.exe` 取代 python，輸出目錄改為本地新目錄。
+run-id 和報告目錄不得已存在。第一個命令僅讓原 40 train 進入比較器，不做 holdout
+預測；輸出在獨立 feature_selection/ 子目錄，不覆寫原實驗。
+
+[實驗協定](../docs/FEATURE_SELECTION_PROTOCOL.md) 說明 5/3/3 folds、State 編碼計數、
+真正 SFS、LassoCV fold blocks 與 zero-coefficient padding。
+[繁中分析與兩張曲線](../docs/reports/feature_selection/REPORT.md) 及其 JSON/CSV 是實測
+審查快照；每次新 run 都自行重算。Verifier 會驗原始 row IDs／每次 fit 的統計、重 fit
+所選欄位的 OLS、重算預測指標、replay 多 alpha path，並由 CSV 重畫比對兩張 PNG。
+曲線最低點、nested 選模成績及最後三折凍結方案是不同層級，不混稱最佳 test 結果。
