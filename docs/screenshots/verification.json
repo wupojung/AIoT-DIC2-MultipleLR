@@ -1,0 +1,365 @@
+{
+  "status": "PASS",
+  "timestamp": "2026-10-16T13:09:57.218Z",
+  "browser": "155.0.8059.84",
+  "playwright": "1.64.1",
+  "platform": "darwin",
+  "viewportOnly": true,
+  "scenarios": [
+    {
+      "device": "desktop",
+      "width": 1920,
+      "height": 1080,
+      "protocol": "http",
+      "tabs": [
+        {
+          "id": "overview",
+          "viewportWidth": 1920,
+          "documentWidth": 1920,
+          "documentHeight": 1080,
+          "horizontalScroll": 0,
+          "overflow": [],
+          "screenshot": "desktop-1920x1080-overview.png"
+        },
+        {
+          "id": "features",
+          "viewportWidth": 1920,
+          "documentWidth": 1920,
+          "documentHeight": 1080,
+          "horizontalScroll": 0,
+          "overflow": [],
+          "screenshot": "desktop-1920x1080-features.png"
+        },
+        {
+          "id": "evaluation",
+          "viewportWidth": 1920,
+          "documentWidth": 1920,
+          "documentHeight": 1080,
+          "horizontalScroll": 0,
+          "overflow": [],
+          "screenshot": "desktop-1920x1080-evaluation.png"
+        }
+      ],
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "device": "desktop",
+      "width": 1920,
+      "height": 1080,
+      "protocol": "file",
+      "tabs": [
+        {
+          "id": "overview",
+          "viewportWidth": 1920,
+          "documentWidth": 1920,
+          "documentHeight": 1080,
+          "horizontalScroll": 0,
+          "overflow": []
+        },
+        {
+          "id": "features",
+          "viewportWidth": 1920,
+          "documentWidth": 1920,
+          "documentHeight": 1080,
+          "horizontalScroll": 0,
+          "overflow": []
+        },
+        {
+          "id": "evaluation",
+          "viewportWidth": 1920,
+          "documentWidth": 1920,
+          "documentHeight": 1080,
+          "horizontalScroll": 0,
+          "overflow": []
+        }
+      ],
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "device": "desktop",
+      "width": 1440,
+      "height": 900,
+      "protocol": "http",
+      "tabs": [
+        {
+          "id": "overview",
+          "viewportWidth": 1440,
+          "documentWidth": 1440,
+          "documentHeight": 1049,
+          "horizontalScroll": 0,
+          "overflow": [],
+          "screenshot": "desktop-1440x900-overview.png"
+        },
+        {
+          "id": "features",
+          "viewportWidth": 1440,
+          "documentWidth": 1440,
+          "documentHeight": 1049,
+          "horizontalScroll": 0,
+          "overflow": [],
+          "screenshot": "desktop-1440x900-features.png"
+        },
+        {
+          "id": "evaluation",
+          "viewportWidth": 1440,
+          "documentWidth": 1440,
+          "documentHeight": 1049,
+          "horizontalScroll": 0,
+          "overflow": [],
+          "screenshot": "desktop-1440x900-evaluation.png"
+        }
+      ],
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "device": "desktop",
+      "width": 1440,
+      "height": 900,
+      "protocol": "file",
+      "tabs": [
+        {
+          "id": "overview",
+          "viewportWidth": 1440,
+          "documentWidth": 1440,
+          "documentHeight": 1049,
+          "horizontalScroll": 0,
+          "overflow": []
+        },
+        {
+          "id": "features",
+          "viewportWidth": 1440,
+          "documentWidth": 1440,
+          "documentHeight": 1049,
+          "horizontalScroll": 0,
+          "overflow": []
+        },
+        {
+          "id": "evaluation",
+          "viewportWidth": 1440,
+          "documentWidth": 1440,
+          "documentHeight": 1049,
+          "horizontalScroll": 0,
+          "overflow": []
+        }
+      ],
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "device": "tablet",
+      "width": 768,
+      "height": 1024,
+      "protocol": "http",
+      "tabs": [
+        {
+          "id": "overview",
+          "viewportWidth": 768,
+          "documentWidth": 768,
+          "documentHeight": 1033,
+          "horizontalScroll": 0,
+          "overflow": [],
+          "screenshot": "tablet-768x1024-overview.png"
+        },
+        {
+          "id": "features",
+          "viewportWidth": 768,
+          "documentWidth": 768,
+          "documentHeight": 1033,
+          "horizontalScroll": 0,
+          "overflow": [],
+          "screenshot": "tablet-768x1024-features.png"
+        },
+        {
+          "id": "evaluation",
+          "viewportWidth": 768,
+          "documentWidth": 768,
+          "documentHeight": 1033,
+          "horizontalScroll": 0,
+          "overflow": [],
+          "screenshot": "tablet-768x1024-evaluation.png"
+        }
+      ],
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "device": "tablet",
+      "width": 768,
+      "height": 1024,
+      "protocol": "file",
+      "tabs": [
+        {
+          "id": "overview",
+          "viewportWidth": 768,
+          "documentWidth": 768,
+          "documentHeight": 1033,
+          "horizontalScroll": 0,
+          "overflow": []
+        },
+        {
+          "id": "features",
+          "viewportWidth": 768,
+          "documentWidth": 768,
+          "documentHeight": 1033,
+          "horizontalScroll": 0,
+          "overflow": []
+        },
+        {
+          "id": "evaluation",
+          "viewportWidth": 768,
+          "documentWidth": 768,
+          "documentHeight": 1033,
+          "horizontalScroll": 0,
+          "overflow": []
+        }
+      ],
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "device": "mobile",
+      "width": 390,
+      "height": 844,
+      "protocol": "http",
+      "tabs": [
+        {
+          "id": "overview",
+          "viewportWidth": 390,
+          "documentWidth": 390,
+          "documentHeight": 1103,
+          "horizontalScroll": 0,
+          "overflow": [],
+          "screenshot": "mobile-390x844-overview.png"
+        },
+        {
+          "id": "features",
+          "viewportWidth": 390,
+          "documentWidth": 390,
+          "documentHeight": 1103,
+          "horizontalScroll": 0,
+          "overflow": [],
+          "screenshot": "mobile-390x844-features.png"
+        },
+        {
+          "id": "evaluation",
+          "viewportWidth": 390,
+          "documentWidth": 390,
+          "documentHeight": 1103,
+          "horizontalScroll": 0,
+          "overflow": [],
+          "screenshot": "mobile-390x844-evaluation.png"
+        }
+      ],
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "device": "mobile",
+      "width": 390,
+      "height": 844,
+      "protocol": "file",
+      "tabs": [
+        {
+          "id": "overview",
+          "viewportWidth": 390,
+          "documentWidth": 390,
+          "documentHeight": 1103,
+          "horizontalScroll": 0,
+          "overflow": []
+        },
+        {
+          "id": "features",
+          "viewportWidth": 390,
+          "documentWidth": 390,
+          "documentHeight": 1103,
+          "horizontalScroll": 0,
+          "overflow": []
+        },
+        {
+          "id": "evaluation",
+          "viewportWidth": 390,
+          "documentWidth": 390,
+          "documentHeight": 1103,
+          "horizontalScroll": 0,
+          "overflow": []
+        }
+      ],
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "device": "mobile",
+      "width": 375,
+      "height": 812,
+      "protocol": "http",
+      "tabs": [
+        {
+          "id": "overview",
+          "viewportWidth": 375,
+          "documentWidth": 375,
+          "documentHeight": 1103,
+          "horizontalScroll": 0,
+          "overflow": [],
+          "screenshot": "mobile-375x812-overview.png"
+        },
+        {
+          "id": "features",
+          "viewportWidth": 375,
+          "documentWidth": 375,
+          "documentHeight": 1103,
+          "horizontalScroll": 0,
+          "overflow": [],
+          "screenshot": "mobile-375x812-features.png"
+        },
+        {
+          "id": "evaluation",
+          "viewportWidth": 375,
+          "documentWidth": 375,
+          "documentHeight": 1103,
+          "horizontalScroll": 0,
+          "overflow": [],
+          "screenshot": "mobile-375x812-evaluation.png"
+        }
+      ],
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "device": "mobile",
+      "width": 375,
+      "height": 812,
+      "protocol": "file",
+      "tabs": [
+        {
+          "id": "overview",
+          "viewportWidth": 375,
+          "documentWidth": 375,
+          "documentHeight": 1103,
+          "horizontalScroll": 0,
+          "overflow": []
+        },
+        {
+          "id": "features",
+          "viewportWidth": 375,
+          "documentWidth": 375,
+          "documentHeight": 1103,
+          "horizontalScroll": 0,
+          "overflow": []
+        },
+        {
+          "id": "evaluation",
+          "viewportWidth": 375,
+          "documentWidth": 375,
+          "documentHeight": 1103,
+          "horizontalScroll": 0,
+          "overflow": []
+        }
+      ],
+      "errors": [],
+      "warnings": []
+    }
+  ]
+}

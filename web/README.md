@@ -24,7 +24,10 @@ NODE_PATH=/tmp/dic2-browser/node_modules node tests/browser_smoke.cjs
 ```
 Run from repository root. The script defaults to the macOS Chrome executable;
 set `CHROME_PATH` to another installed Chrome/Chromium executable if needed.
-It checks HTTP and direct-file opening, disabled selector, tabs at 1440/375px,
-keyboard navigation, horizontal overflow and browser console/page errors.
+It checks HTTP and direct-file opening at 1920×1080, 1440×900, 768×1024,
+390×844 and 375×812; all tabs and button states, keyboard navigation, text
+overflow, horizontal scrolling and browser console/page/network errors.
+It writes 15 actual full-page PNG captures and verification.json under
+docs/screenshots/. See the [verification evidence](../docs/screenshots/README.md).
 Playwright is installed outside the project solely for verification, not shipped
 with the dashboard. Windows/browser automation is not yet verified.
