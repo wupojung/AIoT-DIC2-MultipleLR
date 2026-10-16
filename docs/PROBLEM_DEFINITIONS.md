@@ -31,7 +31,8 @@
 歷史觀測單位是 Boston 地區 census tract 層級，不是當代個別房屋。
 MEDV 指自住房屋價值中位數，歷史定義單位為千美元；候選版本仍需逐項驗證。
 
-舊版 sklearn 文件列出 13 個 predictors：CRIM、ZN、INDUS、CHAS、NOX、RM、AGE、
+[sklearn 歷史 schema 說明](https://github.com/scikit-learn/scikit-learn/blob/1.1.3/sklearn/datasets/descr/boston_house_prices.rst)
+列出 13 個 predictors：CRIM、ZN、INDUS、CHAS、NOX、RM、AGE、
 DIS、RAD、TAX、PTRATIO、B、LSTAT；含 MEDV 共 14 欄不代表有 14 個特徵。
 數量、樣本與變數編碼是來源的預期描述，本專案尚未對任何檔案實測。
 
@@ -41,7 +42,7 @@ MEDV 的上限截斷、年代、地理範圍、聚合觀測與潛在空間相關
 不得將結果作當前估價、因果、群體差異合理化或決策建議。
 
 [sklearn 歷史資料說明](https://scikit-learn.org/1.1/modules/generated/sklearn.datasets.load_boston.html)
-解釋變數與倫理背景；[1.2 release notes](https://scikit-learn.org/stable/whats_new/v1.2.html)
+解釋變數與倫理背景；[1.2.0 官方移除訊息](https://github.com/scikit-learn/scikit-learn/blob/1.2.0/sklearn/datasets/__init__.py#L100-L147)
 記錄 `load_boston` 已移除。本專案不得呼叫它、降版繞過移除或直接下載未審查鏡像。
 後續由教師確認允許的歷史資料版本、license、來源、變數處置與教學限制，再建立 manifest。
 若無法核准，提出替代資料問題交教師決策，不能自行更換指定題目。
