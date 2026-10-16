@@ -1,0 +1,71 @@
+{
+  "status": "PASS",
+  "url": "https://wupojung.github.io/AIoT-DIC2-MultipleLR/",
+  "viewport": {
+    "width": 1920,
+    "height": 1080
+  },
+  "browser": "155.0.8059.84",
+  "tool": "Playwright + Google Chrome",
+  "tested_at": "2026-10-16T15:14:21.280Z",
+  "cases": [
+    {
+      "dataset": "50_startups",
+      "tab": "overview",
+      "status": "PASS",
+      "screenshot": "dashboard-50_startups-overview-1920x1080.png"
+    },
+    {
+      "dataset": "50_startups",
+      "tab": "features",
+      "status": "PASS",
+      "screenshot": "dashboard-50_startups-features-1920x1080.png"
+    },
+    {
+      "dataset": "50_startups",
+      "tab": "evaluation",
+      "status": "PASS",
+      "screenshot": "dashboard-50_startups-evaluation-1920x1080.png"
+    },
+    {
+      "dataset": "boston_housing",
+      "tab": "overview",
+      "status": "PASS",
+      "screenshot": "dashboard-boston_housing-overview-1920x1080.png"
+    },
+    {
+      "dataset": "boston_housing",
+      "tab": "features",
+      "status": "PASS",
+      "screenshot": "dashboard-boston_housing-features-1920x1080.png"
+    },
+    {
+      "dataset": "boston_housing",
+      "tab": "evaluation",
+      "status": "PASS",
+      "screenshot": "dashboard-boston_housing-evaluation-1920x1080.png"
+    },
+    {
+      "dataset": "50_startups",
+      "tab": "overview",
+      "status": "PASS",
+      "screenshot": "dashboard-50_startups-overview-1920x1080.png"
+    },
+    {
+      "dataset": "50_startups",
+      "tab": "features",
+      "status": "PASS",
+      "screenshot": "dashboard-50_startups-features-1920x1080.png"
+    },
+    {
+      "dataset": "50_startups",
+      "tab": "evaluation",
+      "status": "PASS",
+      "screenshot": "dashboard-50_startups-evaluation-1920x1080.png"
+    }
+  ],
+  "console_and_js_errors": [],
+  "failed_requests": [],
+  "deployment_run": "https://github.com/wupojung/AIoT-DIC2-MultipleLR/actions/runs/38922135144",
+  "deployed_web_commit": "16bd349c80417fe1a7f89b3acd77a7d4d24ebb1f"
+}
