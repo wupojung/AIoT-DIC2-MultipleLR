@@ -159,3 +159,38 @@ TEST/VERIFY/PASS 已完成。尚未執行 Boston 載入、schema 實測、EDA、
 這不是 Boston 資料測試。來源 loader／manifest、B 政策落實、Boston baseline／holdout、
 專屬 verifier、CRISP-DM 報告和實測圖表仍待政策確認後完成；不能把 synthetic 結果
 當作 Boston 結果。原實驗快照、原 verifier/tests、已接受協定與 ADR 未修改。
+
+## 最新共通階段驗證（不代表 Boston PASS）
+
+已於獨立 clone `/tmp/dic2-05-shared-check` 建立 fresh venv，依原 requirements/
+constraints 安裝且 pip check 通過。使用原已驗證的 Startups cache，程式仍重新核對
+來源 SHA-256，不聲稱本輪做過新的 Boston 下載。
+
+- BUILD：共通程式 fresh venv 安裝成功，未新增相依。
+- RUN：環境檢查、Startups Baseline 與五方法實驗實際執行成功。
+- TEST：**29 tests PASS**（包含原 21 項），另外 8 項驗 config、排除欄、無 State、
+  12 特徵／動態 k、另一個樣本數、nested engine、自訂 alpha 與圖表單位／軸。
+- VERIFY：兩個既有 verifier 通過，含 24 組多 alpha replay；Web 10 scenarios 通過，
+  console/JS/network errors/warnings 為 0。Baseline 20 個 runtime artifacts、
+  Feature Selection 13 個 artifacts 與重構前 byte-identical（來源下載時間紀錄未納入）。
+- 舊報告、舊測試、接受的 ADR／評估協定、Web、部署與相依檔案未修改。
+
+實際命令（在 clone root，cache 為先前已驗證的絕對路徑）：
+```sh
+python3 -m venv .venv
+.venv/bin/python -m pip install -r requirements.txt
+.venv/bin/python -m pip check
+.venv/bin/python python/src/environment_check.py
+.venv/bin/python python/src/startups_baseline.py --cache-dir /path/to/verified/50_startups --run-id shared-check
+.venv/bin/python python/src/feature_selection.py --cache-dir /path/to/verified/50_startups --run-id shared-check
+.venv/bin/python -m unittest discover -s tests -v
+.venv/bin/python python/src/verify_startups_run.py outputs/50_startups/shared-check --source /path/to/verified/50_startups/50_Startups.csv
+.venv/bin/python python/src/verify_feature_selection.py outputs/50_startups/feature_selection/shared-check --source /path/to/verified/50_startups/50_Startups.csv --replay-lasso
+python3 -m http.server 8000 --directory web
+# Another terminal:
+NODE_PATH=/tmp/dic2-browser/node_modules node tests/browser_smoke.cjs
+```
+
+以上只通過**共通重構／Startups 相容性**關卡。Boston 的來源 schema 實測、Baseline、
+Feature Selection、holdout、JSON/CSV、圖表與繁中 CRISP-DM 報告仍未執行，
+不得對整個 Issue #5 標 PASS；等待來源／B／評估設定的明確確認。
